@@ -143,7 +143,17 @@
 
   <script>
     emailjs.init("PhCQVVY22FxDzO8KP"); // <-- Reemplaza aquí con tu public_key
-
+emailjs.send(
+  "TU_SERVICE_ID",  // Service ID
+  "TU_TEMPLATE_ID", // Template ID
+  {
+    to_email: "jgarcia.fixser@gmail.com",
+    subject: "Reporte Excel",
+    message: "Adjunto el Excel con los datos del formulario",
+    attachment: base64Excel,
+    filename: "reportes_validacion.xlsx"
+  }
+)
     let records = JSON.parse(localStorage.getItem('records') || '[]');
 
     const columns = [
