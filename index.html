@@ -221,7 +221,7 @@
       , ws, 'Reportes');
       XLSX.writeFile(wb, 'reportes_validacion.xlsx');
     }
-
+/*
     function enviarExcelPorCorreo(){
       if(records.length===0){alert('No hay registros.'); return;}
       // Generar Excel en base64
@@ -249,6 +249,41 @@
         alert('Error al enviar el correo.');
       });
     }
+*/
+    function enviarExcelPorCorreo() {
+  if(records.length===0){alert('No hay registros.'); return;}
+
+  // Generar Excel base64
+  const ws_data=[columns];
+  records.forEach(r=>ws_data.push(columns.map(c=>r[c]||'')));
+  const wb=XLSX.utils.book_new();
+  const ws=XLSX.utils.aoa_to_sheet(ws_data);
+  XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
+  const wbout=XLSX.write(wb, {bookType:'xlsx', type:'base64'});
+
+  emailjs.send(
+    'service_ubl091j',      // Service ID de EmailJS
+    'template_ihxtn3n',     // Template ID de EmailJS
+    {
+      to_email: 'jgarcia.fixser@gmail.com',
+      subject: 'Reporte Validación de Cámara',
+      message: 'Adjunto el Excel con los registros.',
+      attachment: [
+        {
+          content: wbout,
+          filename: "reportes_validacion.xlsx",
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          disposition: "attachment"
+        }
+      ]
+    }
+  ).then(() => {
+    alert('Correo enviado correctamente.');
+  }, (err) => {
+    console.error(err);
+    alert('Error al enviar el correo. Revisa Service/Template ID y campos de la plantilla.');
+  });
+}
 
     // Asignar eventos a botones
     document.getElementById('saveBtn').onclick = addRecord;
