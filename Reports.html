@@ -35,7 +35,7 @@
       <div style="width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#e6f0fb,#dbeefe);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">AV</div>
       <div>
         <h1>Formulario — Validación de Cámara</h1>
-        <div class="muted">Llena el formulario y presiona "Guardar registro" o "Enviar por correo".</div>
+        <div class="muted">Llena el formulario y presiona "Guardar registro" o "Enviar Excel por correo".</div>
       </div>
     </header>
 
@@ -115,7 +115,7 @@
       <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
         <button type="button" id="saveBtn">Guardar registro</button>
         <button type="button" class="secondary" id="clearBtn">Limpiar formulario</button>
-        <button type="button" id="sendMailBtn">Enviar por correo</button>
+        <button type="button" id="sendExcelBtn">Enviar Excel por correo</button>
       </div>
     </form>
 
@@ -137,136 +137,17 @@
     </div>
   </div>
 
+  <!-- LIBRERÍAS -->
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
   <script>
+    emailjs.init("PhCQVVY22FxDzO8KP"); // <-- Reemplaza aquí con tu public_key
+
     let records = JSON.parse(localStorage.getItem('records') || '[]');
 
     const columns = [
       'report','datetime','company','engineer','phone','city','ubication',
       'description','brand','model','serial','controlnum','status',
       'temperature','humidity',
-      'specs_available','voltage_plate','manuals','refrigerant','shock_free','supplies_installed',
-      'static_ls','static_hs','resistance','t1_t2','t1_t3','t2_t3','to_ground',
-      'notes'
-    ];
-
-    const get = id => document.getElementById(id).value;
-    const chk = id => document.getElementById(id).checked ? 'YES' : 'NO';
-
-    function getFormData(){
-      return {
-        report:get('report'), datetime:get('datetime'), company:get('company'), engineer:get('engineer'),
-        phone:get('phone'), city:get('city'), ubication:get('ubication'),
-        description:get('description'), brand:get('brand'), model:get('model'),
-        serial:get('serial'), controlnum:get('controlnum'), status:get('status'),
-        temperature:get('temperature'), humidity:get('humidity'),
-        specs_available:chk('specs_available'), voltage_plate:chk('voltage_plate'),
-        manuals:chk('manuals'), refrigerant:chk('refrigerant'), shock_free:chk('shock_free'),
-        supplies_installed:chk('supplies_installed'),
-        static_ls:get('static_ls'), static_hs:get('static_hs'), resistance:get('resistance'),
-        t1_t2:get('t1_t2'), t1_t3:get('t1_t3'), t2_t3:get('t2_t3'), to_ground:get('to_ground'),
-        notes:get('notes')
-      };
-    }
-
-    function addRecord(){
-      const data = getFormData();
-      if(!data.report || !data.datetime){ alert('Completa los campos obligatorios.'); return; }
-      records.push(data);
-      localStorage.setItem('records', JSON.stringify(records));
-      renderTable();
-      alert('Registro guardado correctamente.');
-    }
-
-    function clearForm(){ document.getElementById('reportForm').reset(); }
-
-    function renderTable(){
-      const head = document.getElementById('tableHead');
-      const body = document.getElementById('tableBody');
-      head.innerHTML = ''; body.innerHTML = '';
-      columns.forEach(c=>{
-        const th=document.createElement('th'); th.textContent=c.replace(/_/g,' '); head.appendChild(th);
-      });
-      records.forEach(r=>{
-        const tr=document.createElement('tr');
-        columns.forEach(c=>{
-          const td=document.createElement('td');
-          td.textContent=r[c]||''; tr.appendChild(td);
-        });
-        body.appendChild(tr);
-      });
-    }
-
-    function exportCSV(){
-      if(records.length===0){alert('No hay registros.');return;}
-      const rows=[columns.join(',')];
-      records.forEach(r=>{
-        const vals=columns.map(c=>{
-          const v=String(r[c]||'').replace(/"/g,'""');
-          return v.includes(',')?`"${v}"`:v;
-        });
-        rows.push(vals.join(','));
-      });
-      const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'});
-      const a=document.createElement('a');
-      a.href=URL.createObjectURL(blob);
-      a.download='reportes_validacion.csv';
-      a.click();
-    }
-
-    function exportXLSX(){
-      if(records.length===0){alert('No hay registros.');return;}
-      if(typeof XLSX==='undefined'){alert('No se pudo cargar Excel, se descargará CSV.');return exportCSV();}
-      const ws_data=[columns];
-      records.forEach(r=>ws_data.push(columns.map(c=>r[c]||'')));
-      const wb=XLSX.utils.book_new();
-      const ws=XLSX.utils.aoa_to_sheet(ws_data);
-      XLSX.utils.book_append_sheet(wb,ws,'Reportes');
-      XLSX.writeFile(wb,'reportes_validacion.xlsx');
-    }
-
-    // 🚀 Enviar por correo (FormSubmit)
-    function sendMail(){
-      const data = getFormData();
-      const form = document.createElement('form');
-      form.action = "https://formsubmit.co/jgarcia.fixser@gmail.com";
-      form.method = "POST";
-
-      // formato del correo
-      form.innerHTML += '<input type="hidden" name="_subject" value="Nuevo reporte de validación de cámara">';
-      form.innerHTML += '<input type="hidden" name="_template" value="table">';
-      form.innerHTML += '<input type="hidden" name="_captcha" value="false">';
-
-      // Agregar cada campo como input oculto
-      for (const [key, value] of Object.entries(data)) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = value;
-        form.appendChild(input);
-      }
-
-      document.body.appendChild(form);
-      form.submit();
-    }
-
-    (function loadSheetJS(){
-      const s=document.createElement('script');
-      s.src='https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js';
-      document.head.appendChild(s);
-    })();
-
-    document.getElementById('saveBtn').onclick=addRecord;
-    document.getElementById('clearBtn').onclick=clearForm;
-    document.getElementById('exportBtn').onclick=exportXLSX;
-    document.getElementById('downloadCsvBtn').onclick=exportCSV;
-    document.getElementById('sendMailBtn').onclick=sendMail;
-
-    window.onload=()=>{
-      const dt=new Date();
-      const tz=dt.getTimezoneOffset()*60000;
-      document.getElementById('datetime').value=(new Date(dt-tz)).toISOString().slice(0,16);
-      renderTable();
-    }
-  </script>
-</body>
-</html>
+      'specs
