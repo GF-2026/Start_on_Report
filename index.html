@@ -139,12 +139,15 @@
 
   <!-- Librerías externas -->
   <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 
   <!-- Script principal -->
   <script>
   window.addEventListener('DOMContentLoaded', () => {
-    emailjs.init("PhCQVVY22FxDzO8KP"); // Reemplaza con tu Public Key de EmailJS
-
-    const get = id => document.getElementById(id).value;
-    const chk = id => document.get
+  document.getElementById('saveBtn').onclick = addRecord;
+  document.getElementById('clearBtn').onclick = clearForm;
+  document.getElementById('exportBtn').onclick = exportXLSX;
+  document.getElementById('downloadCsvBtn').onclick = exportCSV;
+  document.getElementById('sendExcelBtn').onclick = enviarExcelPorCorreo;
+});
