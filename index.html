@@ -30,6 +30,9 @@ th{background:#f1f7fb;color:#0b2235}
 .muted{color:var(--muted);font-size:13px}
 @media (max-width:800px){.grid{grid-template-columns:1fr}}
 </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">  emailjs.init('PhCQVVY22FxDzO8KP')
+</script>
 </head>
 <body>
 <div class="container">
@@ -41,68 +44,121 @@ th{background:#f1f7fb;color:#0b2235}
 </div>
 </header>
 
-<form id="reportForm" class="card">
-<div class="section-header"><strong>1 – Datos generales</strong></div>
-<div class="grid">
-<div><label>Report *</label><input type="text" id="report" value="Validación de cámara" required></div>
-<div><label>Date & Time *</label><input type="datetime-local" id="datetime" required></div>
-<div><label>Company</label><input type="text" id="company"></div>
-<div><label>Engineer</label><input type="text" id="engineer"></div>
-<div><label>Phone</label><input type="text" id="phone"></div>
-<div><label>City</label><input type="text" id="city"></div>
-<div class="fullwidth"><label>Ubication</label><input type="text" id="ubication"></div>
-</div>
+<form id="form">
+  <div class="field">
+    <label for="datetime">datetime</label>
+    <input type="text" name="datetime" id="datetime">
+  </div>
+  <div class="field">
+    <label for="company">company</label>
+    <input type="text" name="company" id="company">
+  </div>
+  <div class="field">
+    <label for="engineer">engineer</label>
+    <input type="text" name="engineer" id="engineer">
+  </div>
+  <div class="field">
+    <label for="phone">phone</label>
+    <input type="text" name="phone" id="phone">
+  </div>
+  <div class="field">
+    <label for="city">city</label>
+    <input type="text" name="city" id="city">
+  </div>
+  <div class="field">
+    <label for="ubication">ubication</label>
+    <input type="text" name="ubication" id="ubication">
+  </div>
+  <div class="field">
+    <label for="description">description</label>
+    <input type="text" name="description" id="description">
+  </div>
+  <div class="field">
+    <label for="brand">brand</label>
+    <input type="text" name="brand" id="brand">
+  </div>
+  <div class="field">
+    <label for="model">model</label>
+    <input type="text" name="model" id="model">
+  </div>
+  <div class="field">
+    <label for="serial">serial</label>
+    <input type="text" name="serial" id="serial">
+  </div>
+  <div class="field">
+    <label for="controlnum">controlnum</label>
+    <input type="text" name="controlnum" id="controlnum">
+  </div>
+  <div class="field">
+    <label for="status">status</label>
+    <input type="text" name="status" id="status">
+  </div>
+  <div class="field">
+    <label for="temperature">temperature</label>
+    <input type="text" name="temperature" id="temperature">
+  </div>
+  <div class="field">
+    <label for="humidity">humidity</label>
+    <input type="text" name="humidity" id="humidity">
+  </div>
+  <div class="field">
+    <label for="specs_available">specs_available</label>
+    <input type="text" name="specs_available" id="specs_available">
+  </div>
+  <div class="field">
+    <label for="voltage_plate">voltage_plate</label>
+    <input type="text" name="voltage_plate" id="voltage_plate">
+  </div>
+  <div class="field">
+    <label for="manuals">manuals</label>
+    <input type="text" name="manuals" id="manuals">
+  </div>
+  <div class="field">
+    <label for="refrigerant">refrigerant</label>
+    <input type="text" name="refrigerant" id="refrigerant">
+  </div>
+  <div class="field">
+    <label for="shock_free">shock_free</label>
+    <input type="text" name="shock_free" id="shock_free">
+  </div>
+  <div class="field">
+    <label for="supplies_installed">supplies_installed</label>
+    <input type="text" name="supplies_installed" id="supplies_installed">
+  </div>
+  <div class="field">
+    <label for="static_ls">static_ls</label>
+    <input type="text" name="static_ls" id="static_ls">
+  </div>
+  <div class="field">
+    <label for="static_hs">static_hs</label>
+    <input type="text" name="static_hs" id="static_hs">
+  </div>
+  <div class="field">
+    <label for="resistance">resistance</label>
+    <input type="text" name="resistance" id="resistance">
+  </div>
+  <div class="field">
+    <label for="t1_t2">t1_t2</label>
+    <input type="text" name="t1_t2" id="t1_t2">
+  </div>
+  <div class="field">
+    <label for="t1_t3">t1_t3</label>
+    <input type="text" name="t1_t3" id="t1_t3">
+  </div>
+  <div class="field">
+    <label for="t2_t3">t2_t3</label>
+    <input type="text" name="t2_t3" id="t2_t3">
+  </div>
+  <div class="field">
+    <label for="to_ground">to_ground</label>
+    <input type="text" name="to_ground" id="to_ground">
+  </div>
+  <div class="field">
+    <label for="notes">notes</label>
+    <input type="text" name="notes" id="notes">
+  </div>
 
-<hr>
-<div class="section-header"><strong>2 – Datos del equipo</strong></div>
-<div class="grid">
-<div><label>Description</label><input type="text" id="description"></div>
-<div><label>Brand</label><input type="text" id="brand"></div>
-<div><label>Model</label><input type="text" id="model"></div>
-<div><label>Serial</label><input type="text" id="serial"></div>
-<div><label>Control number</label><input type="text" id="controlnum"></div>
-<div><label>Status</label><input type="text" id="status"></div>
-</div>
-
-<hr>
-<div class="section-header"><strong>3 – Condiciones ambientales</strong></div>
-<div class="grid">
-<div><label>Temperature (°C)</label><input type="number" step="0.1" id="temperature"></div>
-<div><label>Humidity (%)</label><input type="number" step="0.1" id="humidity"></div>
-</div>
-
-<hr>
-<div class="section-header"><strong>4 – Checklist</strong></div>
-<div class="grid checkboxes">
-<label><input type="checkbox" id="specs_available"> Specs available</label>
-<label><input type="checkbox" id="voltage_plate"> Voltage matches plate</label>
-<label><input type="checkbox" id="manuals"> Manuals available</label>
-<label><input type="checkbox" id="refrigerant"> Refrigerant loaded</label>
-<label><input type="checkbox" id="shock_free"> Shock free</label>
-<label><input type="checkbox" id="supplies_installed"> Supplies installed</label>
-</div>
-
-<hr>
-<div class="section-header"><strong>5 – Mediciones eléctricas</strong></div>
-<div class="grid">
-<div><label>Static LS</label><input type="number" step="0.01" id="static_ls"></div>
-<div><label>Static HS</label><input type="number" step="0.01" id="static_hs"></div>
-<div><label>Resistance (Ω)</label><input type="number" step="0.001" id="resistance"></div>
-<div><label>T1–T2 (V)</label><input type="number" step="0.1" id="t1_t2"></div>
-<div><label>T1–T3 (V)</label><input type="number" step="0.1" id="t1_t3"></div>
-<div><label>T2–T3 (V)</label><input type="number" step="0.1" id="t2_t3"></div>
-<div><label>To ground (V)</label><input type="number" step="0.01" id="to_ground"></div>
-</div>
-
-<hr>
-<div class="section-header"><strong>6 – Observaciones</strong></div>
-<textarea id="notes"></textarea>
-
-<div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
-<button type="button" id="saveBtn">Guardar registro</button>
-<button type="button" class="secondary" id="clearBtn">Limpiar formulario</button>
-<button type="button" id="sendExcelBtn">Enviar Excel por correo</button>
-</div>
+  <input type="submit" id="button" value="Send Email" >
 </form>
 
 <div class="card">
