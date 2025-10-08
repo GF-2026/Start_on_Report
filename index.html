@@ -124,7 +124,10 @@ th{background:#f1f7fb;color:#0b2235}
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
-  emailjs.init("PhCQVVY22FxDzO8KP"); // reemplaza con tu Public Key
+  // 🟦 CONFIGURA AQUÍ TUS CLAVES DE EMAILJS
+  emailjs.init("PhCQVVY22FxDzO8KP"); // ← tu PUBLIC KEY
+  const SERVICE_ID = "service_35s0cyg"; // ← tu SERVICE ID
+  const TEMPLATE_ID = "template_4fu1spp"; // ← tu TEMPLATE ID
 
   const get=id=>document.getElementById(id).value;
   const chk=id=>document.getElementById(id).checked?'YES':'NO';
@@ -204,25 +207,23 @@ window.addEventListener('DOMContentLoaded', () => {
     const wb=XLSX.utils.book_new();
     const ws=XLSX.utils.aoa_to_sheet(ws_data);
     XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
-    const wbout=XLSX.write(wb,{bookType:'xlsx',type:'base64'});
 
-    emailjs.send(
-      'service_35s0cyg',   // reemplaza con tu Service ID
-      'template_4fu1spp',  // reemplaza con tu Template ID
-      {
-        to_email:'jgarcia.fixser@gmail.com',
-        subject:'Reporte Validación de Cámara',
-        message:'Adjunto el Excel con los registros.',
-        attachment:[{
-          content: wbout,
-          filename:"reportes_validacion.xlsx",
-          type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-          disposition:"attachment"
-        }]
-      }
-    )
-    .then(()=>alert('Correo enviado correctamente.'),
-          err=>{console.error(err); alert('Error al enviar el correo. Revisa Public Key, Service ID y Template.');});
+    // Crear enlace temporal para descargar
+    const blob=XLSX.write(wb,{bookType:'xlsx',type:'array'});
+    const url=URL.createObjectURL(new Blob([blob]));
+
+    const fecha=new Date().toLocaleString();
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      to_email: 'jgarcia.fixser@gmail.com',
+      subject: 'Reporte Validación de Cámara',
+      message: `Hola José,\n\nTu archivo Excel está listo. Puedes descargarlo desde este enlace:\n${url}\n\n📅 Fecha: ${fecha}\n\nAtte: Sistema de Reportes Técnicos`
+    })
+    .then(()=>alert('Correo enviado correctamente con enlace al Excel.'))
+    .catch(err=>{
+      console.error(err);
+      alert('Error al enviar el correo. Verifica tu Public Key, Service ID y Template ID.');
+    });
   }
 
   document.getElementById('saveBtn').onclick=addRecord;
