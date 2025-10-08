@@ -1,304 +1,245 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Reporte: Validación de Cámara</title>
-<!-- Favicon -->
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<style>
-:root{--bg:#f7fafc;--card:#ffffff;--accent:#2b6cb0;--muted:#6b7280}
-body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);margin:0;padding:24px;color:#0f172a}
-.container{max-width:1100px;margin:0 auto}
-header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
-h1{margin:0;font-size:20px}
-.card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06);margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
-input[type=text],input[type=number],input[type=datetime-local],textarea{width:100%;padding:10px;border:1px solid #e6eef6;border-radius:6px;font-size:14px}
-textarea{min-height:80px;resize:vertical}
-.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.actions{display:flex;gap:8px}
-button{background:var(--accent);color:#fff;border:0;padding:10px 12px;border-radius:8px;cursor:pointer}
-button.secondary{background:#fff;color:var(--accent);border:1px solid #cfe0f5}
-.table-wrap{overflow:auto}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{padding:8px;border-bottom:1px solid #eef2f7;text-align:left}
-th{background:#f1f7fb;color:#0b2235}
-.checkboxes{display:flex;flex-direction:column;gap:6px}
-.fullwidth{grid-column:1/-1}
-.muted{color:var(--muted);font-size:13px}
-@media (max-width:800px){.grid{grid-template-columns:1fr}}
-</style>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="text/javascript">  emailjs.init('PhCQVVY22FxDzO8KP')
-</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reporte: Validación de Cámara</title>
+  <style>
+    :root{--bg:#f7fafc;--card:#ffffff;--accent:#2b6cb0;--muted:#6b7280}
+    body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);margin:0;padding:24px;color:#0f172a}
+    .container{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    h1{margin:0;font-size:20px}
+    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06);margin-bottom:16px}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+    input[type=text],input[type=number],input[type=datetime-local],select,textarea{width:100%;padding:10px;border:1px solid #e6eef6;border-radius:6px;font-size:14px}
+    textarea{min-height:80px;resize:vertical}
+    .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .actions{display:flex;gap:8px}
+    button{background:var(--accent);color:#fff;border:0;padding:10px 12px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#fff;color:var(--accent);border:1px solid #cfe0f5}
+    .table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:8px;border-bottom:1px solid #eef2f7;text-align:left}
+    th{background:#f1f7fb;color:#0b2235}
+    .checkboxes{display:flex;flex-direction:column;gap:6px}
+    .fullwidth{grid-column:1/-1}
+    .muted{color:var(--muted);font-size:13px}
+    @media (max-width:800px){.grid{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
-<div class="container">
-<header>
-<div style="width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#e6f0fb,#dbeefe);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">AV</div>
-<div>
-<h1>Formulario — Validación de Cámara</h1>
-<div class="muted">Llena el formulario y presiona "Guardar registro" o "Enviar Excel por correo".</div>
-</div>
-</header>
+  <div class="container">
+    <header>
+      <div style="width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#e6f0fb,#dbeefe);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">AV</div>
+      <div>
+        <h1>Formulario — Validación de Cámara</h1>
+        <div class="muted">Llena el formulario y presiona "Guardar registro". Luego usa "Exportar a Excel" para descargar todos los registros.</div>
+      </div>
+    </header>
 
-<form id="form">
-  <div class="field">
-    <label for="datetime">datetime</label>
-    <input type="text" name="datetime" id="datetime">
-  </div>
-  <div class="field">
-    <label for="company">company</label>
-    <input type="text" name="company" id="company">
-  </div>
-  <div class="field">
-    <label for="engineer">engineer</label>
-    <input type="text" name="engineer" id="engineer">
-  </div>
-  <div class="field">
-    <label for="phone">phone</label>
-    <input type="text" name="phone" id="phone">
-  </div>
-  <div class="field">
-    <label for="city">city</label>
-    <input type="text" name="city" id="city">
-  </div>
-  <div class="field">
-    <label for="ubication">ubication</label>
-    <input type="text" name="ubication" id="ubication">
-  </div>
-  <div class="field">
-    <label for="description">description</label>
-    <input type="text" name="description" id="description">
-  </div>
-  <div class="field">
-    <label for="brand">brand</label>
-    <input type="text" name="brand" id="brand">
-  </div>
-  <div class="field">
-    <label for="model">model</label>
-    <input type="text" name="model" id="model">
-  </div>
-  <div class="field">
-    <label for="serial">serial</label>
-    <input type="text" name="serial" id="serial">
-  </div>
-  <div class="field">
-    <label for="controlnum">controlnum</label>
-    <input type="text" name="controlnum" id="controlnum">
-  </div>
-  <div class="field">
-    <label for="status">status</label>
-    <input type="text" name="status" id="status">
-  </div>
-  <div class="field">
-    <label for="temperature">temperature</label>
-    <input type="text" name="temperature" id="temperature">
-  </div>
-  <div class="field">
-    <label for="humidity">humidity</label>
-    <input type="text" name="humidity" id="humidity">
-  </div>
-  <div class="field">
-    <label for="specs_available">specs_available</label>
-    <input type="text" name="specs_available" id="specs_available">
-  </div>
-  <div class="field">
-    <label for="voltage_plate">voltage_plate</label>
-    <input type="text" name="voltage_plate" id="voltage_plate">
-  </div>
-  <div class="field">
-    <label for="manuals">manuals</label>
-    <input type="text" name="manuals" id="manuals">
-  </div>
-  <div class="field">
-    <label for="refrigerant">refrigerant</label>
-    <input type="text" name="refrigerant" id="refrigerant">
-  </div>
-  <div class="field">
-    <label for="shock_free">shock_free</label>
-    <input type="text" name="shock_free" id="shock_free">
-  </div>
-  <div class="field">
-    <label for="supplies_installed">supplies_installed</label>
-    <input type="text" name="supplies_installed" id="supplies_installed">
-  </div>
-  <div class="field">
-    <label for="static_ls">static_ls</label>
-    <input type="text" name="static_ls" id="static_ls">
-  </div>
-  <div class="field">
-    <label for="static_hs">static_hs</label>
-    <input type="text" name="static_hs" id="static_hs">
-  </div>
-  <div class="field">
-    <label for="resistance">resistance</label>
-    <input type="text" name="resistance" id="resistance">
-  </div>
-  <div class="field">
-    <label for="t1_t2">t1_t2</label>
-    <input type="text" name="t1_t2" id="t1_t2">
-  </div>
-  <div class="field">
-    <label for="t1_t3">t1_t3</label>
-    <input type="text" name="t1_t3" id="t1_t3">
-  </div>
-  <div class="field">
-    <label for="t2_t3">t2_t3</label>
-    <input type="text" name="t2_t3" id="t2_t3">
-  </div>
-  <div class="field">
-    <label for="to_ground">to_ground</label>
-    <input type="text" name="to_ground" id="to_ground">
-  </div>
-  <div class="field">
-    <label for="notes">notes</label>
-    <input type="text" name="notes" id="notes">
+    <form id="reportForm" class="card">
+      <!-- DATOS GENERALES -->
+      <div class="section-header">
+        <strong>1 – Datos generales</strong>
+        <div class="muted">Campos obligatorios marcados con *</div>
+      </div>
+      <div class="grid">
+        <div><label>Report *</label><input type="text" id="report" value="Validación de cámara" required /></div>
+        <div><label>Date & Time *</label><input type="datetime-local" id="datetime" required /></div>
+        <div><label>Company</label><input type="text" id="company" /></div>
+        <div><label>Engineer</label><input type="text" id="engineer" /></div>
+        <div><label>Phone</label><input type="text" id="phone" /></div>
+        <div><label>City</label><input type="text" id="city" /></div>
+        <div class="fullwidth"><label>Ubication</label><input type="text" id="ubication" /></div>
+      </div>
+
+      <hr />
+
+      <!-- EQUIPO -->
+      <div class="section-header"><strong>2 – Datos del equipo</strong></div>
+      <div class="grid">
+        <div><label>Description</label><input type="text" id="description" /></div>
+        <div><label>Brand</label><input type="text" id="brand" /></div>
+        <div><label>Model</label><input type="text" id="model" /></div>
+        <div><label>Serial</label><input type="text" id="serial" /></div>
+        <div><label>Control number</label><input type="text" id="controlnum" /></div>
+        <div><label>Status</label><input type="text" id="status" /></div>
+      </div>
+
+      <hr />
+
+      <!-- AMBIENTE -->
+      <div class="section-header"><strong>3 – Condiciones ambientales</strong></div>
+      <div class="grid">
+        <div><label>Temperature (°C)</label><input type="number" step="0.1" id="temperature" /></div>
+        <div><label>Humidity (%)</label><input type="number" step="0.1" id="humidity" /></div>
+      </div>
+
+      <hr />
+
+      <!-- CHECKLIST -->
+      <div class="section-header"><strong>4 – Checklist</strong></div>
+      <div class="grid">
+        <div class="checkboxes">
+          <label><input type="checkbox" id="specs_available" /> Specs available</label>
+          <label><input type="checkbox" id="voltage_plate" /> Voltage matches plate</label>
+          <label><input type="checkbox" id="manuals" /> Manuals available</label>
+          <label><input type="checkbox" id="refrigerant" /> Refrigerant loaded</label>
+          <label><input type="checkbox" id="shock_free" /> Shock free</label>
+          <label><input type="checkbox" id="supplies_installed" /> Supplies installed</label>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- MEDICIONES -->
+      <div class="section-header"><strong>5 – Mediciones eléctricas</strong></div>
+      <div class="grid">
+        <div><label>Static LS</label><input type="number" step="0.01" id="static_ls" /></div>
+        <div><label>Static HS</label><input type="number" step="0.01" id="static_hs" /></div>
+        <div><label>Resistance (Ω)</label><input type="number" step="0.001" id="resistance" /></div>
+        <div><label>T1–T2 (V)</label><input type="number" step="0.1" id="t1_t2" /></div>
+        <div><label>T1–T3 (V)</label><input type="number" step="0.1" id="t1_t3" /></div>
+        <div><label>T2–T3 (V)</label><input type="number" step="0.1" id="t2_t3" /></div>
+        <div><label>To ground (V)</label><input type="number" step="0.01" id="to_ground" /></div>
+      </div>
+
+      <hr />
+
+      <!-- OBSERVACIONES -->
+      <div class="section-header"><strong>6 – Observaciones</strong></div>
+      <textarea id="notes"></textarea>
+
+      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+        <button type="button" id="saveBtn">Guardar registro</button>
+        <button type="button" class="secondary" id="clearBtn">Limpiar formulario</button>
+      </div>
+    </form>
+
+    <!-- TABLA -->
+    <div class="card">
+      <div class="section-header">
+        <strong>Registros capturados</strong>
+        <div class="actions">
+          <button id="exportBtn">Exportar a Excel</button>
+          <button class="secondary" id="downloadCsvBtn">Exportar CSV</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="recordsTable">
+          <thead><tr id="tableHead"></tr></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
-  <input type="submit" id="button" value="Send Email" >
-</form>
+  <script>
+    let records = JSON.parse(localStorage.getItem('records') || '[]');
 
-<div class="card">
-<div class="section-header">
-<strong>Registros capturados</strong>
-<div class="actions">
-<button id="exportBtn">Exportar a Excel</button>
-<button class="secondary" id="downloadCsvBtn">Exportar CSV</button>
-</div>
-</div>
-<div class="table-wrap">
-<table id="recordsTable">
-<thead><tr id="tableHead"></tr></thead>
-<tbody id="tableBody"></tbody>
-</table>
-</div>
-</div>
+    const columns = [
+      'report','datetime','company','engineer','phone','city','ubication',
+      'description','brand','model','serial','controlnum','status',
+      'temperature','humidity',
+      'specs_available','voltage_plate','manuals','refrigerant','shock_free','supplies_installed',
+      'static_ls','static_hs','resistance','t1_t2','t1_t3','t2_t3','to_ground',
+      'notes'
+    ];
 
-<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    const get = id => document.getElementById(id).value;
+    const chk = id => document.getElementById(id).checked ? 'YES' : 'NO';
 
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-  // 🟦 CONFIGURA AQUÍ TUS CLAVES DE EMAILJS
-  emailjs.init("PhCQVVY22FxDzO8KP"); // ← tu PUBLIC KEY
-  const SERVICE_ID = "service_35s0cyg"; // ← tu SERVICE ID
-  const TEMPLATE_ID = "template_4fu1spp"; // ← tu TEMPLATE ID
+    function getFormData(){
+      return {
+        report:get('report'), datetime:get('datetime'), company:get('company'), engineer:get('engineer'),
+        phone:get('phone'), city:get('city'), ubication:get('ubication'),
+        description:get('description'), brand:get('brand'), model:get('model'),
+        serial:get('serial'), controlnum:get('controlnum'), status:get('status'),
+        temperature:get('temperature'), humidity:get('humidity'),
+        specs_available:chk('specs_available'), voltage_plate:chk('voltage_plate'),
+        manuals:chk('manuals'), refrigerant:chk('refrigerant'), shock_free:chk('shock_free'),
+        supplies_installed:chk('supplies_installed'),
+        static_ls:get('static_ls'), static_hs:get('static_hs'), resistance:get('resistance'),
+        t1_t2:get('t1_t2'), t1_t3:get('t1_t3'), t2_t3:get('t2_t3'), to_ground:get('to_ground'),
+        notes:get('notes')
+      };
+    }
 
-  const get=id=>document.getElementById(id).value;
-  const chk=id=>document.getElementById(id).checked?'YES':'NO';
-  let records=JSON.parse(localStorage.getItem('records')||'[]');
-  const columns=['report','datetime','company','engineer','phone','city','ubication','description','brand','model','serial','controlnum','status','temperature','humidity','specs_available','voltage_plate','manuals','refrigerant','shock_free','supplies_installed','static_ls','static_hs','resistance','t1_t2','t1_t3','t2_t3','to_ground','notes'];
+    function addRecord(){
+      const data = getFormData();
+      if(!data.report || !data.datetime){ alert('Completa los campos obligatorios.'); return; }
+      records.push(data);
+      localStorage.setItem('records', JSON.stringify(records));
+      renderTable();
+      alert('Registro guardado correctamente.');
+    }
 
-  function getFormData(){
-    // Generar folio único basado en fecha y hora
-    const now=new Date();
-    const folio=`REP-${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2,'0')}${now.getDate().toString().padStart(2,'0')}-${now.getHours().toString().padStart(2,'0')}${now.getMinutes().toString().padStart(2,'0')}${now.getSeconds().toString().padStart(2,'0')}`;
-    return {
-      report:folio,
-      datetime:get('datetime'), company:get('company'), engineer:get('engineer'),
-      phone:get('phone'), city:get('city'), ubication:get('ubication'),
-      description:get('description'), brand:get('brand'), model:get('model'),
-      serial:get('serial'), controlnum:get('controlnum'), status:get('status'),
-      temperature:get('temperature'), humidity:get('humidity'),
-      specs_available:chk('specs_available'), voltage_plate:chk('voltage_plate'),
-      manuals:chk('manuals'), refrigerant:chk('refrigerant'), shock_free:chk('shock_free'),
-      supplies_installed:chk('supplies_installed'),
-      static_ls:get('static_ls'), static_hs:get('static_hs'), resistance:get('resistance'),
-      t1_t2:get('t1_t2'), t1_t3:get('t1_t3'), t2_t3:get('t2_t3'), to_ground:get('to_ground'),
-      notes:get('notes')
-    };
-  }
+    function clearForm(){ document.getElementById('reportForm').reset(); }
 
-  function renderTable(){
-    const head=document.getElementById('tableHead');
-    const body=document.getElementById('tableBody');
-    head.innerHTML=''; body.innerHTML='';
-    columns.forEach(c=>{const th=document.createElement('th'); th.textContent=c.replace(/_/g,' '); head.appendChild(th);});
-    records.forEach(r=>{
-      const tr=document.createElement('tr');
-      columns.forEach(c=>{const td=document.createElement('td'); td.textContent=r[c]||''; tr.appendChild(td);});
-      body.appendChild(tr);
-    });
-  }
+    function renderTable(){
+      const head = document.getElementById('tableHead');
+      const body = document.getElementById('tableBody');
+      head.innerHTML = ''; body.innerHTML = '';
+      columns.forEach(c=>{
+        const th=document.createElement('th'); th.textContent=c.replace(/_/g,' '); head.appendChild(th);
+      });
+      records.forEach(r=>{
+        const tr=document.createElement('tr');
+        columns.forEach(c=>{
+          const td=document.createElement('td');
+          td.textContent=r[c]||''; tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      });
+    }
 
-  function addRecord(){
-    const data=getFormData();
-    if(!data.datetime){alert('Completa los campos obligatorios.'); return;}
-    records.push(data);
-    localStorage.setItem('records',JSON.stringify(records));
-    renderTable();
-    alert('Registro guardado correctamente.');
-  }
+    function exportCSV(){
+      if(records.length===0){alert('No hay registros.');return;}
+      const rows=[columns.join(',')];
+      records.forEach(r=>{
+        const vals=columns.map(c=>{
+          const v=String(r[c]||'').replace(/"/g,'""');
+          return v.includes(',')?`"${v}"`:v;
+        });
+        rows.push(vals.join(','));
+      });
+      const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'});
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download='reportes_validacion.csv';
+      a.click();
+    }
 
-  function clearForm(){document.getElementById('reportForm').reset();}
+    function exportXLSX(){
+      if(records.length===0){alert('No hay registros.');return;}
+      if(typeof XLSX==='undefined'){alert('No se pudo cargar Excel, se descargará CSV.');return exportCSV();}
+      const ws_data=[columns];
+      records.forEach(r=>ws_data.push(columns.map(c=>r[c]||'')));
+      const wb=XLSX.utils.book_new();
+      const ws=XLSX.utils.aoa_to_sheet(ws_data);
+      XLSX.utils.book_append_sheet(wb,ws,'Reportes');
+      XLSX.writeFile(wb,'reportes_validacion.xlsx');
+    }
 
-  function exportCSV(){
-    if(records.length===0){alert('No hay registros.'); return;}
-    const rows=[columns.join(',')];
-    records.forEach(r=>{
-      const vals=columns.map(c=>{const v=String(r[c]||'').replace(/"/g,'""'); return v.includes(',')?`"${v}"`:v;});
-      rows.push(vals.join(','));
-    });
-    const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'});
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download='reportes_validacion.csv';
-    a.click();
-  }
+    (function loadSheetJS(){
+      const s=document.createElement('script');
+      s.src='https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js';
+      document.head.appendChild(s);
+    })();
 
-  function exportXLSX(){
-    if(records.length===0){alert('No hay registros.'); return;}
-    const ws_data=[columns];
-    records.forEach(r=>ws_data.push(columns.map(c=>r[c]||'')));
-    const wb=XLSX.utils.book_new();
-    const ws=XLSX.utils.aoa_to_sheet(ws_data);
-    XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
-    const now=new Date();
-    const filename=`reportes_validacion_${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2,'0')}${now.getDate().toString().padStart(2,'0')}_${now.getHours().toString().padStart(2,'0')}${now.getMinutes().toString().padStart(2,'0')}${now.getSeconds().toString().padStart(2,'0')}.xlsx`;
-    XLSX.writeFile(wb, filename);
-  }
+    document.getElementById('saveBtn').onclick=addRecord;
+    document.getElementById('clearBtn').onclick=clearForm;
+    document.getElementById('exportBtn').onclick=exportXLSX;
+    document.getElementById('downloadCsvBtn').onclick=exportCSV;
 
-  function enviarExcelPorCorreo(){
-    if(records.length===0){alert('No hay registros.'); return;}
-    const ws_data=[columns];
-    records.forEach(r=>ws_data.push(columns.map(c=>r[c]||'')));
-    const wb=XLSX.utils.book_new();
-    const ws=XLSX.utils.aoa_to_sheet(ws_data);
-    XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
-
-    // Crear enlace temporal para descargar (GitHub Pages no permite adjuntos reales)
-    const blob=XLSX.write(wb,{bookType:'xlsx',type:'array'});
-    const url=URL.createObjectURL(new Blob([blob]));
-
-    const fecha=new Date().toLocaleString();
-
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-      to_email: 'jgarcia.fixser@gmail.com',
-      subject: 'Reporte Validación de Cámara',
-      message: `Hola José,\n\nTu archivo Excel está listo. Puedes descargarlo desde este enlace:\n${url}\n\n📅 Fecha: ${fecha}\n\nAtte: Sistema de Reportes Técnicos`
-    })
-    .then(()=>alert('Correo enviado correctamente con enlace al Excel.'))
-    .catch(err=>{
-      console.error(err);
-      alert('Error al enviar el correo. Verifica tu Public Key, Service ID y Template ID.');
-    });
-  }
-
-  document.getElementById('saveBtn').onclick=addRecord;
-  document.getElementById('clearBtn').onclick=clearForm;
-  document.getElementById('exportBtn').onclick=exportXLSX;
-  document.getElementById('downloadCsvBtn').onclick=exportCSV;
-  document.getElementById('sendExcelBtn').onclick=enviarExcelPorCorreo;
-
-  // Inicializar fecha y tabla
-  const dt=new Date();
-  const tz=dt.getTimezoneOffset()*60000;
-  document.getElementById('datetime').value=(new Date(dt-tz)).toISOString().slice(0,16);
-  renderTable();
-});
-</script>
+    window.onload=()=>{
+      const dt=new Date();
+      const tz=dt.getTimezoneOffset()*60000;
+      document.getElementById('datetime').value=(new Date(dt-tz)).toISOString().slice(0,16);
+      renderTable();
+    }
+  </script>
 </body>
 </html>
