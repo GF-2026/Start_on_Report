@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Reporte: Validación de Cámara</title>
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <style>
 :root{--bg:#f7fafc;--card:#ffffff;--accent:#2b6cb0;--muted:#6b7280}
 body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);margin:0;padding:24px;color:#0f172a}
@@ -124,18 +126,23 @@ th{background:#f1f7fb;color:#0b2235}
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
-  emailjs.init("PhCQVVY22FxDzO8KP"); // tu PUBLIC KEY
-  const SERVICE_ID = "service_35s0cyg";  // tu SERVICE ID
-  const TEMPLATE_ID = "template_4fu1spp"; // tu TEMPLATE ID
+  // 🟦 CONFIGURA AQUÍ TUS CLAVES DE EMAILJS
+  emailjs.init("PhCQVVY22FxDzO8KP"); // ← tu PUBLIC KEY
+  const SERVICE_ID = "service_35s0cyg"; // ← tu SERVICE ID
+  const TEMPLATE_ID = "template_4fu1spp"; // ← tu TEMPLATE ID
 
-  const get = id => document.getElementById(id).value;
-  const chk = id => document.getElementById(id).checked ? 'YES' : 'NO';
-  let records = JSON.parse(localStorage.getItem('records') || '[]');
-  const columns = ['report','datetime','company','engineer','phone','city','ubication','description','brand','model','serial','controlnum','status','temperature','humidity','specs_available','voltage_plate','manuals','refrigerant','shock_free','supplies_installed','static_ls','static_hs','resistance','t1_t2','t1_t3','t2_t3','to_ground','notes'];
+  const get=id=>document.getElementById(id).value;
+  const chk=id=>document.getElementById(id).checked?'YES':'NO';
+  let records=JSON.parse(localStorage.getItem('records')||'[]');
+  const columns=['report','datetime','company','engineer','phone','city','ubication','description','brand','model','serial','controlnum','status','temperature','humidity','specs_available','voltage_plate','manuals','refrigerant','shock_free','supplies_installed','static_ls','static_hs','resistance','t1_t2','t1_t3','t2_t3','to_ground','notes'];
 
-  function getFormData() {
+  function getFormData(){
+    // Generar folio único basado en fecha y hora
+    const now=new Date();
+    const folio=`REP-${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2,'0')}${now.getDate().toString().padStart(2,'0')}-${now.getHours().toString().padStart(2,'0')}${now.getMinutes().toString().padStart(2,'0')}${now.getSeconds().toString().padStart(2,'0')}`;
     return {
-      report:get('report'), datetime:get('datetime'), company:get('company'), engineer:get('engineer'),
+      report:folio,
+      datetime:get('datetime'), company:get('company'), engineer:get('engineer'),
       phone:get('phone'), city:get('city'), ubication:get('ubication'),
       description:get('description'), brand:get('brand'), model:get('model'),
       serial:get('serial'), controlnum:get('controlnum'), status:get('status'),
@@ -149,37 +156,34 @@ window.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  function renderTable() {
-    const head = document.getElementById('tableHead');
-    const body = document.getElementById('tableBody');
-    head.innerHTML = ''; body.innerHTML = '';
-    columns.forEach(c => { const th = document.createElement('th'); th.textContent = c.replace(/_/g,' '); head.appendChild(th); });
-    records.forEach(r => {
-      const tr = document.createElement('tr');
-      columns.forEach(c => { const td = document.createElement('td'); td.textContent = r[c] || ''; tr.appendChild(td); });
+  function renderTable(){
+    const head=document.getElementById('tableHead');
+    const body=document.getElementById('tableBody');
+    head.innerHTML=''; body.innerHTML='';
+    columns.forEach(c=>{const th=document.createElement('th'); th.textContent=c.replace(/_/g,' '); head.appendChild(th);});
+    records.forEach(r=>{
+      const tr=document.createElement('tr');
+      columns.forEach(c=>{const td=document.createElement('td'); td.textContent=r[c]||''; tr.appendChild(td);});
       body.appendChild(tr);
     });
   }
 
-  function addRecord() {
-    const data = getFormData();
-    if (!data.report || !data.datetime) { alert('Completa los campos obligatorios.'); return; }
+  function addRecord(){
+    const data=getFormData();
+    if(!data.datetime){alert('Completa los campos obligatorios.'); return;}
     records.push(data);
-    localStorage.setItem('records', JSON.stringify(records));
+    localStorage.setItem('records',JSON.stringify(records));
     renderTable();
     alert('Registro guardado correctamente.');
   }
 
-  function clearForm(){ document.getElementById('reportForm').reset(); }
+  function clearForm(){document.getElementById('reportForm').reset();}
 
-  function exportCSV() {
+  function exportCSV(){
     if(records.length===0){alert('No hay registros.'); return;}
     const rows=[columns.join(',')];
     records.forEach(r=>{
-      const vals=columns.map(c=>{
-        const v=String(r[c]||'').replace(/"/g,'""');
-        return v.includes(',')?`"${v}"`:v;
-      });
+      const vals=columns.map(c=>{const v=String(r[c]||'').replace(/"/g,'""'); return v.includes(',')?`"${v}"`:v;});
       rows.push(vals.join(','));
     });
     const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'});
@@ -189,19 +193,19 @@ window.addEventListener('DOMContentLoaded', () => {
     a.click();
   }
 
-  function exportXLSX() {
+  function exportXLSX(){
     if(records.length===0){alert('No hay registros.'); return;}
     const ws_data=[columns];
     records.forEach(r=>ws_data.push(columns.map(c=>r[c]||'')));
     const wb=XLSX.utils.book_new();
     const ws=XLSX.utils.aoa_to_sheet(ws_data);
     XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
-    const now = new Date();
-    const nombreArchivo = `reportes_validacion_${now.getFullYear()}${now.getMonth()+1}${now.getDate()}_${now.getHours()}${now.getMinutes()}${now.getSeconds()}.xlsx`;
-    XLSX.writeFile(wb, nombreArchivo);
+    const now=new Date();
+    const filename=`reportes_validacion_${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2,'0')}${now.getDate().toString().padStart(2,'0')}_${now.getHours().toString().padStart(2,'0')}${now.getMinutes().toString().padStart(2,'0')}${now.getSeconds().toString().padStart(2,'0')}.xlsx`;
+    XLSX.writeFile(wb, filename);
   }
 
-  function enviarExcelPorCorreo() {
+  function enviarExcelPorCorreo(){
     if(records.length===0){alert('No hay registros.'); return;}
     const ws_data=[columns];
     records.forEach(r=>ws_data.push(columns.map(c=>r[c]||'')));
@@ -209,51 +213,21 @@ window.addEventListener('DOMContentLoaded', () => {
     const ws=XLSX.utils.aoa_to_sheet(ws_data);
     XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
 
-    const wbout = XLSX.write(wb, { bookType:'xlsx', type:'base64' });
-    const formData = getFormData();
-    const fechaHora = new Date().toLocaleString();
+    // Crear enlace temporal para descargar (GitHub Pages no permite adjuntos reales)
+    const blob=XLSX.write(wb,{bookType:'xlsx',type:'array'});
+    const url=URL.createObjectURL(new Blob([blob]));
+
+    const fecha=new Date().toLocaleString();
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, {
       to_email: 'jgarcia.fixser@gmail.com',
-      datetime: fechaHora,
-      company: formData.company,
-      engineer: formData.engineer,
-      phone: formData.phone,
-      city: formData.city,
-      ubication: formData.ubication,
-      description: formData.description,
-      brand: formData.brand,
-      model: formData.model,
-      serial: formData.serial,
-      controlnum: formData.controlnum,
-      status: formData.status,
-      temperature: formData.temperature,
-      humidity: formData.humidity,
-      specs_available: formData.specs_available,
-      voltage_plate: formData.voltage_plate,
-      manuals: formData.manuals,
-      refrigerant: formData.refrigerant,
-      shock_free: formData.shock_free,
-      supplies_installed: formData.supplies_installed,
-      static_ls: formData.static_ls,
-      static_hs: formData.static_hs,
-      resistance: formData.resistance,
-      t1_t2: formData.t1_t2,
-      t1_t3: formData.t1_t3,
-      t2_t3: formData.t2_t3,
-      to_ground: formData.to_ground,
-      notes: formData.notes,
-      attachment:[{
-        content: wbout,
-        filename:`reporte_${fechaHora.replace(/[\/,: ]/g,'_')}.xlsx`,
-        type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        disposition:"attachment"
-      }]
+      subject: 'Reporte Validación de Cámara',
+      message: `Hola José,\n\nTu archivo Excel está listo. Puedes descargarlo desde este enlace:\n${url}\n\n📅 Fecha: ${fecha}\n\nAtte: Sistema de Reportes Técnicos`
     })
-    .then(()=>alert('Correo enviado correctamente con Excel adjunto.'))
+    .then(()=>alert('Correo enviado correctamente con enlace al Excel.'))
     .catch(err=>{
       console.error(err);
-      alert('Error al enviar el correo. Verifica Public Key, Service ID y Template ID.');
+      alert('Error al enviar el correo. Verifica tu Public Key, Service ID y Template ID.');
     });
   }
 
