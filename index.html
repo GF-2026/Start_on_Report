@@ -124,10 +124,10 @@ th{background:#f1f7fb;color:#0b2235}
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
-  // 🟦 CONFIGURA AQUÍ TUS CLAVES DE EMAILJS
-  emailjs.init("PhCQVVY22FxDzO8KP"); // ← tu PUBLIC KEY
-  const SERVICE_ID = "service_35s0cyg"; // ← tu SERVICE ID
-  const TEMPLATE_ID = "template_4fu1spp"; // ← tu TEMPLATE ID
+  // ⚡ CONFIGURA TUS CLAVES DE EMAILJS
+  emailjs.init("PhCQVVY22FxDzO8KP"); // ← tu Public Key
+  const SERVICE_ID = "service_35s0cyg"; // ← tu Service ID
+  const TEMPLATE_ID = "template_4fu1spp"; // ← tu Template ID
 
   const get=id=>document.getElementById(id).value;
   const chk=id=>document.getElementById(id).checked?'YES':'NO';
@@ -177,10 +177,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if(records.length===0){alert('No hay registros.'); return;}
     const rows=[columns.join(',')];
     records.forEach(r=>{
-      const vals=columns.map(c=>{
-        const v=String(r[c]||'').replace(/"/g,'""');
-        return v.includes(',')?`"${v}"`:v;
-      });
+      const vals=columns.map(c=>{const v=String(r[c]||'').replace(/"/g,'""'); return v.includes(',')?`"${v}"`:v;});
       rows.push(vals.join(','));
     });
     const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'});
@@ -208,16 +205,14 @@ window.addEventListener('DOMContentLoaded', () => {
     const ws=XLSX.utils.aoa_to_sheet(ws_data);
     XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
 
-    // Crear enlace temporal para descargar
     const blob=XLSX.write(wb,{bookType:'xlsx',type:'array'});
     const url=URL.createObjectURL(new Blob([blob]));
-
     const fecha=new Date().toLocaleString();
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, {
       to_email: 'jgarcia.fixser@gmail.com',
       subject: 'Reporte Validación de Cámara',
-      message: `Hola José,\n\nTu archivo Excel está listo. Puedes descargarlo desde este enlace:\n${url}\n\n📅 Fecha: ${fecha}\n\nAtte: Sistema de Reportes Técnicos`
+      message: `Hola José,\n\nTu archivo Excel está listo. Descárgalo aquí:\n${url}\n\n📅 Fecha: ${fecha}\n\nAtte: Sistema de Reportes`
     })
     .then(()=>alert('Correo enviado correctamente con enlace al Excel.'))
     .catch(err=>{
