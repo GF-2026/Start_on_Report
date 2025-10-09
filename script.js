@@ -1,5 +1,7 @@
-// Datos y columnas
 let records = JSON.parse(localStorage.getItem('records')||'[]');
+let signatureData='';
+
+// Columnas de tabla y Excel
 const columns = [
   'report','datetime','company','engineer','phone','city','ubication',
   'description','brand','model','serial','controlnum','status',
@@ -8,10 +10,6 @@ const columns = [
   'resistance','t1_t2','t1_t3','t2_t3','to_ground','notes','signature'
 ];
 
-const sigPreview = document.getElementById('signaturePreview');
-let signatureData='';
-
-// Funciones auxiliares
 const get=id=>document.getElementById(id).value;
 const chk=id=>document.getElementById(id).checked?'YES':'NO';
 
@@ -31,7 +29,6 @@ function getFormData(){
   };
 }
 
-// Guardar registro
 function addRecord(){
   const data=getFormData();
   if(!data.report||!data.datetime){alert('Completa los campos obligatorios.');return;}
@@ -41,21 +38,19 @@ function addRecord(){
   alert('Registro guardado.');
 }
 
-// Limpiar formulario
 function clearForm(){
   document.getElementById('reportForm').reset();
-  sigPreview.getContext('2d').clearRect(0,0,sigPreview.width,sigPreview.height);
+  const preview=document.getElementById('signaturePreview');
+  preview.getContext('2d').clearRect(0,0,preview.width,preview.height);
   signatureData='';
 }
 
-// Borrar todos
 function deleteAllRecords(){
   if(confirm('¿Eliminar todos los registros?')){
     localStorage.removeItem('records'); records=[]; renderTable();
   }
 }
 
-// Render tabla
 function renderTable(){
   const head=document.getElementById('tableHead');
   const body=document.getElementById('tableBody');
@@ -74,7 +69,6 @@ function renderTable(){
   });
 }
 
-// Export CSV
 function exportCSV(){
   if(records.length===0){alert('No hay registros'); return;}
   const rows=[columns.join(',')];
@@ -86,45 +80,38 @@ function exportCSV(){
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='reportes.csv'; a.click();
 }
 
-// Export XLSX con firma incrustada
 function exportXLSX(){
   if(records.length===0){alert('No hay registros'); return;}
   const wb=XLSX.utils.book_new();
   const ws_data=[columns];
-  const ws=XLSX.utils.aoa_to_sheet(ws_data);
-
-  records.forEach((r,rowIndex)=>{
-    columns.forEach((c,colIndex)=>{
-      const cell=XLSX.utils.encode_cell({r:rowIndex+1,c:colIndex});
-      if(c==='signature' && r[c]){
-        // Insertar imagen en celda usando drawing
-        XLSX.utils.sheet_add_aoa(ws,[[{t:'s',v:''}]],{origin:{r:rowIndex+1,c:colIndex}});
-        if(!ws['!images']) ws['!images']=[];
-        ws['!images'].push({
-          name:`sig${rowIndex}`, data:r[c].split(',')[1], type:'png',
-          position:{sheet:'Sheet1', type:'twoCellAnchor', from:{col:colIndex,row:rowIndex+1}, to:{col:colIndex+1,row:rowIndex+2}}
-        });
-      } else {
-        ws[cell]={t:'s',v:r[c]||''};
-      }
-    });
+  records.forEach(r=>{
+    const row=columns.map(c=>r[c]||'');
+    ws_data.push(row);
   });
-
+  const ws=XLSX.utils.aoa_to_sheet(ws_data);
   XLSX.utils.book_append_sheet(wb,ws,'Reportes');
   XLSX.writeFile(wb,'reportes.xlsx');
 }
 
-// Firma manuscrita
+// ----- FIRMA -----
 const modal=document.getElementById('signatureModal');
 const canvas=document.getElementById('signatureCanvas');
-const ctx=canvas.getContext('2d'); let drawing=false;
+const ctx=canvas.getContext('2d');
+let drawing=false;
 
-function pos(e){const r=canvas.getBoundingClientRect(); return e.touches?[e.touches[0].clientX-r.left,e.touches[0].clientY-r.top]:[e.clientX-r.left,e.clientY-r.top];}
-canvas.addEventListener('mousedown',e=>{drawing=true;ctx.beginPath();ctx.moveTo(...pos(e));});
-canvas.addEventListener('mousemove',e=>{if(!drawing)return;ctx.lineWidth=2;ctx.lineCap='round';ctx.lineTo(...pos(e));ctx.stroke();});
-canvas.addEventListener('mouseup',()=>drawing=false); canvas.addEventListener('mouseout',()=>drawing=false);
-canvas.addEventListener('touchstart',e=>{drawing=true;ctx.beginPath();ctx.moveTo(...pos(e));});
-canvas.addEventListener('touchmove',e=>{if(!drawing)return;e.preventDefault();ctx.lineWidth=2;ctx.lineCap='round';ctx.lineTo(...pos(e));ctx.stroke();});
+function getPos(e){
+  const rect=canvas.getBoundingClientRect();
+  if(e.touches) return [e.touches[0].clientX-rect.left,e.touches[0].clientY-rect.top];
+  return [e.clientX-rect.left,e.clientY-rect.top];
+}
+
+canvas.addEventListener('mousedown',e=>{drawing=true;ctx.beginPath();ctx.moveTo(...getPos(e));});
+canvas.addEventListener('mousemove',e=>{if(!drawing)return;ctx.lineWidth=2;ctx.lineCap='round';ctx.lineTo(...getPos(e));ctx.stroke();});
+canvas.addEventListener('mouseup',()=>drawing=false);
+canvas.addEventListener('mouseout',()=>drawing=false);
+
+canvas.addEventListener('touchstart',e=>{drawing=true;ctx.beginPath();ctx.moveTo(...getPos(e));});
+canvas.addEventListener('touchmove',e=>{if(!drawing)return;e.preventDefault();ctx.lineWidth=2;ctx.lineCap='round';ctx.lineTo(...getPos(e));ctx.stroke();});
 canvas.addEventListener('touchend',()=>drawing=false);
 
 document.getElementById('openSignature').onclick=()=>modal.style.display='flex';
@@ -132,21 +119,8 @@ document.getElementById('closeSignature').onclick=()=>modal.style.display='none'
 document.getElementById('clearSignature').onclick=()=>ctx.clearRect(0,0,canvas.width,canvas.height);
 document.getElementById('saveSignature').onclick=()=>{
   signatureData=canvas.toDataURL('image/png');
-  const sigCtx=sigPreview.getContext('2d');
-  sigCtx.clearRect(0,0,sigPreview.width,sigPreview.height);
-  const img=new Image(); img.onload=()=>sigCtx.drawImage(img,0,0,sigPreview.width,sigPreview.height); img.src=signatureData;
-  modal.style.display='none';
-};
-
-// Botones
-document.getElementById('saveBtn').onclick=addRecord;
-document.getElementById('clearBtn').onclick=clearForm;
-document.getElementById('deleteAllBtn').onclick=deleteAllRecords;
-document.getElementById('downloadCsvBtn').onclick=exportCSV;
-document.getElementById('exportBtn').onclick=exportXLSX;
-
-// Inicialización
-window.onload=()=>{
-  const dt=new Date();
-  const tz=dt.getTimezoneOffset()*60000;
-  document.getElementById('datetime').value=new Date(dt-tz
+  const sigPreview=document.getElementById('signaturePreview');
+  const previewCtx=sigPreview.getContext('2d');
+  previewCtx.clearRect(0,0,sigPreview.width,sigPreview.height);
+  const img=new Image();
+  img.onload=()=>previewCtx.drawImage(img,0,0,sigPreview.width,sigPreview.height);
