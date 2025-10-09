@@ -3,18 +3,20 @@ let signatureData='';
 
 // Columnas de tabla y Excel
 const columns = [
-  'report','datetime','company','engineer','phone','city','ubication',
+  'folio','report','datetime','company','engineer','phone','city','ubication',
   'description','brand','model','serial','controlnum','status',
   'temperature','humidity','specs_available','voltage_plate','manuals',
   'refrigerant','shock_free','supplies_installed','static_ls','static_hs',
   'resistance','t1_t2','t1_t3','t2_t3','to_ground','notes','signature'
 ];
-
+const now = new Date();
+const folio = `FOL-${now.getFullYear()}${(records.length+1).toString().padStart(3,'0')}`;
 const get=id=>document.getElementById(id).value;
 const chk=id=>document.getElementById(id).checked?'YES':'NO';
 
 function getFormData(){
   return {
+    folio: folio,  // <-- nuevo campo
     report:get('report'), datetime:get('datetime'), company:get('company'),
     engineer:get('engineer'), phone:get('phone'), city:get('city'),
     ubication:get('ubication'), description:get('description'), brand:get('brand'),
