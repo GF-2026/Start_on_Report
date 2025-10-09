@@ -124,3 +124,22 @@ document.getElementById('saveSignature').onclick=()=>{
   previewCtx.clearRect(0,0,sigPreview.width,sigPreview.height);
   const img=new Image();
   img.onload=()=>previewCtx.drawImage(img,0,0,sigPreview.width,sigPreview.height);
+    img.src=signatureData;
+  modal.style.display='none';
+};
+
+// ----- BOTONES -----
+document.getElementById('saveBtn').onclick=addRecord;
+document.getElementById('clearBtn').onclick=clearForm;
+document.getElementById('exportBtn').onclick=exportXLSX;
+document.getElementById('downloadCsvBtn').onclick=exportCSV;
+document.getElementById('deleteAllBtn').onclick=deleteAllRecords;
+
+// Inicialización de fecha y renderizado de tabla
+window.onload=()=>{
+  const dt=new Date();
+  const tz=dt.getTimezoneOffset()*60000;
+  document.getElementById('datetime').value=(new Date(dt-tz)).toISOString().slice(0,16);
+  renderTable();
+};
+
