@@ -20,7 +20,7 @@ th{background:#f1f7fb;color:#0b2235}
 .checkboxes{display:flex;flex-direction:column;gap:6px}
 .fullwidth{grid-column:1/-1}
 .muted{color:var(--muted);font-size:13px}
-#signatureModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);align-items:center;justify-content:center}
+#signatureModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;z-index:1000}
 #signatureBox{background:white;padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.2);display:flex;flex-direction:column;align-items:center;gap:10px}
 canvas{border:1px solid #ccc;border-radius:8px;touch-action:none}
 .signature-actions{display:flex;gap:8px}
