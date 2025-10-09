@@ -1,141 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mantenimiento Preventivo</title>
-  <style>
-    :root{--bg:#f7fafc;--card:#ffffff;--accent:#2b6cb0;--muted:#6b7280}
-    body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);margin:0;padding:24px;color:#0f172a}
-    .container{max-width:1100px;margin:0 auto}
-    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
-    h1{margin:0;font-size:20px}
-    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06);margin-bottom:16px}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
-    input[type=text],input[type=number],input[type=datetime-local],select,textarea{width:100%;padding:10px;border:1px solid #e6eef6;border-radius:6px;font-size:14px}
-    textarea{min-height:80px;resize:vertical}
-    .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-    .actions{display:flex;gap:8px}
-    button{background:var(--accent);color:#fff;border:0;padding:10px 12px;border-radius:8px;cursor:pointer}
-    button.secondary{background:#fff;color:var(--accent);border:1px solid #cfe0f5}
-    .table-wrap{overflow:auto}
-    table{width:100%;border-collapse:collapse;font-size:13px}
-    th,td{padding:8px;border-bottom:1px solid #eef2f7;text-align:left}
-    th{background:#f1f7fb;color:#0b2235}
-    .checkboxes{display:flex;flex-direction:column;gap:6px}
-    .fullwidth{grid-column:1/-1}
-    .muted{color:var(--muted);font-size:13px}
-    #signatureModal {
-      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.5); align-items:center; justify-content:center;
-    }
-    #signatureBox {
-      background:white; padding:20px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.2);
-      display:flex; flex-direction:column; align-items:center; gap:10px;
-    }
-    canvas {border:1px solid #ccc; border-radius:8px; touch-action:none;}
-    #signaturePreview {
-      display:block; margin-top:6px; max-width:200px; border:1px solid #ddd; border-radius:6px;
-    }
-    @media (max-width:800px){.grid{grid-template-columns:1fr}}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte Preventivo</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
     <header>
-      <div style="width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#e6f0fb,#dbeefe);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">AV</div>
+      <div class="logo">AV</div>
       <div>
         <h1>REPORTE DE PREVENTIVO</h1>
         <div class="muted">Llena el formulario, firma y presiona "Guardar registro".</div>
       </div>
     </header>
-    
+
     <form id="reportForm" class="card">
       <!-- DATOS GENERALES -->
       <div class="section-header">
-        <div class="muted">Campos obligatorios marcados con *</div>
+        <div class="muted">Campos obligatorios *</div>
         <strong>1 – Datos de cliente</strong>
-        <div><label>Report *</label><input type="text" id="report" value="Mantenimiento preventivo" required /></div>   
       </div>
-      <div class="grid">        
-        <div><label>PO:</label><input type="text" id="PO"/></div>
-        <div><label>OT: *</label><input type="text" id="OT" required /></div>
-        <div><label>Fecha y Hora *</label><input type="datetime-local" id="datetime" required /></div>      
-        <div><label>Compañía</label><input type="text" id="company" /></div>
-        <div><label>Ingeniero a cargo</label><input type="text" id="engineer" /></div>
-        <div><label>Teléfono</label><input type="text" id="phone" /></div>
-        <div><label>Ciudad</label><input type="text" id="city" /></div>
+      <div class="grid">
+        <div><label>Report *</label><input type="text" id="report" value="Mantenimiento preventivo" required></div>
+        <div><label>OT *</label><input type="text" id="OT" required></div>
+        <div><label>Fecha y Hora *</label><input type="datetime-local" id="datetime" required></div>
+        <div><label>Compañía</label><input type="text" id="company"></div>
+        <div><label>Ingeniero a cargo</label><input type="text" id="engineer"></div>
+        <div><label>Teléfono</label><input type="text" id="phone"></div>
+        <div><label>Ciudad</label><input type="text" id="city"></div>
       </div>
 
-      <hr />
+      <hr>
 
       <!-- EQUIPO -->
       <div class="section-header"><strong>2 – Datos del equipo</strong></div>
       <div class="grid">
-        <div><label>Descripción</label><input type="text" id="description" /></div>
-        <div><label>Marca</label><input type="text" id="brand" /></div>
-        <div><label>Modelo</label><input type="text" id="model" /></div>
-        <div><label>Serie</label><input type="text" id="serial" /></div>
-        <div><label>Número de control</label><input type="text" id="controlnum" /></div>
-        <div><label>Estado</label><input type="text" id="status" /></div>
+        <div><label>Descripción</label><input type="text" id="description"></div>
+        <div><label>Marca</label><input type="text" id="brand"></div>
+        <div><label>Modelo</label><input type="text" id="model"></div>
+        <div><label>Serie</label><input type="text" id="serial"></div>
+        <div><label>Número de control</label><input type="text" id="controlnum"></div>
+        <div><label>Estado</label><input type="text" id="status"></div>
       </div>
 
-      <hr />
+      <hr>
 
-      <!-- AMBIENTE CIRCUNDANTE -->
+      <!-- AMBIENTE -->
       <div class="section-header"><strong>3 – Condiciones ambientales</strong></div>
       <div class="grid">
-       <div class="fullwidth"><label>Ubicación</label><input type="text" id="ubication" /></div>
-       <div><label>Temperatura (°C)</label><input type="number" step="0.1" id="temperature" /></div>
-       <div><label>Humedad (%)</label><input type="number" step="0.1" id="humidity" /></div>
+        <div class="fullwidth"><label>Ubicación</label><input type="text" id="ubication"></div>
+        <div><label>Temperatura (°C)</label><input type="number" step="0.1" id="temperature"></div>
+        <div><label>Humedad (%)</label><input type="number" step="0.1" id="humidity"></div>
       </div>
 
-      <hr />
+      <hr>
 
       <!-- CHECKLIST -->
       <div class="section-header"><strong>4 – Checklist</strong></div>
-      <div class="grid">
-        <div class="checkboxes">
-          <label><input type="checkbox" id="shock_free" />Libre de golpes</label>
-          <label><input type="checkbox" id="specs_available" />Especificaciones disponibles</label>
-          <label><input type="checkbox" id="manuals" />Manuales disponibles</label>        
-          <label><input type="checkbox" id="refrigerant" />Refrigerante cargado</label>
-          <label><input type="checkbox" id="voltage_plate" />Voltaje coincide con placa</label>
-          <label><input type="checkbox" id="supplies_installed" />Suministros instalados</label>
-        </div>
+      <div class="grid checkboxes">
+        <label><input type="checkbox" id="shock_free">Libre de golpes</label>
+        <label><input type="checkbox" id="specs_available">Especificaciones disponibles</label>
+        <label><input type="checkbox" id="manuals">Manuales disponibles</label>
+        <label><input type="checkbox" id="refrigerant">Refrigerante cargado</label>
+        <label><input type="checkbox" id="voltage_plate">Voltaje coincide con placa</label>
+        <label><input type="checkbox" id="supplies_installed">Suministros instalados</label>
       </div>
 
-      <hr />
+      <hr>
 
       <!-- MEDICIONES -->
       <div class="section-header"><strong>5 – Mediciones eléctricas</strong></div>
       <div class="grid">
-        <div><label>Presión estática LS</label><input type="number" step="0.01" id="static_ls" /></div>
-        <div><label>Presión estática HS</label><input type="number" step="0.01" id="static_hs" /></div>
-        <div><label>Resistencia (Ω)</label><input type="number" step="0.001" id="resistance" /></div>
-        <div><label>CompresorLS T1–T2 (V)</label><input type="number" step="0.1" id="t1_t2" /></div>
-        <div><label>CompresorLS T1–T3 (V)</label><input type="number" step="0.1" id="t1_t3" /></div>
-        <div><label>CompresorLS T2–T3 (V)</label><input type="number" step="0.1" id="t2_t3" /></div>
-        <div><label>CompresorLS To ground (V)</label><input type="number" step="0.01" id="to_ground" /></div>
+        <div><label>Presión LS</label><input type="number" step="0.01" id="static_ls"></div>
+        <div><label>Presión HS</label><input type="number" step="0.01" id="static_hs"></div>
+        <div><label>Resistencia (Ω)</label><input type="number" step="0.001" id="resistance"></div>
+        <div><label>Compresor T1–T2 (V)</label><input type="number" step="0.1" id="t1_t2"></div>
+        <div><label>Compresor T1–T3 (V)</label><input type="number" step="0.1" id="t1_t3"></div>
+        <div><label>Compresor T2–T3 (V)</label><input type="number" step="0.1" id="t2_t3"></div>
+        <div><label>To ground (V)</label><input type="number" step="0.01" id="to_ground"></div>
       </div>
 
-      <hr />
+      <hr>
 
       <!-- OBSERVACIONES -->
       <div class="section-header"><strong>6 – Observaciones</strong></div>
       <textarea id="notes"></textarea>
 
-      <hr />
+      <hr>
 
       <!-- FIRMA -->
       <div class="section-header"><strong>7 – Firma</strong></div>
       <button type="button" id="openSignature">Abrir área de firma</button>
-      <img id="signaturePreview" alt="Firma previa" />
+      <canvas id="signaturePreview" width="300" height="150"></canvas>
 
-      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+      <div class="form-actions">
         <button type="button" id="saveBtn">Guardar registro</button>
-        <button type="button" class="secondary" id="clearBtn">Limpiar formulario</button>
+        <button type="button" id="clearBtn" class="secondary">Limpiar formulario</button>
       </div>
     </form>
 
@@ -145,8 +107,8 @@
         <strong>Registros capturados</strong>
         <div class="actions">
           <button id="exportBtn">Exportar a Excel</button>
-          <button class="secondary" id="downloadCsvBtn">Exportar CSV</button>
-          <button class="secondary" id="deleteAllBtn">Borrar registros</button>
+          <button id="downloadCsvBtn" class="secondary">Exportar CSV</button>
+          <button id="deleteAllBtn" class="secondary">Borrar registros</button>
         </div>
       </div>
       <div class="table-wrap">
@@ -163,172 +125,15 @@
     <div id="signatureBox">
       <h3>Firma manuscrita</h3>
       <canvas id="signatureCanvas" width="300" height="150"></canvas>
-      <div style="display:flex;gap:8px;">
+      <div class="signature-actions">
         <button id="clearSignature">Limpiar</button>
         <button id="saveSignature">Guardar firma</button>
-        <button class="secondary" id="closeSignature">Cerrar</button>
+        <button id="closeSignature" class="secondary">Cerrar</button>
       </div>
     </div>
   </div>
 
-  <script>
-    let records = JSON.parse(localStorage.getItem('records') || '[]');
-    const columns = [
-      'report','datetime','company','engineer','phone','city','ubication',
-      'description','brand','model','serial','controlnum','status',
-      'temperature','humidity','specs_available','voltage_plate','manuals',
-      'refrigerant','shock_free','supplies_installed','static_ls','static_hs',
-      'resistance','t1_t2','t1_t3','t2_t3','to_ground','notes','signature'
-    ];
-
-    const get = id => document.getElementById(id).value;
-    const chk = id => document.getElementById(id).checked ? 'YES' : 'NO';
-    const sigPreview = document.getElementById('signaturePreview');
-    let signatureData = '';
-
-    function getFormData(){
-      return {
-        report:get('report'), datetime:get('datetime'), company:get('company'),
-        engineer:get('engineer'), phone:get('phone'), city:get('city'),
-        ubication:get('ubication'), description:get('description'), brand:get('brand'),
-        model:get('model'), serial:get('serial'), controlnum:get('controlnum'),
-        status:get('status'), temperature:get('temperature'),
-        humidity:get('humidity'), specs_available:chk('specs_available'),
-        voltage_plate:chk('voltage_plate'), manuals:chk('manuals'),
-        refrigerant:chk('refrigerant'), shock_free:chk('shock_free'),
-        supplies_installed:chk('supplies_installed'), static_ls:get('static_ls'),
-        static_hs:get('static_hs'), resistance:get('resistance'),
-        t1_t2:get('t1_t2'), t1_t3:get('t1_t3'), t2_t3:get('t2_t3'),
-        to_ground:get('to_ground'), notes:get('notes'), signature:signatureData
-      };
-    }
-
-    function addRecord(){
-      const data = getFormData();
-      if(!data.report || !data.datetime){ alert('Completa los campos obligatorios.'); return; }
-      records.push(data);
-      localStorage.setItem('records', JSON.stringify(records));
-      renderTable();
-      downloadSignature(data.signature);
-      alert('Registro guardado correctamente.');
-    }
-
-    function downloadSignature(base64){
-      if(!base64) return;
-      const link = document.createElement('a');
-      link.href = base64;
-      link.download = 'firma.png';
-      link.click();
-    }
-
-    function clearForm(){
-      document.getElementById('reportForm').reset();
-      sigPreview.src = '';
-      signatureData = '';
-    }
-
-    function deleteAllRecords(){
-      if(confirm('¿Eliminar todos los registros?')){
-        localStorage.removeItem('records');
-        records = [];
-        renderTable();
-      }
-    }
-
-    function renderTable(){
-      const head = document.getElementById('tableHead');
-      const body = document.getElementById('tableBody');
-      head.innerHTML = ''; body.innerHTML = '';
-      columns.forEach(c=>{const th=document.createElement('th');th.textContent=c.replace(/_/g,' ');head.appendChild(th);});
-      records.forEach(r=>{
-        const tr=document.createElement('tr');
-        columns.forEach(c=>{
-          const td=document.createElement('td');
-          if(c==='signature' && r[c]){
-            const img=document.createElement('img');
-            img.src=r[c]; img.width=80; td.appendChild(img);
-          } else td.textContent=r[c]||'';
-          tr.appendChild(td);
-        });
-        body.appendChild(tr);
-      });
-    }
-
-    function exportCSV(){
-      if(records.length===0){alert('No hay registros.');return;}
-      const rows=[columns.join(',')];
-      records.forEach(r=>{
-        const vals=columns.map(c=>{
-          const v=String(r[c]||'').replace(/"/g,'""');
-          return v.includes(',')?`"${v}"`:v;
-        });
-        rows.push(vals.join(','));
-      });
-      const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'});
-      const a=document.createElement('a');
-      a.href=URL.createObjectURL(blob);
-      a.download='reportes.csv';
-      a.click();
-    }
-
-    function exportXLSX(){
-      if(records.length===0){alert('No hay registros.');return;}
-      if(typeof XLSX==='undefined'){alert('No se pudo cargar Excel, se descargará CSV.');return exportCSV();}
-      const ws_data=[columns];
-      records.forEach(r=>ws_data.push(columns.map(c=>r[c]||'')));
-      const wb=XLSX.utils.book_new();
-      const ws=XLSX.utils.aoa_to_sheet(ws_data);
-      XLSX.utils.book_append_sheet(wb,ws,'Reportes');
-      XLSX.writeFile(wb,'reportes.xlsx');
-    }
-
-    (function loadSheetJS(){
-      const s=document.createElement('script');
-      s.src='https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js';
-      document.head.appendChild(s);
-    })();
-
-    // Firma manuscrita modal
-    const modal=document.getElementById('signatureModal');
-    const canvas=document.getElementById('signatureCanvas');
-    const ctx=canvas.getContext('2d');
-    let drawing=false;
-
-    function pos(e){
-      const r=canvas.getBoundingClientRect();
-      return e.touches?[e.touches[0].clientX-r.left,e.touches[0].clientY-r.top]:
-      [e.clientX-r.left,e.clientY-r.top];
-    }
-
-    canvas.addEventListener('mousedown',e=>{drawing=true;ctx.beginPath();ctx.moveTo(...pos(e));});
-    canvas.addEventListener('mousemove',e=>{if(!drawing)return;ctx.lineWidth=2;ctx.lineCap='round';ctx.lineTo(...pos(e));ctx.stroke();});
-    canvas.addEventListener('mouseup',()=>drawing=false);
-    canvas.addEventListener('mouseout',()=>drawing=false);
-    canvas.addEventListener('touchstart',e=>{drawing=true;ctx.beginPath();ctx.moveTo(...pos(e));});
-    canvas.addEventListener('touchmove',e=>{if(!drawing)return;e.preventDefault();ctx.lineWidth=2;ctx.lineCap='round';ctx.lineTo(...pos(e));ctx.stroke();});
-    canvas.addEventListener('touchend',()=>drawing=false);
-
-    document.getElementById('clearSignature').onclick=()=>ctx.clearRect(0,0,canvas.width,canvas.height);
-    document.getElementById('saveSignature').onclick=()=>{
-      signatureData=canvas.toDataURL('image/png');
-      sigPreview.src=signatureData;
-      modal.style.display='none';
-    };
-    document.getElementById('openSignature').onclick=()=>modal.style.display='flex';
-    document.getElementById('closeSignature').onclick=()=>modal.style.display='none';
-
-    document.getElementById('saveBtn').onclick=addRecord;
-    document.getElementById('clearBtn').onclick=clearForm;
-    document.getElementById('exportBtn').onclick=exportXLSX;
-    document.getElementById('downloadCsvBtn').onclick=exportCSV;
-    document.getElementById('deleteAllBtn').onclick=deleteAllRecords;
-
-    window.onload=()=>{
-      const dt=new Date();
-      const tz=dt.getTimezoneOffset()*60000;
-      document.getElementById('datetime').value=new Date(Date.now()-tz).toISOString().slice(0,16);
-      renderTable();
-    };
-  </script>
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
