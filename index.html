@@ -16,12 +16,12 @@
     input[type=text],input[type=number],input[type=datetime-local],select,textarea{width:100%;padding:10px;border:1px solid #e6eef6;border-radius:6px;font-size:14px}
     textarea{min-height:80px;resize:vertical}
     .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-    .actions{display:flex;gap:8px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
     button{background:var(--accent);color:#fff;border:0;padding:10px 12px;border-radius:8px;cursor:pointer}
     button.secondary{background:#fff;color:var(--accent);border:1px solid #cfe0f5}
     .table-wrap{overflow:auto}
     table{width:100%;border-collapse:collapse;font-size:13px}
-    th,td{padding:8px;border-bottom:1px solid #eef2f7;text-align:left}
+    th,td{padding:8px;border-bottom:1px solid #eef2f7;text-align:left;vertical-align:middle}
     th{background:#f1f7fb;color:#0b2235}
     .checkboxes{display:flex;flex-direction:column;gap:6px}
     .fullwidth{grid-column:1/-1}
@@ -44,7 +44,7 @@
       <div class="section-header">
         <div class="muted">Campos obligatorios marcados con *</div>
         <strong>1 – Datos de cliente</strong>
-       <div><label>Report *</label><input type="text" id="report" value="Mantenimiento preventivo" required /></div>   
+        <div><label>Report *</label><input type="text" id="report" value="Mantenimiento preventivo" required /></div>   
       </div>
       <div class="grid">        
         <div><label>PO:</label><input type="text" id="PO"/></div>
@@ -85,11 +85,11 @@
       <div class="section-header"><strong>4 – Checklist</strong></div>
       <div class="grid">
         <div class="checkboxes">
-          <label><input type="checkbox" id="shock_free" />Esta libre de golpes</label>
+          <label><input type="checkbox" id="shock_free" />Está libre de golpes</label>
           <label><input type="checkbox" id="specs_available" />Especificaciones disponibles</label>
           <label><input type="checkbox" id="manuals" />Manuales disponibles</label>        
           <label><input type="checkbox" id="refrigerant" />Refrigerante cargado</label>
-          <label><input type="checkbox" id="voltage_plate" />Voltage coincide con placa</label>
+          <label><input type="checkbox" id="voltage_plate" />Voltaje coincide con placa</label>
           <label><input type="checkbox" id="supplies_installed" />Suministros instalados</label>
         </div>
       </div>
@@ -99,8 +99,8 @@
       <!-- MEDICIONES -->
       <div class="section-header"><strong>5 – Mediciones eléctricas</strong></div>
       <div class="grid">
-        <div><label>Presion estatica LS</label><input type="number" step="0.01" id="static_ls" /></div>
-        <div><label>Presion estatica HS</label><input type="number" step="0.01" id="static_hs" /></div>
+        <div><label>Presión estática LS</label><input type="number" step="0.01" id="static_ls" /></div>
+        <div><label>Presión estática HS</label><input type="number" step="0.01" id="static_hs" /></div>
         <div><label>Resistencia (Ω)</label><input type="number" step="0.001" id="resistance" /></div>
         <div><label>CompresorLS T1–T2 (V)</label><input type="number" step="0.1" id="t1_t2" /></div>
         <div><label>CompresorLS T1–T3 (V)</label><input type="number" step="0.1" id="t1_t3" /></div>
@@ -114,18 +114,31 @@
       <div class="section-header"><strong>6 – Observaciones</strong></div>
       <textarea id="notes"></textarea>
 
-      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
-        <hr />
-<div class="section-header"><strong>7 – Firma del responsable</strong></div>
-<div class="fullwidth" style="text-align:center">
-  <label for="signature">Firma manuscrita:</label>
-  <br>
-  <canvas id="signature" width="300" height="150" style="border:1px solid #ccc;border-radius:6px;background:#fff"></canvas>
-  <div style="margin-top:8px">
-    <button type="button" id="clearSignature" class="secondary">Limpiar firma</button>
-  </div>
-</div>
+      <hr />
+      <!-- FIRMA -->
+      <div class="section-header"><strong>7 – Firma del responsable</strong></div>
+      <div class="fullwidth" style="text-align:center">
+        <label>Firma manuscrita:</label><br>
+        <button type="button" id="openSignature" class="secondary">Abrir firma</button>
+        <div style="margin-top:8px">
+          <img id="signaturePreview" style="max-width:200px;border:1px solid #ccc;border-radius:6px;display:none" />
+        </div>
+      </div>
 
+      <!-- MODAL DE FIRMA -->
+      <div id="signatureModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:9999">
+        <div style="background:#fff;padding:20px;border-radius:10px;max-width:90%;width:400px;text-align:center">
+          <h3>Firma</h3>
+          <canvas id="signatureCanvas" width="350" height="200" style="border:1px solid #ccc;border-radius:6px;background:#fff"></canvas>
+          <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
+            <button type="button" id="clearSignature" class="secondary">Limpiar</button>
+            <button type="button" id="saveSignature">Aceptar</button>
+            <button type="button" id="closeSignature" class="secondary">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
         <button type="button" id="saveBtn">Guardar registro</button>
         <button type="button" class="secondary" id="clearBtn">Limpiar formulario</button>
       </div>
@@ -138,6 +151,7 @@
         <div class="actions">
           <button id="exportBtn">Exportar a Excel</button>
           <button class="secondary" id="downloadCsvBtn">Exportar CSV</button>
+          <button class="secondary" id="deleteAllBtn">🗑️ Borrar registros</button>
         </div>
       </div>
       <div class="table-wrap">
@@ -158,8 +172,7 @@
       'temperature','humidity',
       'specs_available','voltage_plate','manuals','refrigerant','shock_free','supplies_installed',
       'static_ls','static_hs','resistance','t1_t2','t1_t3','t2_t3','to_ground',
-      'notes'
-      'signature'
+      'notes','signature'
     ];
 
     const get = id => document.getElementById(id).value;
@@ -177,8 +190,8 @@
         supplies_installed:chk('supplies_installed'),
         static_ls:get('static_ls'), static_hs:get('static_hs'), resistance:get('resistance'),
         t1_t2:get('t1_t2'), t1_t3:get('t1_t3'), t2_t3:get('t2_t3'), to_ground:get('to_ground'),
-        notes:get('notes')
-        signature: document.getElementById('signature').toDataURL()
+        notes:get('notes'),
+        signature: document.getElementById('signaturePreview').src || ''
       };
     }
 
@@ -191,7 +204,7 @@
       alert('Registro guardado correctamente.');
     }
 
-    function clearForm(){ document.getElementById('reportForm').reset(); }
+    function clearForm(){ document.getElementById('reportForm').reset(); document.getElementById('signaturePreview').style.display='none'; }
 
     function renderTable(){
       const head = document.getElementById('tableHead');
@@ -204,15 +217,14 @@
         const tr=document.createElement('tr');
         columns.forEach(c=>{
           const td=document.createElement('td');
-          if(c === 'signature' && r[c]){
-  const img = document.createElement('img');
-  img.src = r[c];
-  img.style.width = '100px';
-  td.appendChild(img);
-} else {
-  td.textContent = r[c] || '';
-}
-tr.appendChild(td);
+          if(c==='signature' && r[c]){
+            const img=document.createElement('img');
+            img.src=r[c]; img.style.width='100px'; img.style.border='1px solid #ccc'; img.style.borderRadius='4px';
+            td.appendChild(img);
+          } else {
+            td.textContent=r[c]||'';
+          }
+          tr.appendChild(td);
         });
         body.appendChild(tr);
       });
@@ -246,6 +258,66 @@ tr.appendChild(td);
       XLSX.writeFile(wb,'reportes_validacion.xlsx');
     }
 
+    function deleteAllRecords(){
+      if(confirm('¿Seguro que deseas borrar todos los registros?')){
+        records=[];
+        localStorage.removeItem('records');
+        renderTable();
+      }
+    }
+
+    // --- Modal de firma ---
+    const openBtn = document.getElementById('openSignature');
+    const modal = document.getElementById('signatureModal');
+    const canvas = document.getElementById('signatureCanvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    openBtn.onclick = () => modal.style.display = 'flex';
+    document.getElementById('closeSignature').onclick = () => modal.style.display = 'none';
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      if (e.touches && e.touches[0]) {
+        return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+      } else {
+        return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      }
+    }
+
+    function startDraw(e){ drawing = true; const p=getPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); }
+    function draw(e){
+      if(!drawing) return;
+      e.preventDefault();
+      const p = getPos(e);
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#000';
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+    }
+    function stopDraw(){ drawing = false; ctx.beginPath(); }
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseout', stopDraw);
+    canvas.addEventListener('touchstart', startDraw);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stopDraw);
+    canvas.addEventListener('touchcancel', stopDraw);
+
+    document.getElementById('clearSignature').onclick = () => ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    document.getElementById('saveSignature').onclick = () => {
+      const dataURL = canvas.toDataURL();
+      const img = document.getElementById('signaturePreview');
+      img.src = dataURL;
+      img.style.display = 'block';
+      modal.style.display = 'none';
+    };
+
+    // --- Inicialización ---
     (function loadSheetJS(){
       const s=document.createElement('script');
       s.src='https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js';
@@ -256,56 +328,9 @@ tr.appendChild(td);
     document.getElementById('clearBtn').onclick=clearForm;
     document.getElementById('exportBtn').onclick=exportXLSX;
     document.getElementById('downloadCsvBtn').onclick=exportCSV;
+    document.getElementById('deleteAllBtn').onclick=deleteAllRecords;
 
-    window.onload=()=>{
-      const dt=new Date();
-      const tz=dt.getTimezoneOffset()*60000;
-      document.getElementById('datetime').value=(new Date(dt-tz)).toISOString().slice(0,16);
-      renderTable();
-    }
-    // --- Firma manuscrita ---
-const canvas = document.getElementById('signature');
-const ctx = canvas.getContext('2d');
-let drawing = false;
-
-canvas.addEventListener('mousedown', startDraw);
-canvas.addEventListener('mouseup', stopDraw);
-canvas.addEventListener('mouseout', stopDraw);
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('touchstart', startDraw);
-canvas.addEventListener('touchend', stopDraw);
-canvas.addEventListener('touchcancel', stopDraw);
-canvas.addEventListener('touchmove', drawTouch);
-
-function startDraw(e){ drawing = true; draw(e); }
-function stopDraw(){ drawing = false; ctx.beginPath(); }
-function draw(e){
-  if(!drawing) return;
-  e.preventDefault();
-  const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  ctx.lineWidth = 2;
-  ctx.lineCap = 'round';
-  ctx.strokeStyle = '#000';
-  ctx.lineTo(x, y);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-}
-
-function drawTouch(e){
-  const touch = e.touches[0];
-  const rect = canvas.getBoundingClientRect();
-  const x = touch.clientX - rect.left;
-  const y = touch.clientY - rect.top;
-  draw({ clientX: x + rect.left, clientY: y + rect.top, preventDefault: ()=>{} });
-}
-
-document.getElementById('clearSignature').onclick = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-};
+    renderTable();
   </script>
-  
 </body>
 </html>
