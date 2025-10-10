@@ -26,6 +26,28 @@ function chk(id) {
   return document.getElementById(id)?.checked ? 'Sí' : 'No';
 }
 
+// ======================
+// GENERAR FOLIO AUTOMÁTICO
+// ======================
+function generateFolio() {
+  const company = get('company') || 'SinEmpresa';
+  const now = new Date();
+
+  // Fecha YYYYMMDD
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+
+  // Hora HHMM
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+
+  return `StartReport-${company}-${year}${month}${day}-${hours}${minutes}`;
+}
+
+// ======================
+// FUNCIONES DE FIRMA
+// ======================
 function openSignature(field) {
   currentSignatureField = field;
   ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
@@ -107,8 +129,6 @@ document.getElementById('saveSignature').onclick = () => {
 };
 
 document.getElementById('closeSignature').onclick = closeSignature;
-
-// Abrir modal
 document.getElementById('openSignatureCus').onclick = () => openSignature('cus');
 document.getElementById('openSignatureEsp').onclick = () => openSignature('esp');
 
@@ -116,7 +136,10 @@ document.getElementById('openSignatureEsp').onclick = () => openSignature('esp')
 // GUARDAR REGISTRO
 // ======================
 document.getElementById('saveBtn').onclick = () => {
+  const folio = generateFolio(); // Generar folio
+
   const record = {
+    folio: folio, // NUEVO CAMPO
     OT: get('OT'),
     datetime: get('datetime'),
     company: get('company'),
@@ -154,7 +177,7 @@ document.getElementById('saveBtn').onclick = () => {
   records.push(record);
   localStorage.setItem(storageKey, JSON.stringify(records));
 
-  alert('✅ Registro guardado correctamente.');
+  alert(`✅ Registro guardado correctamente.\nFolio: ${folio}`);
   loadTable();
 };
 
@@ -229,12 +252,9 @@ document.getElementById('exportBtn').onclick = () => {
 const deleteBtn = document.getElementById('deleteAllBtn');
 
 if (deleteBtn) {
-  // Mostrar u ocultar según la variable
-  deleteBtn.style.display = enableDeleteButton ? 'inline-block' : 'none';// CAMBIAR A TRUE PARA HABILITAR EL BOTÓN
-
-  // Funcionalidad de borrar
+  deleteBtn.style.display = enableDeleteButton ? 'inline-block' : 'none';
   deleteBtn.onclick = () => {
-    if (!enableDeleteButton) return; // seguridad extra
+    if (!enableDeleteButton) return;
     if (confirm('¿Seguro que deseas borrar todos los registros?')) {
       localStorage.removeItem(storageKey);
       loadTable();
