@@ -257,22 +257,25 @@ document.getElementById('exportAndMailBtn').onclick = () => {
   const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
   const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 
-  // 3️⃣ Crear URL temporal
+  // 3️⃣ Crear URL temporal y descargar
   const url = URL.createObjectURL(blob);
-
-  // 4️⃣ Descargar automáticamente
   const a = document.createElement('a');
   a.href = url;
   a.download = 'RegistrosArranque.xlsx';
   a.click();
 
-  // 5️⃣ Abrir app de correo con mailto
-  const subject = encodeURIComponent('Registros de Arranque');
-  const body = encodeURIComponent('Hola,\n\nAdjunto el archivo con los registros de arranque. Por favor revisa.\n\nGracias.');
-  const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
+  // 4️⃣ Abrir app de correo con campos prellenados
+  const to = "tck@olimp0.com";   // Cambia a quien quieras
+  const cc = "";                            // Copia opcional
+  const subject = encodeURIComponent("Registros de Arranque");
+  const body = encodeURIComponent(
+    "Hola,\n\nAdjunto el archivo con los registros de arranque.\n\nGracias."
+  );
+
+  const mailtoLink = `mailto:${to}?cc=${cc}&subject=${subject}&body=${body}`;
   window.location.href = mailtoLink;
 
-  // 6️⃣ Liberar URL temporal
+  // 5️⃣ Liberar URL temporal
   setTimeout(() => URL.revokeObjectURL(url), 2000);
 };
 
