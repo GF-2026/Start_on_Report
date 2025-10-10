@@ -1,6 +1,7 @@
 // ----- REGISTROS Y FIRMA -----
 let records = JSON.parse(localStorage.getItem('records')||'[]');
-let signatureData='';
+let signatureData1='';
+let signatureData2='';
 
 // ----- FUNCIONES AUXILIARES -----
 const get=id=>document.getElementById(id).value;
@@ -33,7 +34,7 @@ function getFormData(){
     supplies_installed:chk('supplies_installed'), static_ls:get('static_ls'),
     static_hs:get('static_hs'), resistance_hs:get('resistance_hs'), resistance_ls:get('resistance_ls'),
     voltaje_hs:get('voltaje_hs'), voltaje_ls:get('voltaje_ls'), to_ground:get('to_ground'),
-    notes:get('notes'), signature_esp:signatureData, signature_cus:signatureData
+    notes:get('notes'), signature_esp:signatureData1, signature_cus:signatureData2
   };
 }
 
