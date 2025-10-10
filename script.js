@@ -247,14 +247,14 @@ loadTable();
 // Asegúrate de tener EmailJS y SheetJS cargados en tu proyecto
 
 // Botón de enviar (sin EmailJS)
-document.getElementById('sendButton').addEventListener('click', () => {
+/*document.getElementById('sendButton').addEventListener('click', () => {
     // 1️⃣ Obtener los registros guardados
     let records = JSON.parse(localStorage.getItem('records_arranque') || '[]');
     if (records.length === 0) {
         alert('No hay registros guardados para enviar');
         return;
     }
-
+*/
     // 2️⃣ Generar Excel en memoria (opcional, solo si luego el usuario lo quiere descargar o adjuntar)
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(records);
@@ -263,6 +263,60 @@ document.getElementById('sendButton').addEventListener('click', () => {
     const blob = new Blob([wbout], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
+// Función auxiliar para obtener registros
+function getRecords() {
+    return JSON.parse(localStorage.getItem('records_arranque') || '[]');
+}
+
+// 1️⃣ Descargar Excel manualmente
+document.getElementById('downloadButton').addEventListener('click', () => {
+    const records = getRecords();
+    if (records.length === 0) {
+        alert('No hay registros guardados para descargar');
+        return;
+    }
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(records);
+    XLSX.utils.book_append_sheet(wb, ws, 'Registros');
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+
+    const blob = new Blob([wbout], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    });
+    const url = URL.createObjectURL(blob);
+
+    // Descargar con nombre personalizado
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Registros_Arranque_${new Date().toISOString().slice(0,19).replace(/[-T:]/g,'')}.xlsx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+
+// 2️⃣ Enviar correo (solo abre app, sin adjunto)
+document.getElementById('sendButton').addEventListener('click', () => {
+    const records = getRecords();
+    if (records.length === 0) {
+        alert('No hay registros guardados para enviar');
+        return;
+    }
+
+    const destinatario = "tck@olimp0.com"; // Destinatario de registros
+    const asunto = encodeURIComponent("Reportes de arranque guardados");
+    const cuerpo = encodeURIComponent(
+`Hola,
+
+Aquí te envío los registros técnicos guardados.
+Si lo requieres, puedes adjuntar manualmente el archivo Excel que acabas de descargar.
+
+Saludos.`
+    );
+
+    window.location.href = `mailto:${destinatario}?subject=${asunto}&body=${cuerpo}`;
+});
 
     // 👉 Si deseas permitir que el usuario lo adjunte manualmente:
     // puedes guardar el Blob temporalmente o mostrar un mensaje.
