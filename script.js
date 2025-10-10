@@ -4,7 +4,7 @@ let signatureData='';
 
 // ----- FUNCIONES AUXILIARES -----
 const get=id=>document.getElementById(id).value;
-const chk=id=>document.getElementById(id).checked?'YES':'NO';
+const chk=id=>document.getElementById(id).checked?'NO':'YES';
 
 // ----- GENERAR FOLIO ÚNICO -----
 function generateFolio(){
