@@ -92,9 +92,15 @@ o de la planta<!DOCTYPE html>
 
       <hr>
 
-      <!-- FIRMA -->
-      <div class="section-header"><strong>7 – Firma de cliente</strong></div>
-      <button type="button" id="openSignature">Abrir área de firma</button>
+      <!-- FIRMAS -->
+      <div class="section-header"><strong>7 – Firma de Especialista</strong></div>
+      <div><label>Nombre de Especialista</label><input type="text" step="0.1" id="signature_esp"></div>  
+      <button type="button" id="openSignatureEsp">Firma de Especialista</button>
+      <canvas id="signaturePreview" width="300" height="150"></canvas>
+
+      <div class="section-header"><strong>8 – Firma de cliente</strong></div>
+      <div><label>Nombre de Cliente</label><input type="text" step="0.1" id="signature_cus"></div>  
+      <button type="button" id="openSignatureCus">Firma de Cliente</button>
       <canvas id="signaturePreview" width="300" height="150"></canvas>
 
       <div class="form-actions">
