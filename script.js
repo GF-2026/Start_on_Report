@@ -1,62 +1,191 @@
-// ======================
-// FUNCIONES AUXILIARES
-// ======================
-function getRecords() {
-  return JSON.parse(localStorage.getItem(storageKey) || '[]');
+// ======== Variables globales ========
+let records = JSON.parse(localStorage.getItem('records') || '[]');
+let currentSignatureTarget = null; // 'esp' o 'cus'
+
+// ======== Funciones auxiliares ========
+function get(id) {
+  return document.getElementById(id).value.trim();
 }
 
-// ======================
-// DESCARGAR EXCEL
-// ======================
-document.getElementById('downloadButton').addEventListener('click', () => {
-  const records = getRecords();
-  if (records.length === 0) {
-    alert('No hay registros guardados para descargar');
-    return;
-  }
+function set(id, value) {
+  document.getElementById(id).value = value || '';
+}
 
-  const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.json_to_sheet(records);
-  XLSX.utils.book_append_sheet(wb, ws, 'Registros');
-  const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+function chk(id) {
+  return document.getElementById(id).checked ? 'Sí' : 'No';
+}
 
-  const blob = new Blob([wbout], {
-    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+function setChk(id, val) {
+  document.getElementById(id).checked = (val === 'Sí');
+}
+
+// ======== Guardar registro ========
+document.getElementById('saveBtn').addEventListener('click', () => {
+  const record = {
+    OT: get('OT'),
+    datetime: get('datetime'),
+    company: get('company'),
+    engineer: get('engineer'),
+    phone: get('phone'),
+    city: get('city'),
+    description: get('description'),
+    brand: get('brand'),
+    model: get('model'),
+    serial: get('serial'),
+    controlnum: get('controlnum'),
+    status: get('status'),
+    ubication: get('ubication'),
+    temperature: get('temperature'),
+    humidity: get('humidity'),
+    marking: chk('marking'),
+    voltage_plate: chk('voltage_plate'),
+    shock_free: chk('shock_free'),
+    pallets: chk('pallets'),
+    unpack: chk('unpack'),
+    supplies_installed: chk('supplies_installed'),
+    specs_available: chk('specs_available'),
+    refrigerant: chk('refrigerant'),
+    manuals: chk('manuals'),
+    notes: get('notes'),
+    name_esp: get('name_esp'),
+    name_cus: get('name_cus'),
+    signatureEsp: document.getElementById('signaturePreviewEsp').toDataURL(),
+    signatureCus: document.getElementById('signaturePreviewCus').toDataURL()
+  };
+
+  records.push(record);
+  localStorage.setItem('records', JSON.stringify(records));
+  renderTable();
+  alert('✅ Registro guardado correctamente');
+});
+
+// ======== Limpiar formulario ========
+document.getElementById('clearBtn').addEventListener('click', () => {
+  document.getElementById('reportForm').reset();
+  document.getElementById('signaturePreviewEsp').getContext('2d').clearRect(0, 0, 300, 150);
+  document.getElementById('signaturePreviewCus').getContext('2d').clearRect(0, 0, 300, 150);
+});
+
+// ======== Renderizar tabla ========
+function renderTable() {
+  const head = document.getElementById('tableHead');
+  const body = document.getElementById('tableBody');
+  body.innerHTML = '';
+
+  const columns = [
+    'OT','datetime','company','engineer','city','description','status','temperature','humidity'
+  ];
+
+  head.innerHTML = columns.map(c => `<th>${c}</th>`).join('');
+
+  records.forEach(r => {
+    const row = `<tr>${columns.map(c => `<td>${r[c] || ''}</td>`).join('')}</tr>`;
+    body.insertAdjacentHTML('beforeend', row);
   });
-  const url = URL.createObjectURL(blob);
+}
 
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `Registros_Arranque_${new Date().toISOString().slice(0,19).replace(/[-T:]/g,'')}.xlsx`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+renderTable();
 
-  // mensaje visual opcional
-  // alert('✅ Archivo Excel descargado. Puedes adjuntarlo manualmente al correo.');
+// ======== Descargar Excel ========
+document.getElementById('downloadButton').addEventListener('click', () => {
+  if (!records.length) return alert('No hay registros para exportar.');
+
+  const ws = XLSX.utils.json_to_sheet(records);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
+  XLSX.writeFile(wb, 'Reportes_Fixser.xlsx');
 });
 
-// ======================
-// ENVIAR CORREO (SIN ADJUNTO)
-// ======================
+// ======== Enviar correo ========
 document.getElementById('sendButton').addEventListener('click', () => {
-  const records = getRecords();
-  if (records.length === 0) {
-    alert('No hay registros guardados para enviar');
-    return;
-  }
-
-  const destinatario = "tck@olimp0.com"; // Cambia si es necesario
-  const asunto = encodeURIComponent("Reportes de arranque guardados");
-  const cuerpo = encodeURIComponent(
-`Hola,
-
-Aquí te envío los registros técnicos guardados.
-Si lo requieres, puedes adjuntar manualmente el archivo Excel que acabas de descargar.
-
-Saludos.`
+  const subject = encodeURIComponent('📋 Reportes de Arranque FIXSER');
+  const body = encodeURIComponent(
+    'Hola,\n\nAdjunto encontrarás el archivo Excel con los reportes de arranque.\n\nSaludos,\n'
   );
-
-  window.location.href = `mailto:${destinatario}?subject=${asunto}&body=${cuerpo}`;
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
 });
+
+// ======== Eliminar registros ========
+document.getElementById('deleteAllBtn').addEventListener('click', () => {
+  if (confirm('¿Borrar todos los registros guardados?')) {
+    localStorage.removeItem('records');
+    records = [];
+    renderTable();
+  }
+});
+
+// ======== MANEJO DE FIRMAS ========
+const modal = document.getElementById('signatureModal');
+const canvas = document.getElementById('signatureCanvas');
+const ctx = canvas.getContext('2d');
+let drawing = false;
+
+// Abrir modal de firma
+document.getElementById('openSignatureEsp').addEventListener('click', () => openSignature('esp'));
+document.getElementById('openSignatureCus').addEventListener('click', () => openSignature('cus'));
+
+function openSignature(target) {
+  currentSignatureTarget = target;
+  modal.style.display = 'flex';
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Cerrar modal
+document.getElementById('closeSignature').addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+// Limpiar firma
+document.getElementById('clearSignature').addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
+// Guardar firma
+document.getElementById('saveSignature').addEventListener('click', () => {
+  const dataURL = canvas.toDataURL();
+  if (currentSignatureTarget === 'esp') {
+    const preview = document.getElementById('signaturePreviewEsp');
+    const pctx = preview.getContext('2d');
+    const img = new Image();
+    img.onload = () => {
+      pctx.clearRect(0, 0, 300, 150);
+      pctx.drawImage(img, 0, 0, 300, 150);
+    };
+    img.src = dataURL;
+  } else if (currentSignatureTarget === 'cus') {
+    const preview = document.getElementById('signaturePreviewCus');
+    const pctx = preview.getContext('2d');
+    const img = new Image();
+    img.onload = () => {
+      pctx.clearRect(0, 0, 300, 150);
+      pctx.drawImage(img, 0, 0, 300, 150);
+    };
+    img.src = dataURL;
+  }
+  modal.style.display = 'none';
+});
+
+// Dibujo en canvas
+canvas.addEventListener('mousedown', startDrawing);
+canvas.addEventListener('mouseup', stopDrawing);
+canvas.addEventListener('mouseout', stopDrawing);
+canvas.addEventListener('mousemove', draw);
+
+function startDrawing(e) {
+  drawing = true;
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX, e.offsetY);
+}
+
+function stopDrawing() {
+  drawing = false;
+}
+
+function draw(e) {
+  if (!drawing) return;
+  ctx.lineWidth = 2;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#000';
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+}
