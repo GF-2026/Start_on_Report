@@ -149,7 +149,14 @@ const columns = [
   'temperature', 'humidity', 'specs_available', 'voltage_plate', 'manuals',
   'refrigerant', 'shock_free', 'supplies_installed', 'static_ls', 'static_hs',
   'resistance_hs', 'resistance_ls', 'voltaje_hs', 'voltaje_ls', 'to_ground',
-  'notes', 'name_esp', 'name_cus', 'signature_esp', 'signature_cus', 'current_hs', 'current_ls', 'current_circ', 'pressures_hs', 'pressures_ls'
+  'notes', 'name_esp', 'name_cus', 'signature_esp', 'signature_cus', 'current_hs',
+  'current_ls', 'current_circ', 'pressures_hs', 'pressures_ls', 'marking', 'pallets',
+  'unpack', 'resistance_circ', 'resistance_heat', 'resistance_hum', 'current_heat',
+  'current_hum', 'hum_from', 'hum_target', 'hum_low', 'hum_hig', 'pulldown', 'temp_hig',
+  'temp_low', 'main_switch', 'switch_covers', 'tighting', 'headfan', 'balance', 'fuses_ok',
+  'faseado', 'crankcase', 'grounded', 'fans_ok', 'coils_ok', 'armafles_ok', 'inyection_ok',
+  'oil_ok', 'sights_ok', 'acid_ok', 'noleaks', 'hilow', 'lowoil', 'rotalocks', 'capillaries',
+  'frosty', 'heat_test', 'hum_test', 'cold_test'
 ];
 
 // ----- RENDERIZAR TABLA -----
