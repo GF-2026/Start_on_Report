@@ -248,44 +248,42 @@ loadTable();
 
 // Botón de enviar (sin EmailJS)
 document.getElementById('sendButton').addEventListener('click', () => {
-    // 1️⃣ Obtener los registros guardados en localStorage
+    // 1️⃣ Obtener los registros guardados
     let records = JSON.parse(localStorage.getItem('records_arranque') || '[]');
     if (records.length === 0) {
         alert('No hay registros guardados para enviar');
         return;
     }
 
-    // 2️⃣ Generar Excel en memoria con SheetJS
+    // 2️⃣ Generar Excel en memoria (opcional, solo si luego el usuario lo quiere descargar o adjuntar)
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(records);
     XLSX.utils.book_append_sheet(wb, ws, 'Registros');
     const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-
-    // 3️⃣ Crear archivo temporal (sin descargarlo)
     const blob = new Blob([wbout], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
-    const fileURL = URL.createObjectURL(blob);
 
-    // 4️⃣ Preparar correo (solo prellenado, sin adjunto real)
-    const destinatario = "correo@ejemplo.com"; // 👉 cámbialo por tu correo
+    // 👉 Si deseas permitir que el usuario lo adjunte manualmente:
+    // puedes guardar el Blob temporalmente o mostrar un mensaje.
+    // Pero aquí no se descarga ni se muestra link.
+
+    // 3️⃣ Preparar correo (solo texto)
+    const destinatario = "tck@olimp0.com"; // cambia por el tuyo
     const asunto = encodeURIComponent("Registros técnicos guardados");
     const cuerpo = encodeURIComponent(
 `Hola,
 
-Adjunto los registros técnicos generados por la aplicación.
-Debido a las limitaciones del navegador, el archivo se encuentra en el siguiente enlace temporal (válido mientras la pestaña esté abierta):
-
-${fileURL}
-
-Por favor descárgalo antes de cerrar el navegador.
+Aquí te envío los registros técnicos guardados en la aplicación.
+Puedes adjuntar el archivo Excel generado manualmente si lo requieres.
 
 Saludos.`
     );
 
-    // 5️⃣ Abrir la app de correo (móvil o PC)
+    // 4️⃣ Abrir la app de correo
     window.location.href = `mailto:${destinatario}?subject=${asunto}&body=${cuerpo}`;
 });
+
 
 // ======================
 // BORRAR REGISTROS CON CONTROL
