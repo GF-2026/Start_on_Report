@@ -189,3 +189,4 @@ function draw(e) {
   ctx.lineTo(e.offsetX, e.offsetY);
   ctx.stroke();
 }
+// ====================== // GENERAR FOLIO AUTOMÁTICO // ====================== function generateFolio() { const company = get('company') || 'SinEmpresa'; const now = new Date(); // Fecha YYYYMMDD const year = now.getFullYear(); const month = String(now.getMonth() + 1).padStart(2, '0'); const day = String(now.getDate()).padStart(2, '0'); // Hora HHMM const hours = String(now.getHours()).padStart(2, '0'); const minutes = String(now.getMinutes()).padStart(2, '0'); return StartReport-${company}-${year}${month}${day}-${hours}${minutes}; }
