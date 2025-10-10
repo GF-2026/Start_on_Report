@@ -246,40 +246,45 @@ loadTable();
   XLSX.writeFile(wb, 'RegistrosArranque.xlsx');*/
 // Asegúrate de tener EmailJS y SheetJS cargados en tu proyecto
 
+// Botón de enviar (sin EmailJS)
 document.getElementById('sendButton').addEventListener('click', () => {
-    // ✅ Obtener registros del mismo storageKey
-    let records = JSON.parse(localStorage.getItem(storageKey) || '[]');
-    if(records.length === 0){
-        alert('No hay registros para enviar');
+    // 1️⃣ Obtener los registros guardados en localStorage
+    let records = JSON.parse(localStorage.getItem('records_arranque') || '[]');
+    if (records.length === 0) {
+        alert('No hay registros guardados para enviar');
         return;
     }
 
-    // 2️⃣ Generar Excel en memoria
+    // 2️⃣ Generar Excel en memoria con SheetJS
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(records);
     XLSX.utils.book_append_sheet(wb, ws, 'Registros');
     const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-    const blob = new Blob([wbout], { type: 'application/octet-stream' });
 
-    // 3️⃣ Convertir a Base64
-    const reader = new FileReader();
-    reader.onload = function(e){
-        const base64 = e.target.result.split(',')[1];
-        
-        // 4️⃣ Parámetros del correo
-        const emailParams = {
-            to_email: "destinatario@correo.com",
-            subject: "Registros de reporte",
-            message: "Adjunto los registros guardados",
-            attachment: base64
-        };
+    // 3️⃣ Crear archivo temporal (sin descargarlo)
+    const blob = new Blob([wbout], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    });
+    const fileURL = URL.createObjectURL(blob);
 
-        // 5️⃣ Enviar correo
-        emailjs.send('tu_service_id', 'tu_template_id', emailParams)
-            .then(() => alert('Correo enviado con éxito ✅'))
-            .catch(err => alert('❌ Error al enviar: ' + err.text || err));
-    };
-    reader.readAsDataURL(blob);
+    // 4️⃣ Preparar correo (solo prellenado, sin adjunto real)
+    const destinatario = "correo@ejemplo.com"; // 👉 cámbialo por tu correo
+    const asunto = encodeURIComponent("Registros técnicos guardados");
+    const cuerpo = encodeURIComponent(
+`Hola,
+
+Adjunto los registros técnicos generados por la aplicación.
+Debido a las limitaciones del navegador, el archivo se encuentra en el siguiente enlace temporal (válido mientras la pestaña esté abierta):
+
+${fileURL}
+
+Por favor descárgalo antes de cerrar el navegador.
+
+Saludos.`
+    );
+
+    // 5️⃣ Abrir la app de correo (móvil o PC)
+    window.location.href = `mailto:${destinatario}?subject=${asunto}&body=${cuerpo}`;
 });
 
 // ======================
