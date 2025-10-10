@@ -236,14 +236,44 @@ loadTable();
 // ======================
 // EXPORTAR A EXCEL (.XLSX)
 // ======================
-document.getElementById('exportBtn').onclick = () => {
+/*document.getElementById('exportBtn').onclick = () => {
   const records = JSON.parse(localStorage.getItem(storageKey) || '[]');
   if (!records.length) return alert('No hay registros para exportar.');
 
   const wb = XLSX.utils.book_new();
   const ws = XLSX.utils.json_to_sheet(records);
   XLSX.utils.book_append_sheet(wb, ws, 'Registros');
-  XLSX.writeFile(wb, 'RegistrosArranque.xlsx');
+  XLSX.writeFile(wb, 'RegistrosArranque.xlsx');*/
+document.getElementById('exportAndMailBtn').onclick = () => {
+  const records = JSON.parse(localStorage.getItem(storageKey) || '[]');
+  if (!records.length) return alert('No hay registros para exportar.');
+
+  // 1️⃣ Crear Excel
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.json_to_sheet(records);
+  XLSX.utils.book_append_sheet(wb, ws, 'Registros');
+
+  // 2️⃣ Convertir a Blob
+  const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+  const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+  // 3️⃣ Crear URL temporal
+  const url = URL.createObjectURL(blob);
+
+  // 4️⃣ Descargar automáticamente
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'RegistrosArranque.xlsx';
+  a.click();
+
+  // 5️⃣ Abrir app de correo con mailto
+  const subject = encodeURIComponent('Registros de Arranque');
+  const body = encodeURIComponent('Hola,\n\nAdjunto el archivo con los registros de arranque. Por favor revisa.\n\nGracias.');
+  const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
+  window.location.href = mailtoLink;
+
+  // 6️⃣ Liberar URL temporal
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
 };
 
 // ======================
