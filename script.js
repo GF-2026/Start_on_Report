@@ -68,7 +68,7 @@ const columns = [
   'description','brand','model','serial','controlnum','status',
   'temperature','humidity','specs_available','voltage_plate','manuals',
   'refrigerant','shock_free','supplies_installed','static_ls','static_hs',
-  'resistance_hs','resistance_ls', 'to_ground','voltage_hs','voltage_ls','notes','signature'
+  'resistance_hs','resistance_ls', 'to_ground','voltage_hs','voltage_ls','notes','signature_esp','signature_cus'
 ];
 
 // ----- RENDERIZAR TABLA -----
