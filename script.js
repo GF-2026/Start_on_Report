@@ -31,7 +31,7 @@ function getFormData(){
     specs_available:chk('specs_available'), voltage_plate:chk('voltage_plate'),
     manuals:chk('manuals'), refrigerant:chk('refrigerant'), shock_free:chk('shock_free'),
     supplies_installed:chk('supplies_installed'), static_ls:get('static_ls'),
-    static_hs:get('static_hs'), resistance:get('resistance'),
+    static_hs:get('static_hs'), resistance_hs:get('resistance_hs'), resistance_ls:get('resistance_ls'),
     t1_t2:get('t1_t2'), t1_t3:get('t1_t3'), t2_t3:get('t2_t3'), to_ground:get('to_ground'),
     notes:get('notes'), signature:signatureData
   };
