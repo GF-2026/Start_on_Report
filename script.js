@@ -1,27 +1,32 @@
+// ======================
+// VARIABLES GLOBALES
+// ======================
+let currentSignatureField = null;
+let signatureDataCus = '';
+let signatureDataEsp = '';
 const modal = document.getElementById('signatureModal');
 const signatureCanvas = document.getElementById('signatureCanvas');
 const ctx = signatureCanvas.getContext('2d');
 let drawing = false;
 
-// Ajustar tamaño del canvas
-function resizeCanvas() {
-  const rect = signatureCanvas.getBoundingClientRect();
-  signatureCanvas.width = rect.width;
-  signatureCanvas.height = rect.height;
-  ctx.lineCap = 'round';
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = '#000';
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
+// ======================
+// FUNCIONES
+// ======================
 function openSignature(field) {
   currentSignatureField = field;
   ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
   modal.style.display = 'flex';
 }
 
-// Dibujo mouse
+function closeSignature() {
+  modal.style.display = 'none';
+  currentSignatureField = null;
+}
+
+// ======================
+// EVENTOS DE DIBUJO
+// ======================
+// Mouse
 signatureCanvas.addEventListener('mousedown', e => {
   drawing = true;
   const rect = signatureCanvas.getBoundingClientRect();
@@ -37,7 +42,7 @@ signatureCanvas.addEventListener('mousemove', e => {
 signatureCanvas.addEventListener('mouseup', () => drawing = false);
 signatureCanvas.addEventListener('mouseout', () => drawing = false);
 
-// Dibujo touch
+// Touch
 signatureCanvas.addEventListener('touchstart', e => {
   e.preventDefault();
   drawing = true;
@@ -57,7 +62,13 @@ signatureCanvas.addEventListener('touchmove', e => {
 signatureCanvas.addEventListener('touchend', () => drawing = false);
 signatureCanvas.addEventListener('touchcancel', () => drawing = false);
 
-// Guardar firma
+// ======================
+// BOTONES FIRMA
+// ======================
+document.getElementById('clearSignature').onclick = () => {
+  ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+};
+
 document.getElementById('saveSignature').onclick = () => {
   const dataURL = signatureCanvas.toDataURL();
   let previewCanvas;
@@ -68,6 +79,7 @@ document.getElementById('saveSignature').onclick = () => {
     signatureDataEsp = dataURL;
     previewCanvas = document.getElementById('signaturePreviewEsp');
   }
+
   if (previewCanvas) {
     const previewCtx = previewCanvas.getContext('2d');
     previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
@@ -75,14 +87,11 @@ document.getElementById('saveSignature').onclick = () => {
     img.onload = () => previewCtx.drawImage(img, 0, 0, previewCanvas.width, previewCanvas.height);
     img.src = dataURL;
   }
-  modal.style.display = 'none';
-  currentSignatureField = null;
+
+  closeSignature();
 };
 
-// Limpiar firma
-document.getElementById('clearSignature').onclick = () => {
-  ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
-};
+document.getElementById('closeSignature').onclick = closeSignature;
 
 // Abrir modal
 document.getElementById('openSignatureCus').onclick = () => openSignature('cus');
