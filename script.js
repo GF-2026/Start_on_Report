@@ -252,7 +252,7 @@ document.getElementById('exportBtn').onclick = () => {
 const deleteBtn = document.getElementById('deleteAllBtn');
 
 if (deleteBtn) {
-  deleteBtn.style.display = enableDeleteButton ? 'inline-block' : 'true'; // Para activar/desactivar; solo alternar none/true
+  deleteBtn.style.display = enableDeleteButton ? 'inline-block' : 'none'; // Para activar/desactivar; solo alternar none/true
   deleteBtn.onclick = () => {
     if (!enableDeleteButton) return;
     if (confirm('¿Seguro que deseas borrar todos los registros?')) {
