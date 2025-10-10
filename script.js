@@ -247,8 +247,8 @@ loadTable();
 // Asegúrate de tener EmailJS y SheetJS cargados en tu proyecto
 
 document.getElementById('sendButton').addEventListener('click', () => {
-    // 1️⃣ Obtener registros
-    let records = JSON.parse(localStorage.getItem('records') || '[]');
+    // ✅ Obtener registros del mismo storageKey
+    let records = JSON.parse(localStorage.getItem(storageKey) || '[]');
     if(records.length === 0){
         alert('No hay registros para enviar');
         return;
@@ -261,12 +261,12 @@ document.getElementById('sendButton').addEventListener('click', () => {
     const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
     const blob = new Blob([wbout], { type: 'application/octet-stream' });
 
-    // 3️⃣ Convertir a Base64 (EmailJS requiere Base64)
+    // 3️⃣ Convertir a Base64
     const reader = new FileReader();
     reader.onload = function(e){
-        const base64 = e.target.result.split(',')[1]; // quitar prefijo data:...
+        const base64 = e.target.result.split(',')[1];
         
-        // 4️⃣ Preparar parámetros del correo
+        // 4️⃣ Parámetros del correo
         const emailParams = {
             to_email: "destinatario@correo.com",
             subject: "Registros de reporte",
@@ -276,8 +276,8 @@ document.getElementById('sendButton').addEventListener('click', () => {
 
         // 5️⃣ Enviar correo
         emailjs.send('tu_service_id', 'tu_template_id', emailParams)
-            .then(() => alert('Correo enviado con éxito'))
-            .catch(err => alert('Error al enviar: ' + err));
+            .then(() => alert('Correo enviado con éxito ✅'))
+            .catch(err => alert('❌ Error al enviar: ' + err.text || err));
     };
     reader.readAsDataURL(blob);
 });
