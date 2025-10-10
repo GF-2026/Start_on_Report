@@ -7,7 +7,7 @@ let signatureDataEsp = '';
 const storageKey = 'records_arranque';
 
 // Control de borrado
-const enableDeleteButton = false; // Cambia a true para habilitar el botón de borrar
+const enableDeleteButton = true; // Cambia a true para habilitar el botón de borrar
 
 // Canvas de firma
 const modal = document.getElementById('signatureModal');
