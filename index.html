@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reporte de Arranque</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
     <header>
-<img id="logo" src="LOGO.png" alt="FIXSER" />
+      <img id="logo" src="LOGO.png" alt="FIXSER" />
       <div>
         <h1>REPORTE DE ARRANQUE</h1>
         <div class="muted">Llena el formulario, firma y presiona "Guardar registro".</div>
@@ -22,157 +22,160 @@
         <strong>1 – Datos de cliente</strong>
         <div class="muted">Campos obligatorios *</div>
       </div>
-        <div class="grid">
-       <!-- <div><label>Report: *</label><input type="text" id="report" value="Mantenimiento preventivo" required></div>-->
-        <div><label>OT: *</label><input type="text" id="OT" required></div>
-        <div><label>Fecha y Hora: *</label><input type="datetime-local" id="datetime" required></div>
-        <div><label>Compañía:</label><input type="text" id="company"></div>
-        <div><label>Ingeniero a cargo:</label><input type="text" id="engineer"></div>
-        <div><label>Teléfono:</label><input type="text" id="phone"></div>
-        <div><label>Ciudad:</label><input type="text" id="city"></div>
+
+      <div class="grid">
+        <div><label>OT: *</label><input type="text" id="OT" required /></div>
+        <div><label>Fecha y Hora: *</label><input type="datetime-local" id="datetime" required /></div>
+        <div><label>Compañía:</label><input type="text" id="company" /></div>
+        <div><label>Ingeniero a cargo:</label><input type="text" id="engineer" /></div>
+        <div><label>Teléfono:</label><input type="text" id="phone" /></div>
+        <div><label>Ciudad:</label><input type="text" id="city" /></div>
       </div>
 
-      <hr>
+      <hr />
 
-       <!-- DATOS DE EQUIPO -->   
+      <!-- DATOS DE EQUIPO -->
       <div class="section-header"><strong>2 – Datos del equipo</strong></div>
       <div class="grid">
-        <div><label>Descripción:</label><input type="text" id="description"></div>
-        <div><label>Marca:</label><input type="text" id="brand"></div>
-        <div><label>Modelo:</label><input type="text" id="model"></div>
-        <div><label>Serie:</label><input type="text" id="serial"></div>
-        <div><label>Número de control:</label><input type="text" id="controlnum"></div>
-        <div><label>Estado Operativo:</label><input type="text" id="status"></div>
+        <div><label>Descripción:</label><input type="text" id="description" /></div>
+        <div><label>Marca:</label><input type="text" id="brand" /></div>
+        <div><label>Modelo:</label><input type="text" id="model" /></div>
+        <div><label>Serie:</label><input type="text" id="serial" /></div>
+        <div><label>Número de control:</label><input type="text" id="controlnum" /></div>
+        <div><label>Estado Operativo:</label><input type="text" id="status" /></div>
       </div>
 
-      <hr>
+      <hr />
 
       <!-- AMBIENTE -->
       <div class="section-header"><strong>3 – Condiciones ambientales</strong></div>
       <div class="grid">
-        <div class="fullwidth"><label>Ubicación dentro de la planta:</label><input type="text" id="ubication"></div>
-        <div><label>Temperatura: (°C)</label><input type="number" step="0.1" id="temperature"></div>
-        <div><label>Humedad: (%)</label><input type="number" step="0.1" id="humidity"></div>
+        <div class="fullwidth"><label>Ubicación dentro de la planta:</label><input type="text" id="ubication" /></div>
+        <div><label>Temperatura: (°C)</label><input type="number" step="0.1" id="temperature" /></div>
+        <div><label>Humedad: (%)</label><input type="number" step="0.1" id="humidity" /></div>
       </div>
 
-      <hr>
+      <hr />
 
       <!-- CHECKLIST -->
       <div class="section-header"><strong>4 – Chequeo inicial</strong></div>
       <div class="grid checkboxes">
-        <label><input type="checkbox" id="marking">Se marcó futuro espacio de equipo</label>  
-        <label><input type="checkbox" id="voltage_plate">El voltaje coincide con la placa</label>
-        <label><input type="checkbox" id="shock_free">Esta libre de golpes</label>
-         <label><input type="checkbox" id="pallets">Se deja espacio para tarimas</label>
-         <label><input type="checkbox" id="unpack">Se deja espacio desempacar</label>
-        <label><input type="checkbox" id="supplies_installed">Suministros instalados</label>        
-        <label><input type="checkbox" id="specs_available">Hay especificaciones disponibles</label>
-        <label><input type="checkbox" id="refrigerant">Tiene carga de refrigerante</label>
-        <label><input type="checkbox" id="manuals">Se tienen manuales y diagramas</label>        
-
-
+        <label><input type="checkbox" id="marking" />Se marcó futuro espacio de equipo</label>
+        <label><input type="checkbox" id="voltage_plate" />El voltaje coincide con la placa</label>
+        <label><input type="checkbox" id="shock_free" />Está libre de golpes</label>
+        <label><input type="checkbox" id="pallets" />Se deja espacio para tarimas</label>
+        <label><input type="checkbox" id="unpack" />Se deja espacio para desempacar</label>
+        <label><input type="checkbox" id="supplies_installed" />Suministros instalados</label>
+        <label><input type="checkbox" id="specs_available" />Hay especificaciones disponibles</label>
+        <label><input type="checkbox" id="refrigerant" />Tiene carga de refrigerante</label>
+        <label><input type="checkbox" id="manuals" />Se tienen manuales y diagramas</label>
       </div>
 
-      <hr>
+      <hr />
 
       <!-- MEDICIONES -->
       <div class="section-header"><strong>5 – Mediciones</strong></div>
       <div class="grid">
-        <div><label>Presión Estatica LS:</label><input type="number" id="static_hs"></div>        
-        <div><label>Presión Estatica HS:</label><input type="number" id="static_ls"></div>
-        
-        <div><label>Resistencia de compresor HS entre fases y a tierra: (Ejemplo: 0.3, 0.3, 0,4, 0 Ω)</label><input type="text" step="0.001" id="resistance_hs"></div>
-        <div><label>Resistencia de compresor LS entre fases y a tierra: (Ejemplo: 0.3, 0.3, 0,4, 0 Ω)</label><input type="text" step="0.001" id="resistance_ls"></div>
+        <div><label>Presión Estática LS:</label><input type="number" step="0.01" id="static_ls" /></div>
+        <div><label>Presión Estática HS:</label><input type="number" step="0.01" id="static_hs" /></div>
 
-        <div><label>Resistencia de circulador entre fases y a tierra: (Ejemplo: 0.3, 0.3, 0,4, 0 Ω)</label><input type="text" step="0.001" id="resistance_circ"></div>
-        <div><label>Resistencia de heater entre fases y a tierra: (Ejemplo: 0.3, 0.3, 0,4, 0 Ω)</label><input type="text" step="0.001" id="resistance_heat"></div>
-        <div><label>Resistencia de humidificador entre fases y a tierra: (Ejemplo: 0.3, 0.3, 0,4, 0 Ω)</label><input type="text" step="0.001" id="resistance_hum"></div>
-        
-        <div><label>Voltaje de compresor HS: (230, 228, 229 V)</label><input type="text" id="voltaje_hs"></div>
-        <div><label>Voltaje de compresor LS: (230, 228, 229 V)</label><input type="text" id="voltaje_ls"></div>
-        <div><label>Voltaje a tierra: (V)</label><input type="number" id="to_ground"></div>  
-        
-        <div><label>Amperajes de compresor HS: (4, 5, 4 A)</label><input type="text" id="current_hs"></div>
-        <div><label>Amperajes de compresor LS: (4, 5, 4 A)</label><input type="text" id="current_ls"></div>
-        
-        <div><label>Amperajes de circuladores: (4, 5, 4 A)</label><input type="text" id="current_circ"></div>
-        <div><label>Amperajes de heater: (4, 5, 4 A)</label><input type="text" id="current_heat"></div>
-        <div><label>Amperajes de humidificador: (4, 5, 4 A)</label><input type="text" id="current_hum"></div>        
-        
-         <div><label>Presiones de compresor HS: (30, 215 PSI)</label><input type="text" id="pressures_hs"></div>
-         <div><label>Presiones de compresor LS: (30, 215 PSI)</label><input type="text" id="pressures_ls"></div>
-        
-          <!--<div><label>Compresor T2–T3 (V)</label><input type="number" step="0.1" id="t2_t3"></div>-->
+        <div><label>Resistencia compresor HS:</label><input type="number" step="0.001" id="resistance_hs" /></div>
+        <div><label>Resistencia compresor LS:</label><input type="number" step="0.001" id="resistance_ls" /></div>
+
+        <div><label>Resistencia circulador:</label><input type="number" step="0.001" id="resistance_circ" /></div>
+        <div><label>Resistencia heater:</label><input type="number" step="0.001" id="resistance_heat" /></div>
+        <div><label>Resistencia humidificador:</label><input type="number" step="0.001" id="resistance_hum" /></div>
+
+        <div><label>Voltaje compresor HS:</label><input type="text" id="voltaje_hs" /></div>
+        <div><label>Voltaje compresor LS:</label><input type="text" id="voltaje_ls" /></div>
+        <div><label>Voltaje a tierra:</label><input type="number" id="to_ground" /></div>
+
+        <div><label>Amperajes compresor HS:</label><input type="text" id="current_hs" /></div>
+        <div><label>Amperajes compresor LS:</label><input type="text" id="current_ls" /></div>
+        <div><label>Amperajes circuladores:</label><input type="text" id="current_circ" /></div>
+        <div><label>Amperajes heater:</label><input type="text" id="current_heat" /></div>
+        <div><label>Amperajes humidificador:</label><input type="text" id="current_hum" /></div>
+
+        <div><label>Presiones compresor HS:</label><input type="text" id="pressures_hs" /></div>
+        <div><label>Presiones compresor LS:</label><input type="text" id="pressures_ls" /></div>
       </div>
 
-      <hr>
-      <!-- ELECTRIC SYSTEM -->      
+      <hr />
+
+      <!-- CHEQUEO ELÉCTRICO -->
       <div class="section-header"><strong>6 – Chequeo eléctrico</strong></div>
       <div class="grid checkboxes">
-        <label><input type="checkbox" id="main_switch">Están seguros el Switch principal, hardware, cables, etc.</label>  
-        <label><input type="checkbox" id="switch_covers">Tienen cubiertas los presostatos</label>
-        <label><input type="checkbox" id="tighting">Se reaprietan conexiones</label>
-         <label><input type="checkbox" id="headfan">Revisión de headfans</label>
-         <label><input type="checkbox" id="balance">Está balanceada la carga</label>
-        <label><input type="checkbox" id="fuses_ok">Los fusibles corresponden</label>        
-        <label><input type="checkbox" id="faseado">Faseado correcto</label>
-        <label><input type="checkbox" id="cranckase">Calentador de carter</label>
-        <label><input type="checkbox" id="grounded">Tierra física</label>    
+        <label><input type="checkbox" id="main_switch" />Switch principal, hardware y cables correctos</label>
+        <label><input type="checkbox" id="switch_covers" />Cubiertas de presostatos</label>
+        <label><input type="checkbox" id="tighting" />Conexiones reapretadas</label>
+        <label><input type="checkbox" id="headfan" />Revisión de headfans</label>
+        <label><input type="checkbox" id="balance" />Carga balanceada</label>
+        <label><input type="checkbox" id="fuses_ok" />Fusibles correctos</label>
+        <label><input type="checkbox" id="faseado" />Faseado correcto</label>
+        <label><input type="checkbox" id="crankcase" />Calentador de cárter</label>
+        <label><input type="checkbox" id="grounded" />Tierra física</label>
+      </div>
 
-      <!-- COOLING SYSTEM -->      
+      <hr />
+
+      <!-- CHEQUEO REFRIGERACIÓN -->
       <div class="section-header"><strong>7 – Chequeo en refrigeración</strong></div>
       <div class="grid checkboxes">
-        <label><input type="checkbox" id="fans_ok">Revisión de ventiladores</label>  
-        <label><input type="checkbox" id="coils_ok">Revisión de serpentines</label>
-        <label><input type="checkbox" id="armafles_ok">Revisión de Armaflex</label>
-         <label><input type="checkbox" id="inyection_ok">Revisión de válvula de inyección</label>
-         <label><input type="checkbox" id="oil_ok">Revisión de nivel de aceite</label>
-        <label><input type="checkbox" id="sights_ok">Revisión de mirillas</label>        
-        <label><input type="checkbox" id="acid_ok">Prueba de acidez</label>
-        <label><input type="checkbox" id="noleaks">Señales o rastros de fugas</label>
-        <label><input type="checkbox" id="hilow">Chequeo del Hi/Low</label>       
-        <label><input type="checkbox" id="lowoil">Revisión de protección de aceite</label>  
-        <label><input type="checkbox" id="rotalocks">Capuchones de rotalocks</label>
-        <label><input type="checkbox" id="capillaries">Revisión de capilares</label>
-        <label><input type="checkbox" id="frosty">Escarche de succión</label>
-   
-        <!-- HEATING TEST -->  
-      <div class="section-header"><strong>7 – Prueba de calentamiento</strong></div>
-        <div><label>Desde temperatura ambiente:  (°C)</label><input type="text" id="hum_from"></div> 
-        <div><label>Hasta el punto máximo menos: 10 (°C)</label><input type="text" id="hum_target"></div>
-        <label><input type="checkbox" id="heat_test">Soak de 30 min)</label>        
-        
-      <!-- HUMIDITY TEST -->  
-      <div class="section-header"><strong>7 – Prueba de humedad</strong></div>
-        <div><label>Humedad baja (20 % HR)</label><input type="text" id="hum_low"></div> 
-        <div><label>Humedad alta (80 % HR)</label><input type="text" id="hum_hig"></div>
-        <label><input type="checkbox" id="hum_test">Soak de 30 min c/u)</label> 
-        
-      <!-- COOLING TEST -->          
-      <div class="section-header"><strong>7 – Prueba de enfriamiento</strong></div>
-        <div><label>Desde punto máximo menos 10:  (°C)</label><input type="text" id="temp_hig"></div> 
-        <div><label>Hasta punto máximo más 10:  (°C)</label><input type="text" id="temp_low"></div>
-        <label><input type="checkbox" id="cold_test">Soak de 30 min)</label> 
-        <div><label>Tiempo que duró: (Minutos)</label><input type="text" id="pulldown"></div>        
-        
+        <label><input type="checkbox" id="fans_ok" />Ventiladores OK</label>
+        <label><input type="checkbox" id="coils_ok" />Serpentines OK</label>
+        <label><input type="checkbox" id="armafles_ok" />Armaflex OK</label>
+        <label><input type="checkbox" id="inyection_ok" />Válvula de inyección OK</label>
+        <label><input type="checkbox" id="oil_ok" />Nivel de aceite correcto</label>
+        <label><input type="checkbox" id="sights_ok" />Mirillas OK</label>
+        <label><input type="checkbox" id="acid_ok" />Prueba de acidez</label>
+        <label><input type="checkbox" id="noleaks" />Sin fugas</label>
+        <label><input type="checkbox" id="hilow" />Chequeo Hi/Low</label>
+        <label><input type="checkbox" id="lowoil" />Protección de aceite OK</label>
+        <label><input type="checkbox" id="rotalocks" />Capuchones de rotalocks</label>
+        <label><input type="checkbox" id="capillaries" />Capilares OK</label>
+        <label><input type="checkbox" id="frosty" />Escarche de succión</label>
+      </div>
+
+      <hr />
+
+      <!-- PRUEBAS -->
+      <div class="section-header"><strong>8 – Pruebas</strong></div>
+      <div class="grid">
+        <div><label>Temp. ambiente (°C):</label><input type="text" id="hum_from" /></div>
+        <div><label>Punto máximo -10 (°C):</label><input type="text" id="hum_target" /></div>
+        <label><input type="checkbox" id="heat_test" />Prueba de calentamiento (soak 30 min)</label>
+
+        <div><label>Humedad baja (20 %HR):</label><input type="text" id="hum_low" /></div>
+        <div><label>Humedad alta (80 %HR):</label><input type="text" id="hum_hig" /></div>
+        <label><input type="checkbox" id="hum_test" />Prueba de humedad (soak 30 min c/u)</label>
+
+        <div><label>Punto máximo -10 (°C):</label><input type="text" id="temp_hig" /></div>
+        <div><label>Punto máximo +10 (°C):</label><input type="text" id="temp_low" /></div>
+        <label><input type="checkbox" id="cold_test" />Prueba de enfriamiento (soak 30 min)</label>
+        <div><label>Duración (min):</label><input type="text" id="pulldown" /></div>
+      </div>
+
+      <hr />
+
       <!-- OBSERVACIONES -->
+      <div class="section-header"><strong>9 – Observaciones</strong></div>
+      <textarea id="notes"></textarea>
 
-      <hr>
-      <!-- FIRMAS DEL ESPECIALISTA-->
-      <div class="section-header"><strong>9 – Firma de cliente</strong></div>
-      <div><label>Nombre de Cliente</label><input type="text"id="name_cus"></div>  
-      <button type="button" id="openSignatureCus">Firma de Cliente</button>
-      <canvas id="signaturePreviewCus" width="300" height="150"></canvas>
+      <hr />
 
-      <!-- FIRMAS DEL CLIENTE-->
-        
-       <div class="section-header"><strong>7 – Observaciones</strong></div>
-       <textarea id="notes"></textarea>
-
-      <div class="section-header"><strong>8 – Firma de Especialista</strong></div>
-      <div><label>Nombre de Especialista</label><input type="text" id="name_esp"></div>  
+      <!-- FIRMA ESPECIALISTA -->
+      <div class="section-header"><strong>10 – Firma de especialista</strong></div>
+      <div><label>Nombre de Especialista</label><input type="text" id="name_esp" /></div>
       <button type="button" id="openSignatureEsp">Firma de Especialista</button>
       <canvas id="signaturePreviewEsp" width="300" height="150"></canvas>
+
+      <hr />
+
+      <!-- FIRMA CLIENTE -->
+      <div class="section-header"><strong>11 – Firma de cliente</strong></div>
+      <div><label>Nombre de Cliente</label><input type="text" id="name_cus" /></div>
+      <button type="button" id="openSignatureCus">Firma de Cliente</button>
+      <canvas id="signaturePreviewCus" width="300" height="150"></canvas>
 
       <div class="form-actions">
         <button type="button" id="saveBtn">Guardar registro</button>
