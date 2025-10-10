@@ -6,6 +6,9 @@ let signatureDataCus = '';
 let signatureDataEsp = '';
 const storageKey = 'records_arranque';
 
+// Control de borrado
+const enableDeleteButton = false; // Cambia a true para habilitar el botón de borrar
+
 // Canvas de firma
 const modal = document.getElementById('signatureModal');
 const signatureCanvas = document.getElementById('signatureCanvas');
@@ -219,3 +222,22 @@ document.getElementById('exportBtn').onclick = () => {
   XLSX.utils.book_append_sheet(wb, ws, 'Registros');
   XLSX.writeFile(wb, 'RegistrosArranque.xlsx');
 };
+
+// ======================
+// BORRAR REGISTROS CON CONTROL
+// ======================
+const deleteBtn = document.getElementById('deleteAllBtn');
+
+if (deleteBtn) {
+  // Mostrar u ocultar según la variable
+  deleteBtn.style.display = enableDeleteButton ? 'inline-block' : 'none';// CAMBIAR A TRUE PARA HABILITAR EL BOTÓN
+
+  // Funcionalidad de borrar
+  deleteBtn.onclick = () => {
+    if (!enableDeleteButton) return; // seguridad extra
+    if (confirm('¿Seguro que deseas borrar todos los registros?')) {
+      localStorage.removeItem(storageKey);
+      loadTable();
+    }
+  };
+}
