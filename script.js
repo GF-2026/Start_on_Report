@@ -54,6 +54,12 @@ function getFormData() {
     voltaje_hs: get('voltaje_hs'),
     voltaje_ls: get('voltaje_ls'),
     to_ground: get('to_ground'),
+    current_hs: get('current_hs'),
+    current_ls: get('current_ls'),
+    current_circ: get('current_circ'),
+    pressures_hs: get('pressures_hs'),
+    pressures_ls: get('pressures_ls'),
+    
     notes: get('notes'),
     name_esp: get('name_esp'),
     name_cus: get('name_cus'),
@@ -103,7 +109,7 @@ const columns = [
   'temperature', 'humidity', 'specs_available', 'voltage_plate', 'manuals',
   'refrigerant', 'shock_free', 'supplies_installed', 'static_ls', 'static_hs',
   'resistance_hs', 'resistance_ls', 'voltaje_hs', 'voltaje_ls', 'to_ground',
-  'notes', 'name_esp', 'name_cus', 'signature_esp', 'signature_cus'
+  'notes', 'name_esp', 'name_cus', 'signature_esp', 'signature_cus', 'current_hs', 'current_ls', 'current_circ', 'pressures_hs', 'pressures_ls'
 ];
 
 // ----- RENDERIZAR TABLA -----
