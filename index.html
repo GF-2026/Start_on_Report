@@ -1,4 +1,4 @@
-o de la planta<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -9,7 +9,7 @@ o de la planta<!DOCTYPE html>
 <body>
   <div class="container">
     <header>
-<img id="logo" src="logo.png" alt="FIXSER" />
+<img id="logo" src="LOGO.png" alt="FIXSER" />
       <div>
         <h1>REPORTE DE ARRANQUE</h1>
         <div class="muted">Llena el formulario, firma y presiona "Guardar registro".</div>
@@ -135,29 +135,44 @@ o de la planta<!DOCTYPE html>
         <label><input type="checkbox" id="rotalocks">Capuchones de rotalocks</label>
         <label><input type="checkbox" id="capillaries">Revisión de capilares</label>
         <label><input type="checkbox" id="frosty">Escarche de succión</label>
-
+   
+        <!-- HEATING TEST -->  
+      <div class="section-header"><strong>7 – Prueba de calentamiento</strong></div>
+        <div><label>Desde temperatura ambiente:  (°C)</label><input type="text" id="hum_from"></div> 
+        <div><label>Hasta el punto máximo menos: 10 (°C)</label><input type="text" id="hum_target"></div>
+        <label><input type="checkbox" id="heat_test">Soak de 30 min)</label>        
+        
       <!-- HUMIDITY TEST -->  
-
-      <!-- HEATING TEST -->  
-
+      <div class="section-header"><strong>7 – Prueba de humedad</strong></div>
+        <div><label>Humedad baja (20 % HR)</label><input type="text" id="hum_low"></div> 
+        <div><label>Humedad alta (80 % HR)</label><input type="text" id="hum_hig"></div>
+        <label><input type="checkbox" id="hum_test">Soak de 30 min c/u)</label> 
+        
       <!-- COOLING TEST -->          
+      <div class="section-header"><strong>7 – Prueba de enfriamiento</strong></div>
+        <div><label>Desde punto máximo menos 10:  (°C)</label><input type="text" id="temp_hig"></div> 
+        <div><label>Hasta punto máximo más 10:  (°C)</label><input type="text" id="temp_low"></div>
+        <label><input type="checkbox" id="cold_test">Soak de 30 min)</label> 
+        <div><label>Tiempo que duró: (Minutos)</label><input type="text" id="pulldown"></div>        
         
       <!-- OBSERVACIONES -->
-      <div class="section-header"><strong>7 – Observaciones</strong></div>
-      <textarea id="notes"></textarea>
 
       <hr>
-
-      <!-- FIRMAS -->
-      <div class="section-header"><strong>8 – Firma de Especialista</strong></div>
-      <div><label>Nombre de Especialista</label><input type="text" id="name_esp"></div>  
-      <button type="button" id="openSignatureEsp">Firma de Especialista</button>
-      <canvas id="signaturePreviewEsp" width="300" height="150"></canvas>
-
+      <!-- FIRMAS DEL ESPECIALISTA-->
       <div class="section-header"><strong>9 – Firma de cliente</strong></div>
       <div><label>Nombre de Cliente</label><input type="text"id="name_cus"></div>  
       <button type="button" id="openSignatureCus">Firma de Cliente</button>
       <canvas id="signaturePreviewCus" width="300" height="150"></canvas>
+
+      <!-- FIRMAS DEL CLIENTE-->
+        
+       <div class="section-header"><strong>7 – Observaciones</strong></div>
+       <textarea id="notes"></textarea>
+
+      <div class="section-header"><strong>8 – Firma de Especialista</strong></div>
+      <div><label>Nombre de Especialista</label><input type="text" id="name_esp"></div>  
+      <button type="button" id="openSignatureEsp">Firma de Especialista</button>
+      <canvas id="signaturePreviewEsp" width="300" height="150"></canvas>
 
       <div class="form-actions">
         <button type="button" id="saveBtn">Guardar registro</button>
