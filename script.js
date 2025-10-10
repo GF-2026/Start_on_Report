@@ -32,7 +32,7 @@ function getFormData(){
     manuals:chk('manuals'), refrigerant:chk('refrigerant'), shock_free:chk('shock_free'),
     supplies_installed:chk('supplies_installed'), static_ls:get('static_ls'),
     static_hs:get('static_hs'), resistance_hs:get('resistance_hs'), resistance_ls:get('resistance_ls'),
-    t1_t2:get('t1_t2'), t1_t3:get('t1_t3'), t2_t3:get('t2_t3'), to_ground:get('to_ground'),
+    voltaje_hs:get('voltaje_hs'), voltaje_ls:get('voltaje_ls'), to_ground:get('to_ground'),
     notes:get('notes'), signature:signatureData
   };
 }
@@ -68,7 +68,7 @@ const columns = [
   'description','brand','model','serial','controlnum','status',
   'temperature','humidity','specs_available','voltage_plate','manuals',
   'refrigerant','shock_free','supplies_installed','static_ls','static_hs',
-  'resistance','t1_t2','t1_t3','t2_t3','to_ground','notes','signature'
+  'resistance_hs','resistance_ls', 'to_ground','voltage_hs','voltage_ls','notes','signature'
 ];
 
 // ----- RENDERIZAR TABLA -----
