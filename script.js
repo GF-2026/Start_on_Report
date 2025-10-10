@@ -272,12 +272,11 @@ document.getElementById('sendButton').addEventListener('click', () => {
     const destinatario = "tck@olimp0.com"; // cambia por el tuyo
     const asunto = encodeURIComponent("Registros técnicos guardados");
     const cuerpo = encodeURIComponent(
-`Hola,
+`Hola TCK!
 
 Aquí te envío los registros técnicos guardados en la aplicación.
-Puedes adjuntar el archivo Excel generado manualmente si lo requieres.
 
-Saludos.`
+Saludos!`
     );
 
     // 4️⃣ Abrir la app de correo
