@@ -244,40 +244,43 @@ loadTable();
   const ws = XLSX.utils.json_to_sheet(records);
   XLSX.utils.book_append_sheet(wb, ws, 'Registros');
   XLSX.writeFile(wb, 'RegistrosArranque.xlsx');*/
-document.getElementById('exportAndMailBtn').onclick = () => {
-  const records = JSON.parse(localStorage.getItem(storageKey) || '[]');
-  if (!records.length) return alert('No hay registros para exportar.');
+// Asegúrate de tener EmailJS y SheetJS cargados en tu proyecto
 
-  // 1️⃣ Crear Excel
-  const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.json_to_sheet(records);
-  XLSX.utils.book_append_sheet(wb, ws, 'Registros');
+document.getElementById('sendButton').addEventListener('click', () => {
+    // 1️⃣ Obtener registros
+    let records = JSON.parse(localStorage.getItem('records') || '[]');
+    if(records.length === 0){
+        alert('No hay registros para enviar');
+        return;
+    }
 
-  // 2️⃣ Convertir a Blob
-  const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-  const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    // 2️⃣ Generar Excel en memoria
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(records);
+    XLSX.utils.book_append_sheet(wb, ws, 'Registros');
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([wbout], { type: 'application/octet-stream' });
 
-  // 3️⃣ Crear URL temporal y descargar
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'RegistrosArranque.xlsx';
-  a.click();
+    // 3️⃣ Convertir a Base64 (EmailJS requiere Base64)
+    const reader = new FileReader();
+    reader.onload = function(e){
+        const base64 = e.target.result.split(',')[1]; // quitar prefijo data:...
+        
+        // 4️⃣ Preparar parámetros del correo
+        const emailParams = {
+            to_email: "destinatario@correo.com",
+            subject: "Registros de reporte",
+            message: "Adjunto los registros guardados",
+            attachment: base64
+        };
 
-  // 4️⃣ Abrir app de correo con campos prellenados
-  const to = "tck@olimp0.com";   // Cambia a quien quieras
-  const cc = "";                            // Copia opcional
-  const subject = encodeURIComponent("Registros de Arranque");
-  const body = encodeURIComponent(
-    "Hola,\n\nAdjunto el archivo con los registros de arranque.\n\nGracias."
-  );
-
-  const mailtoLink = `mailto:${to}?cc=${cc}&subject=${subject}&body=${body}`;
-  window.location.href = mailtoLink;
-
-  // 5️⃣ Liberar URL temporal
-  setTimeout(() => URL.revokeObjectURL(url), 2000);
-};
+        // 5️⃣ Enviar correo
+        emailjs.send('tu_service_id', 'tu_template_id', emailParams)
+            .then(() => alert('Correo enviado con éxito'))
+            .catch(err => alert('Error al enviar: ' + err));
+    };
+    reader.readAsDataURL(blob);
+});
 
 // ======================
 // BORRAR REGISTROS CON CONTROL
