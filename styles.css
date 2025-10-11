@@ -1,60 +1,43 @@
-/* ======================
-   VARIABLES Y RESET
-   ====================== */
-:root {
-    --bg: #f7fafc;
-    --card: #fff;
-    --accent: #2b6cb0;
-    --muted: #6b7280;
-    --border: #e2e8f0;
-}
-
-* { box-sizing: border-box; margin:0; padding:0; }
-body { font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif; background: var(--bg); color:#0f172a; padding:24px; }
-.container { max-width:1100px; margin:0 auto; }
-
-/* HEADER */
-header { display:flex; align-items:center; gap:16px; margin-bottom:24px; }
-header img#logo { width:80px; height:auto; }
-header h1 { font-size:1.8rem; margin-bottom:4px; }
-header .muted { color:var(--muted); font-size:0.9rem; }
-
-/* FORM */
-.card { background:var(--card); padding:24px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.05); margin-bottom:24px; }
-.section-header { font-size:1.1rem; margin:16px 0 8px; }
-.section-header .muted { font-size:0.85rem; color:var(--muted); }
-.grid { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); }
-.fullwidth { grid-column:1/-1; }
-.grid label { display:flex; flex-direction:column; font-weight:500; font-size:0.9rem; }
-.grid input[type="text"], .grid input[type="number"], .grid input[type="datetime-local"], textarea {
-    padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:0.9rem; margin-top:4px;
-}
-textarea { width:100%; height:80px; resize:vertical; }
-
-/* CHECKBOXES */
-.grid.checkboxes { grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); }
-.grid.checkboxes label { flex-direction:row; align-items:center; gap:6px; font-weight:400; font-size:0.9rem; }
-
-/* BOTONES */
-button { background:var(--accent); color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; font-weight:500; transition:background 0.2s; }
-button:hover { background:#1e4e8c; }
-button.secondary { background:#e2e8f0; color:#0f172a; }
-button.secondary:hover { background:#cbd5e1; }
-.form-actions { margin-top:16px; display:flex; gap:12px; }
-
-/* TABLA */
-.table-wrap { overflow-x:auto; }
-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
-th, td { padding:8px 12px; border:1px solid var(--border); text-align:left; }
-th { background:var(--bg); font-weight:600; }
-
 /* MODAL FIRMA */
-#signatureModal { display:flex; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:1000; }
-#signatureBox { background:var(--card); padding:24px; border-radius:12px; width:340px; text-align:center; }
-#signatureBox canvas { border:1px solid var(--border); margin:12px 0; border-radius:6px; }
+#signatureModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
 
-/* RESPONSIVE */
-@media(max-width:600px){
-  .grid { grid-template-columns:1fr; }
-  header { flex-direction:column; align-items:flex-start; }
+#signatureBox {
+    background: var(--card);
+    padding: 24px;
+    border-radius: 12px;
+    width: 340px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    position: relative; /* importante si quieres agregar botón cerrar en esquina */
+}
+
+#signatureBox canvas {
+    width: 100%;
+    height: 150px;
+    border: 1px solid var(--border);
+    margin: 12px 0;
+    border-radius: 6px;
+}
+
+.signature-actions button {
+    margin: 4px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.signature-actions .secondary {
+    background: #ccc;
 }
