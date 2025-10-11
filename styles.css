@@ -1,235 +1,222 @@
+/* ======================
+   VARIABLES Y RESET
+   ====================== */
 :root {
-  --bg:#f7fafc;
-  --card:#fff;
-  --accent:#2b6cb0;
-  --muted:#6b7280;
+    --bg: #f7fafc;
+    --card: #fff;
+    --accent: #2b6cb0;
+    --muted: #6b7280;
+    --border: #e2e8f0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
-  background:var(--bg);
-  margin:0;
-  padding:24px;
-  color:#0f172a;
+    font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: #0f172a;
+    padding: 24px;
 }
 
 .container {
-  max-width:1100px;
-  margin:0 auto;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
+/* ======================
+   HEADER
+   ====================== */
 header {
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-bottom:18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
-h1 {
-  margin:0;
-  font-size:20px;
+header img#logo {
+    width: 80px;
+    height: auto;
 }
 
-.logo {
-  width:52px;
-  height:52px;
-  border-radius:10px;
-  background:linear-gradient(135deg,#e6f0fb,#dbeefe);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--accent);
-  font-weight:700;
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 4px;
 }
 
+header .muted {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* ======================
+   FORMULARIO
+   ====================== */
 .card {
-  background:var(--card);
-  border-radius:10px;
-  padding:18px;
-  box-shadow:0 6px 18px rgba(15,23,42,0.06);
-  margin-bottom:16px;
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-label {
-  font-size:13px;
-  color:var(--muted);
-  display:block;
-  margin-bottom:6px;
-}
-
-input,textarea,select {
-  width:100%;
-  padding:10px;
-  border:1px solid #e6eef6;
-  border-radius:6px;
-  font-size:14px;
-}
-
-textarea {
-  min-height:80px;
-  resize:vertical;
+    background: var(--card);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 24px;
 }
 
 .section-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
+    font-size: 1.1rem;
+    margin: 16px 0 8px;
 }
 
-.actions {
-  display:flex;
-  gap:8px;
+.section-header .muted {
+    font-size: 0.85rem;
+    color: var(--muted);
 }
 
-button {
-  background:var(--accent);
-  color:#fff;
-  border:0;
-  padding:10px 12px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-button.secondary {
-  background:#fff;
-  color:var(--accent);
-  border:1px solid #cfe0f5;
-}
-
-.table-wrap {
-  overflow:auto;
-}
-
-table {
-  width:100%;
-  border-collapse:collapse;
-  font-size:13px;
-}
-
-th,td {
-  padding:8px;
-  border-bottom:1px solid #eef2f7;
-  text-align:left;
-}
-
-th {
-  background:#f1f7fb;
-  color:#0b2235;
+.grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .fullwidth {
-  grid-column:1/-1;
+    grid-column: 1 / -1;
 }
 
-.muted {
-  color:var(--muted);
-  font-size:13px;
+.grid label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    font-size: 0.9rem;
 }
 
-#signatureModal {
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.5);
-  align-items:center;
-  justify-content:center;
-  z-index:1000;
+.grid input[type="text"],
+.grid input[type="number"],
+.grid input[type="datetime-local"],
+textarea {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-top: 4px;
 }
 
-#signatureBox {
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.2);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:10px;
+textarea {
+    width: 100%;
+    height: 80px;
+    resize: vertical;
+    padding: 8px;
 }
 
-canvas {
-  border:1px solid #ccc;
-  border-radius:8px;
-  touch-action:none;
+/* ======================
+   CHECKBOXES
+   ====================== */
+.grid.checkboxes {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
-.signature-actions {
-  display:flex;
-  gap:8px;
+.grid.checkboxes label {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+/* ======================
+   BOTONES
+   ====================== */
+button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #1e4e8c;
+}
+
+button.secondary {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+button.secondary:hover {
+    background: #cbd5e1;
 }
 
 .form-actions {
-  display:flex;
-  gap:8px;
-  margin-top:12px;
-  justify-content:flex-end;
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
 }
 
-@media(max-width:800px) {
-  .grid {
-    grid-template-columns:1fr;
-  }
+/* ======================
+   TABLA DE REGISTROS
+   ====================== */
+.table-wrap {
+    overflow-x: auto;
 }
 
-/* --- Checkboxes Modernos y alineados --- */
-.checkboxes {
-  display: flex;
-  flex-wrap: wrap;       /* Permite varias en la misma fila */
-  gap: 6px 12px;         /* Espacio vertical y horizontal */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
 }
 
-.checkboxes label {
-  display: inline-flex;  /* Checkbox y texto en la misma línea */
-  align-items: center;
-  gap: 0.5rem;           /* Separación entre checkbox y texto */
-  font-size: 13px;
-  background: #f9f9f9;
-  border-radius: 6px;
-  padding: 4px 8px;
-  border: 1px solid #ddd;
-  white-space: nowrap;   /* Evita que el texto baje */
-  cursor: pointer;
-  user-select: none;
-  transition: background 0.2s ease;
+th, td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
 }
 
-.checkboxes label:hover {
-  background: #eef6fc;
+th {
+    background: var(--bg);
+    font-weight: 600;
 }
 
-.checkboxes input[type="checkbox"] {
-  appearance: none;        /* Quita estilo nativo */
-  width: 18px;
-  height: 18px;
-  border: 2px solid #cfe0f5;
-  border-radius: 6px;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.2s ease;
+/* ======================
+   MODAL DE FIRMA
+   ====================== */
+#signatureModal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.checkboxes input[type="checkbox"]:checked {
-  background-color: var(--accent);
-  border-color: var(--accent);
+#signatureBox {
+    background: var(--card);
+    padding: 24px;
+    border-radius: 12px;
+    width: 340px;
+    text-align: center;
 }
 
-.checkboxes input[type="checkbox"]:checked::after {
-  content: '✓';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
+#signatureBox canvas {
+    border: 1px solid var(--border);
+    margin: 12px 0;
+    border-radius: 6px;
+}
+
+/* ======================
+   RESPONSIVE
+   ====================== */
+@media(max-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
