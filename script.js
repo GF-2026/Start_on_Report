@@ -5,26 +5,26 @@ const modal = document.getElementById('signatureModal');
 const canvas = document.getElementById('signatureCanvas');
 const ctx = canvas.getContext('2d');
 let drawing = false;
-let currentSignatureTarget = null;
+let currentSignatureTarget = null; // 'esp' o 'cus'
 
-// Abrir modal
+// Abrir modal de firma
 function openSignature(target) {
   currentSignatureTarget = target;
   modal.style.display = 'flex';
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-// Cerrar modal
+// Cerrar modal de firma
 document.getElementById('closeSignature').addEventListener('click', () => {
   modal.style.display = 'none';
 });
 
-// Limpiar firma
+// Limpiar el área de firma
 document.getElementById('clearSignature').addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
-// Guardar firma
+// Guardar la firma
 document.getElementById('saveSignature').addEventListener('click', () => {
   const dataURL = canvas.toDataURL();
   const previewCanvas = currentSignatureTarget === 'esp'
@@ -44,7 +44,7 @@ document.getElementById('saveSignature').addEventListener('click', () => {
   modal.style.display = 'none';
 });
 
-// Dibujo con mouse
+// Eventos de dibujo con mouse
 canvas.addEventListener('mousedown', e => {
   drawing = true;
   ctx.beginPath();
@@ -61,7 +61,7 @@ canvas.addEventListener('mousemove', e => {
 canvas.addEventListener('mouseup', () => drawing = false);
 canvas.addEventListener('mouseout', () => drawing = false);
 
-// Dibujo con touch (para móviles)
+// Eventos de dibujo con toque (para dispositivos móviles)
 canvas.addEventListener('touchstart', e => {
   e.preventDefault();
   drawing = true;
