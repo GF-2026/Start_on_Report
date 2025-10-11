@@ -1,153 +1,89 @@
 // ======================
-// VARIABLES GLOBALES
-// ======================
-let records = JSON.parse(localStorage.getItem('records') || '[]');
-let currentSignatureTarget = null; // 'esp' o 'cus'
-const enableDeleteButton = false;   // true = activo, false = desactivado
-const storageKey = 'records';
-
-// ======================
-// AUXILIARES
-// ======================
-function get(id){ return document.getElementById(id).value.trim(); }
-function chk(id){ return document.getElementById(id).checked ? 'Sí' : 'No'; }
-
-// ======================
-// FOLIO AUTOMÁTICO
-// ======================
-function generateFolio(){
-    const company = get('company') || 'SinEmpresa';
-    const now = new Date();
-    const y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0'), d = String(now.getDate()).padStart(2,'0');
-    const h = String(now.getHours()).padStart(2,'0'), min = String(now.getMinutes()).padStart(2,'0');
-    return `StartReport-${company}-${y}${m}${d}-${h}${min}`;
-}
-
-// ======================
-// GUARDAR REGISTRO
-// ======================
-document.getElementById('saveBtn').addEventListener('click', ()=>{
-    const record = {
-        folio: generateFolio(),
-        OT: get('OT'),
-        datetime: get('datetime'),
-        company: get('company'),
-        engineer: get('engineer'),
-        phone: get('phone'),
-        city: get('city'),
-        description: get('description'),
-        brand: get('brand'),
-        model: get('model'),
-        serial: get('serial'),
-        controlnum: get('controlnum'),
-        status: get('status'),
-        ubication: get('ubication'),
-        temperature: get('temperature'),
-        humidity: get('humidity'),
-        marking: chk('marking'),
-        voltage_plate: chk('voltage_plate'),
-        shock_free: chk('shock_free'),
-        pallets: chk('pallets'),
-        unpack: chk('unpack'),
-        supplies_installed: chk('supplies_installed'),
-        specs_available: chk('specs_available'),
-        refrigerant: chk('refrigerant'),
-        manuals: chk('manuals'),
-        notes: get('notes'),
-        name_esp: get('name_esp'),
-        name_cus: get('name_cus'),
-        signatureEsp: document.getElementById('signaturePreviewEsp').toDataURL(),
-        signatureCus: document.getElementById('signaturePreviewCus').toDataURL()
-    };
-    records.push(record);
-    localStorage.setItem(storageKey, JSON.stringify(records));
-    renderTable();
-    alert('✅ Registro guardado correctamente');
-});
-
-// ======================
-// LIMPIAR FORMULARIO
-// ======================
-document.getElementById('clearBtn').addEventListener('click', ()=>{
-    document.getElementById('reportForm').reset();
-    document.getElementById('signaturePreviewEsp').getContext('2d').clearRect(0,0,300,150);
-    document.getElementById('signaturePreviewCus').getContext('2d').clearRect(0,0,300,150);
-});
-
-// ======================
-// RENDER TABLA
-// ======================
-function renderTable(){
-    const head = document.getElementById('tableHead');
-    const body = document.getElementById('tableBody');
-    body.innerHTML = '';
-    const columns = ['folio','OT','datetime','company','engineer','city','description','status','temperature','humidity'];
-    head.innerHTML = columns.map(c=>`<th>${c}</th>`).join('');
-    records.forEach(r=>{
-        const row = `<tr>${columns.map(c=>`<td>${r[c]||''}</td>`).join('')}</tr>`;
-        body.insertAdjacentHTML('beforeend',row);
-    });
-}
-renderTable();
-
-// ======================
-// EXPORTAR EXCEL
-// ======================
-document.getElementById('exportBtn').addEventListener('click', ()=>{
-    if(!records.length) return alert('No hay registros para exportar.');
-    const ws = XLSX.utils.json_to_sheet(records);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
-    XLSX.writeFile(wb, 'Registro_de_arranques.xlsx');
-});
-
-// ======================
-// BORRAR REGISTROS
-// ======================
-const deleteBtn = document.getElementById('deleteAllBtn');
-deleteBtn.style.display = enableDeleteButton?'inline-block':'none';
-deleteBtn.onclick = ()=>{
-    if(!enableDeleteButton) return;
-    if(confirm('¿Borrar todos los registros guardados?')){
-        localStorage.removeItem(storageKey);
-        records=[];
-        renderTable();
-    }
-}
-
-// ======================
-// FIRMA
+// MANEJO DE FIRMAS
 // ======================
 const modal = document.getElementById('signatureModal');
 const canvas = document.getElementById('signatureCanvas');
 const ctx = canvas.getContext('2d');
 let drawing = false;
+let currentSignatureTarget = null;
 
-function openSignature(target){
-    currentSignatureTarget = target;
-    modal.classList.add('active');
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+// Abrir modal
+document.getElementById('openSignatureEsp').addEventListener('click', () => openSignature('esp'));
+document.getElementById('openSignatureCus').addEventListener('click', () => openSignature('cus'));
+
+function openSignature(target) {
+  currentSignatureTarget = target;
+  modal.style.display = 'flex';
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-document.getElementById('openSignatureEsp').addEventListener('click',()=>openSignature('esp'));
-document.getElementById('openSignatureCus').addEventListener('click',()=>openSignature('cus'));
+// Cerrar modal
+document.getElementById('closeSignature').addEventListener('click', () => {
+  modal.style.display = 'none';
+});
 
-document.getElementById('closeSignature').addEventListener('click',()=>modal.classList.remove('active'));
-document.getElementById('clearSignature').addEventListener('click',()=>ctx.clearRect(0,0,canvas.width,canvas.height));
-document.getElementById('saveSignature').addEventListener('click',()=>{
-    const dataURL = canvas.toDataURL();
-    let preview = currentSignatureTarget==='esp'?document.getElementById('signaturePreviewEsp'):document.getElementById('signaturePreviewCus');
-    const pctx = preview.getContext('2d');
-    const img = new Image();
-    img.onload = ()=>{pctx.clearRect(0,0,300,150); pctx.drawImage(img,0,0,300,150)};
-    img.src = dataURL;
-    modal.classList.remove('active');
+// Limpiar firma
+document.getElementById('clearSignature').addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
+// Guardar firma
+document.getElementById('saveSignature').addEventListener('click', () => {
+  const dataURL = canvas.toDataURL();
+  const preview = currentSignatureTarget === 'esp'
+    ? document.getElementById('signaturePreviewEsp')
+    : document.getElementById('signaturePreviewCus');
+  const pctx = preview.getContext('2d');
+  const img = new Image();
+  img.onload = () => {
+    pctx.clearRect(0, 0, preview.width, preview.height);
+    pctx.drawImage(img, 0, 0, preview.width, preview.height);
+  };
+  img.src = dataURL;
+  modal.style.display = 'none';
 });
 
 // ======================
-// DIBUJO CANVAS
+// DIBUJO EN CANVAS (mouse + táctil)
 // ======================
-canvas.addEventListener('mousedown',e=>{drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX,e.offsetY)});
-canvas.addEventListener('mouseup',()=>drawing=false);
-canvas.addEventListener('mouseout',()=>drawing=false);
-canvas.addEventListener('mousemove',e=>{if(!drawing) return; ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#000'; ctx.lineTo(e.offsetX,e.offsetY); ctx.stroke()});
+canvas.addEventListener('mousedown', e => {
+  drawing = true;
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX, e.offsetY);
+});
+
+canvas.addEventListener('mousemove', e => {
+  if (!drawing) return;
+  ctx.lineWidth = 2;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#000';
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+});
+
+canvas.addEventListener('mouseup', () => (drawing = false));
+canvas.addEventListener('mouseout', () => (drawing = false));
+
+// === Soporte táctil ===
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  const rect = canvas.getBoundingClientRect();
+  ctx.beginPath();
+  ctx.moveTo(t.clientX - rect.left, t.clientY - rect.top);
+  drawing = true;
+});
+
+canvas.addEventListener('touchmove', e => {
+  if (!drawing) return;
+  e.preventDefault();
+  const t = e.touches[0];
+  const rect = canvas.getBoundingClientRect();
+  ctx.lineWidth = 2;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#000';
+  ctx.lineTo(t.clientX - rect.left, t.clientY - rect.top);
+  ctx.stroke();
+});
+
+canvas.addEventListener('touchend', () => (drawing = false));
