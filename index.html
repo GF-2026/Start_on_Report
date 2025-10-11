@@ -1,133 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reporte de Arranque</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Formulario de Arranque</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <!-- ENCABEZADO -->
     <header>
-      <img id="logo" src="LOGO.png" alt="FIXSER" />
-      <div>
-        <h1>REPORTE DE ARRANQUE</h1>
-        <p class="muted">Llena el formulario, firma y presiona "Guardar registro".</p>
-      </div>
+      <h1>Formulario de Arranque — (11 secciones)</h1>
+      <div class="small">Offline · Guarda en localStorage · Exporta a Excel</div>
     </header>
 
-    <!-- FORMULARIO PRINCIPAL -->
-    <form id="reportForm" class="card">
-      <div class="section-header">
-        <strong>1 – Datos del cliente</strong>
-      </div>
-      <div class="grid">
-        <div><label>OT: *</label><input type="text" id="OT" required /></div>
-        <div><label>Fecha y Hora: *</label><input type="datetime-local" id="datetime" required /></div>
-        <div><label>Compañía:</label><input type="text" id="company" /></div>
-        <div><label>Ingeniero a cargo:</label><input type="text" id="engineer" /></div>
-        <div><label>Teléfono:</label><input type="text" id="phone" /></div>
-        <div><label>Ciudad:</label><input type="text" id="city" /></div>
-      </div>
-
-      <hr />
-
-      <div class="section-header"><strong>2 – Datos del equipo</strong></div>
-      <div class="grid">
-        <div><label>Descripción:</label><input type="text" id="description" /></div>
-        <div><label>Marca:</label><input type="text" id="brand" /></div>
-        <div><label>Modelo:</label><input type="text" id="model" /></div>
-        <div><label>Serie:</label><input type="text" id="serial" /></div>
-        <div><label>Número de control:</label><input type="text" id="controlnum" /></div>
-        <div><label>Estado operativo:</label><input type="text" id="status" /></div>
-      </div>
-
-      <hr />
-
-      <div class="section-header"><strong>3 – Condiciones ambientales</strong></div>
-      <div class="grid">
-        <div class="fullwidth"><label>Ubicación:</label><input type="text" id="ubication" /></div>
-        <div><label>Temperatura (°C):</label><input type="number" step="0.1" id="temperature" /></div>
-        <div><label>Humedad (%):</label><input type="number" step="0.1" id="humidity" /></div>
-      </div>
-
-      <hr />
-
-      <div class="section-header"><strong>4 – Chequeo inicial</strong></div>
-      <div class="grid checkboxes">
-        <label><input type="checkbox" id="marking" />Marcado de espacio</label>
-        <label><input type="checkbox" id="voltage_plate" />Voltaje coincide</label>
-        <label><input type="checkbox" id="shock_free" />Libre de golpes</label>
-        <label><input type="checkbox" id="pallets" />Espacio para tarimas</label>
-        <label><input type="checkbox" id="unpack" />Espacio para desempacar</label>
-        <label><input type="checkbox" id="supplies_installed" />Suministros instalados</label>
-        <label><input type="checkbox" id="specs_available" />Especificaciones disponibles</label>
-        <label><input type="checkbox" id="refrigerant" />Con refrigerante</label>
-        <label><input type="checkbox" id="manuals" />Manuales disponibles</label>
-      </div>
-
-      <hr />
-
-      <div class="section-header"><strong>5 – Observaciones</strong></div>
-      <textarea id="notes"></textarea>
-
-      <hr />
-
-      <!-- FIRMAS -->
-      <div class="section-header"><strong>6 – Firma del especialista</strong></div>
-      <div><label>Nombre de especialista:</label><input type="text" id="name_esp" /></div>
-      <button type="button" id="openSignatureEsp">Firmar especialista</button>
-      <canvas id="signaturePreviewEsp" width="300" height="150"></canvas>
-
-      <hr />
-
-      <div class="section-header"><strong>7 – Firma del cliente</strong></div>
-      <div><label>Nombre del cliente:</label><input type="text" id="name_cus" /></div>
-      <button type="button" id="openSignatureCus">Firmar cliente</button>
-      <canvas id="signaturePreviewCus" width="300" height="150"></canvas>
-
-      <div class="form-actions">
-        <button type="button" id="saveBtn">Guardar registro</button>
-        <button type="button" id="clearBtn" class="secondary">Limpiar formulario</button>
-      </div>
-    </form>
-
-    <!-- TABLA DE REGISTROS -->
     <div class="card">
-      <div class="section-header">
-        <strong>Registros guardados</strong>
-        <div class="actions">
-          <button id="downloadButton">📄 Descargar Excel</button>
-          <button id="sendButton">✉️ Enviar por correo</button>
-          <button id="deleteAllBtn" class="secondary">🗑️ Borrar registros</button>
+      <form id="frm">
+        <!-- SECTION 1: Datos Generales -->
+        <div class="section">
+          <h2>1. Datos Generales</h2>
+          <div class="grid">
+            <div><label>Folio</label><input type="text" id="folio" readonly></div>
+            <div><label>Fecha</label><input type="text" id="datetime" readonly></div>
+            <div><label>Empresa</label><input type="text" id="company" placeholder="Nombre de la empresa"></div>
+            <div><label>Ingeniero</label><input type="text" id="engineer" placeholder="Nombre del ingeniero"></div>
+            <div><label>Teléfono</label><input type="text" id="phone"></div>
+            <div><label>Ciudad</label><input type="text" id="city"></div>
+          </div>
         </div>
-      </div>
 
-      <div class="table-wrap">
-        <table id="recordsTable">
-          <thead><tr id="tableHead"></tr></thead>
-          <tbody id="tableBody"></tbody>
-        </table>
+        <!-- SECTION 2: Información del Equipo -->
+        <div class="section">
+          <h2>2. Información del Equipo</h2>
+          <div class="grid">
+            <div><label>Marca</label><input type="text" id="brand"></div>
+            <div><label>Modelo</label><input type="text" id="model"></div>
+            <div><label>Serial</label><input type="text" id="serial"></div>
+            <div><label>Número de control</label><input type="text" id="controlnum"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: Condiciones Ambientales -->
+        <div class="section">
+          <h2>3. Condiciones Ambientales</h2>
+          <div class="grid">
+            <div><label>Temperatura (°C)</label><input type="number" step="0.1" id="temperature"></div>
+            <div><label>Humedad (%)</label><input type="number" step="0.1" id="humidity"></div>
+            <div class="left-checkbox"><label><input type="checkbox" id="specs_available"> Especificaciones disponibles</label></div>
+            <div><label>Estado</label><select id="status"><option>Operativo</option><option>Mantenimiento</option><option>Falla</option></select></div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Mediciones de Arranque -->
+        <div class="section">
+          <h2>4. Mediciones de Arranque</h2>
+          <div class="grid">
+            <div><label>Presión Estática HS</label><input type="number" step="0.01" id="static_hs"></div>
+            <div><label>Presión Estática LS</label><input type="number" step="0.01" id="static_ls"></div>
+            <div><label>Velocidad Motor (RPM)</label><input type="number" step="1" id="rpm"></div>
+            <div><label>Corriente (A)</label><input type="number" step="0.01" id="current"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 5: Configuración Eléctrica -->
+        <div class="section">
+          <h2>5. Configuración Eléctrica</h2>
+          <div class="grid">
+            <div><label>Voltaje (V)</label><input type="number" step="0.1" id="voltage"></div>
+            <div><label>Frecuencia (Hz)</label><input type="number" step="0.1" id="frequency"></div>
+            <div><label>Fase</label><input type="text" id="phase"></div>
+            <div><label>Observaciones eléctricas</label><input type="text" id="elec_notes"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 6: Estado de Filtros -->
+        <div class="section">
+          <h2>6. Estado de Filtros</h2>
+          <div class="left-checkbox"><label><input type="checkbox" id="filter1"> Filtro 1 OK</label></div>
+          <div class="left-checkbox"><label><input type="checkbox" id="filter2"> Filtro 2 OK</label></div>
+          <div class="left-checkbox"><label><input type="checkbox" id="filter3"> Filtro 3 OK</label></div>
+        </div>
+
+        <!-- SECTION 7: Estado Mecánico -->
+        <div class="section">
+          <h2>7. Estado Mecánico</h2>
+          <textarea id="mech_notes" placeholder="Observaciones mecánicas"></textarea>
+        </div>
+
+        <!-- SECTION 8: Observaciones -->
+        <div class="section">
+          <h2>8. Observaciones</h2>
+          <textarea id="tech_notes" placeholder="Notas adicionales"></textarea>
+        </div>
+
+        <!-- SECTION 9: Resultados Finales -->
+        <div class="section">
+          <h2>9. Resultados Finales</h2>
+          <input type="text" id="results" placeholder="Resultados finales del arranque">
+        </div>
+
+        <!-- SECTION 10: Firma del Cliente -->
+        <div class="section">
+          <h2>10. Firma del Cliente</h2>
+          <div class="flex">
+            <div style="flex:1" id="sigCusPrev" class="signature-preview">Sin firma</div>
+            <div><button type="button" class="secondary" onclick="openSignature('cus')">Firmar</button></div>
+          </div>
+        </div>
+
+        <!-- SECTION 11: Firma del Especialista -->
+        <div class="section">
+          <h2>11. Firma del Especialista</h2>
+          <div class="flex">
+            <div style="flex:1" id="sigEspPrev" class="signature-preview">Sin firma</div>
+            <div><button type="button" class="secondary" onclick="openSignature('esp')">Firmar</button></div>
+          </div>
+        </div>
+
+        <!-- Botones de Control -->
+        <div class="controls">
+          <button id="saveBtn">Guardar registro</button>
+          <button type="button" id="clearForm" class="secondary">Limpiar formulario</button>
+          <button type="button" id="exportExcel">Descargar Excel</button>
+          <button type="button" id="emailBtn" class="secondary">Enviar por correo</button>
+          <button type="button" id="deleteAllBtn" class="danger">Borrar todos</button>
+        </div>
+      </form>
+      <div id="records-section"></div>
+    </div>
+  </div>
+
+  <!-- Modal de Firma -->
+  <div id="sigModal" class="hidden">
+    <div class="sigBox">
+      <div class="sigHeader">
+        <strong>Firmar</strong>
+        <button id="closeSig" class="secondary">Cerrar</button>
+      </div>
+      <canvas id="sigCanvas"></canvas>
+      <div class="sigControls">
+        <button id="clearSig" type="button" class="secondary">Borrar</button>
+        <button id="saveSig" type="button">Guardar firma</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL DE FIRMA -->
-  <div id="signatureModal">
-    <div id="signatureBox">
-      <h3>Firma manuscrita</h3>
-      <canvas id="signatureCanvas" width="300" height="150"></canvas>
-      <div class="signature-actions">
-        <button id="clearSignature">Limpiar</button>
-        <button id="saveSignature">Guardar firma</button>
-        <button id="closeSignature" class="secondary">Cerrar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- LIBRERÍAS -->
-  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-  <script src="script.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
