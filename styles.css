@@ -122,11 +122,13 @@ th,td{
     max-width:90%;
     text-align:center;
     position:relative;
+    touch-action:none;
 }
 #signatureBox canvas{
     border:1px solid var(--border);
     margin:12px 0;
     border-radius:6px;
+    touch-action:none;
 }
 .signature-actions{
     display:flex;
