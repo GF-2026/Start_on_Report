@@ -68,12 +68,43 @@ document.getElementById('saveBtn').addEventListener('click', () => {
     specs_available: chk('specs_available'),
     refrigerant: chk('refrigerant'),
     manuals: chk('manuals'),
+    // Mediciones
+    static_ls: get('static_ls'),
+    static_hs: get('static_hs'),
+    resistance_hs: get('resistance_hs'),
+    resistance_ls: get('resistance_ls'),
+    resistance_circ: get('resistance_circ'),
+    resistance_heat: get('resistance_heat'),
+    resistance_hum: get('resistance_hum'),
+    voltaje_hs: get('voltaje_hs'),
+    voltaje_ls: get('voltaje_ls'),
+    to_ground: get('to_ground'),
+    current_hs: get('current_hs'),
+    current_ls: get('current_ls'),
+    current_circ: get('current_circ'),
+    current_heat: get('current_heat'),
+    current_hum: get('current_hum'),
+    pressures_hs: get('pressures_hs'),
+    pressures_ls: get('pressures_ls'),
+    // Pruebas
+    hum_from: get('hum_from'),
+    hum_target: get('hum_target'),
+    heat_test: chk('heat_test'),
+    hum_low: get('hum_low'),
+    hum_hig: get('hum_hig'),
+    hum_test: chk('hum_test'),
+    temp_hig: get('temp_hig'),
+    temp_low: get('temp_low'),
+    cold_test: chk('cold_test'),
+    pulldown: get('pulldown'),
+    // Observaciones y firmas
     notes: get('notes'),
     name_esp: get('name_esp'),
     name_cus: get('name_cus'),
     signatureEsp: document.getElementById('signaturePreviewEsp').toDataURL(),
     signatureCus: document.getElementById('signaturePreviewCus').toDataURL()
   };
+
   records.push(record);
   localStorage.setItem(storageKey, JSON.stringify(records));
   renderTable();
@@ -109,12 +140,12 @@ renderTable();
 // ======================
 // EXPORTAR EXCEL
 // ======================
-document.getElementById('downloadButton').addEventListener('click', () => {
+document.getElementById('exportBtn').addEventListener('click', () => {
   if(!records.length) return alert('No hay registros para exportar.');
   const ws = XLSX.utils.json_to_sheet(records);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
-  XLSX.writeFile(wb, 'Registro de arranques.xlsx');
+  XLSX.writeFile(wb, 'Registro_de_arranques.xlsx');
 });
 
 // ======================
@@ -168,7 +199,15 @@ document.getElementById('saveSignature').addEventListener('click',()=>{
 });
 
 // DIBUJO EN CANVAS
-canvas.addEventListener('mousedown',e=>{drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX,e.offsetY)});
-canvas.addEventListener('mouseup',()=>drawing=false);
-canvas.addEventListener('mouseout',()=>drawing=false);
-canvas.addEventListener('mousemove',e=>{if(!drawing) return; ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#000'; ctx.lineTo(e.offsetX,e.offsetY); ctx.stroke()});
+canvas.addEventListener('mousedown', e=>{drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX,e.offsetY)});
+canvas.addEventListener('mouseup', ()=>drawing=false);
+canvas.addEventListener('mouseout', ()=>drawing=false);
+canvas.addEventListener('mousemove', e=>{if(!drawing) return; ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#000'; ctx.lineTo(e.offsetX,e.offsetY); ctx.stroke()});
+
+// ======================
+// BOTÓN MAIL PRECONFIGURADO
+// ======================
+function sendMail() {
+  const mailto = 'mailto:correo@ejemplo.com?subject=Reporte de arranque&body=Adjunto el reporte generado';
+  window.location.href = mailto;
+}
