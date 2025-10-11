@@ -114,7 +114,7 @@ document.getElementById('downloadButton').addEventListener('click', () => {
   const ws = XLSX.utils.json_to_sheet(records);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
-  XLSX.writeFile(wb, 'Reportes_Fixser.xlsx');
+  XLSX.writeFile(wb, 'Registro de arranques.xlsx');
 });
 
 // ======================
