@@ -124,7 +124,85 @@ deleteBtn.onclick = () => {
 // ======================
 // MANEJO DE FIRMAS
 // ======================
+// MANEJO DE FIRMAS (modal)
+// ======================
 const modal = document.getElementById('signatureModal');
+const canvas = document.getElementById('signatureCanvas');
+const ctx = canvas.getContext('2d');
+let drawing = false;
+let currentSignatureTarget = null; // 'esp' o 'cus'
+
+// Abrir modal para firma
+function openSignature(target) {
+    currentSignatureTarget = target;
+    modal.style.display = 'flex';
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Botones de abrir modal
+document.getElementById('openSignatureEsp').addEventListener('click', () => openSignature('esp'));
+document.getElementById('openSignatureCus').addEventListener('click', () => openSignature('cus'));
+
+// Cerrar y limpiar modal
+document.getElementById('closeSignature').addEventListener('click', () => modal.style.display = 'none');
+document.getElementById('clearSignature').addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
+
+// Guardar firma en el canvas del formulario
+document.getElementById('saveSignature').addEventListener('click', () => {
+    const dataURL = canvas.toDataURL();
+    let preview;
+    if (currentSignatureTarget === 'esp') preview = document.getElementById('signaturePreviewEsp');
+    else if (currentSignatureTarget === 'cus') preview = document.getElementById('signaturePreviewCus');
+
+    if (preview) {
+        const pctx = preview.getContext('2d');
+        const img = new Image();
+        img.onload = () => {
+            pctx.clearRect(0, 0, preview.width, preview.height);
+            pctx.drawImage(img, 0, 0, preview.width, preview.height);
+        };
+        img.src = dataURL;
+    }
+
+    modal.style.display = 'none';
+    currentSignatureTarget = null;
+});
+
+// Dibujo dentro del modal
+canvas.addEventListener('mousedown', e => { drawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
+canvas.addEventListener('mouseup', () => drawing = false);
+canvas.addEventListener('mouseout', () => drawing = false);
+canvas.addEventListener('mousemove', e => {
+    if (!drawing) return;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#000';
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+});
+
+// Para dispositivos táctiles
+canvas.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+});
+canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (!drawing) return;
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+    ctx.stroke();
+});
+canvas.addEventListener('touchend', () => drawing = false);
+canvas.addEventListener('touchcancel', () => drawing = false);
+
+// ======================
+/*const modal = document.getElementById('signatureModal');
 const canvas = document.getElementById('signatureCanvas');
 const ctx = canvas.getContext('2d');
 let drawing = false;
@@ -152,7 +230,7 @@ document.getElementById('saveSignature').addEventListener('click',()=>{
   }
   modal.style.display='none';
 });
-
+*/
 // DIBUJO EN CANVAS
 canvas.addEventListener('mousedown',e=>{drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX,e.offsetY)});
 canvas.addEventListener('mouseup',()=>drawing=false);
