@@ -1,4 +1,3 @@
-HTML:
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,14 +10,26 @@ HTML:
 
 <body>
     <div class="container">
-        <header> <img id="logo" src="LOGO.png" alt="FIXSER" />
+        <header>
+            <img id="logo" src="LOGO.png" alt="FIXSER" />
             <div>
                 <h1>REPORTE DE ARRANQUE</h1>
                 <div class="muted">Llena el formulario, firma y presiona "Guardar registro".</div>
             </div>
         </header>
-        <form id="reportForm" class="card"> <!-- DATOS GENERALES -->
-            <div class="section-header"> <strong>1 – Datos de cliente</strong>
+
+        <form id="reportForm" class="card">
+            <!-- FOLIO -->
+            <div class="section-header">
+                <strong>Folio</strong>
+            </div>
+            <div>
+                <input type="text" id="folio" readonly />
+            </div>
+
+            <!-- 1 – Datos de cliente -->
+            <div class="section-header">
+                <strong>1 – Datos de cliente</strong>
                 <div class="muted">Campos obligatorios *</div>
             </div>
             <div class="grid">
@@ -29,7 +40,9 @@ HTML:
                 <div><label>Teléfono:</label><input type="text" id="phone" /></div>
                 <div><label>Ciudad:</label><input type="text" id="city" /></div>
             </div>
-            <hr /> <!-- DATOS DE EQUIPO -->
+
+            <hr />
+            <!-- 2 – Datos del equipo -->
             <div class="section-header"><strong>2 – Datos del equipo</strong></div>
             <div class="grid">
                 <div><label>Descripción:</label><input type="text" id="description" /></div>
@@ -39,39 +52,42 @@ HTML:
                 <div><label>Número de control:</label><input type="text" id="controlnum" /></div>
                 <div><label>Estado Operativo:</label><input type="text" id="status" /></div>
             </div>
-            <hr /> <!-- AMBIENTE -->
+
+            <hr />
+            <!-- 3 – Condiciones ambientales -->
             <div class="section-header"><strong>3 – Condiciones ambientales</strong></div>
             <div class="grid">
-                <div class="fullwidth"><label>Ubicación dentro de la planta:</label><input type="text" id="ubication" />
-                </div>
-                <div><label>Temperatura: (°C)</label><input type="number" step="0.1" id="temperature" /></div>
-                <div><label>Humedad: (%)</label><input type="number" step="0.1" id="humidity" /></div>
+                <div class="fullwidth"><label>Ubicación dentro de la planta:</label><input type="text" id="ubication" /></div>
+                <div><label>Temperatura (°C):</label><input type="number" step="0.1" id="temperature" /></div>
+                <div><label>Humedad (%):</label><input type="number" step="0.1" id="humidity" /></div>
             </div>
-            <hr /> <!-- CHECKLIST -->
+
+            <hr />
+            <!-- 4 – Chequeo inicial -->
             <div class="section-header"><strong>4 – Chequeo inicial</strong></div>
-            <div class="grid checkboxes"> <label><input type="checkbox" id="marking" />Se marcó futuro espacio de
-                    equipo</label> <label><input type="checkbox" id="voltage_plate" />El voltaje coincide con la
-                    placa</label> <label><input type="checkbox" id="shock_free" />Está libre de golpes</label>
-                <label><input type="checkbox" id="pallets" />Se deja espacio para tarimas</label> <label><input
-                        type="checkbox" id="unpack" />Se deja espacio para desempacar</label> <label><input
-                        type="checkbox" id="supplies_installed" />Suministros instalados</label> <label><input
-                        type="checkbox" id="specs_available" />Hay especificaciones disponibles</label> <label><input
-                        type="checkbox" id="refrigerant" />Tiene carga de refrigerante</label> <label><input
-                        type="checkbox" id="manuals" />Se tienen manuales y diagramas</label> </div>
-            <hr /> <!-- MEDICIONES -->
+            <div class="grid checkboxes">
+                <label><input type="checkbox" id="marking" />Se marcó futuro espacio de equipo</label>
+                <label><input type="checkbox" id="voltage_plate" />El voltaje coincide con la placa</label>
+                <label><input type="checkbox" id="shock_free" />Está libre de golpes</label>
+                <label><input type="checkbox" id="pallets" />Se deja espacio para tarimas</label>
+                <label><input type="checkbox" id="unpack" />Se deja espacio para desempacar</label>
+                <label><input type="checkbox" id="supplies_installed" />Suministros instalados</label>
+                <label><input type="checkbox" id="specs_available" />Hay especificaciones disponibles</label>
+                <label><input type="checkbox" id="refrigerant" />Tiene carga de refrigerante</label>
+                <label><input type="checkbox" id="manuals" />Se tienen manuales y diagramas</label>
+            </div>
+
+            <hr />
+            <!-- 5 – Mediciones -->
             <div class="section-header"><strong>5 – Mediciones</strong></div>
             <div class="grid">
                 <div><label>Presión Estática LS:</label><input type="number" step="0.01" id="static_ls" /></div>
                 <div><label>Presión Estática HS:</label><input type="number" step="0.01" id="static_hs" /></div>
-                <div><label>Resistencia compresor HS:</label><input type="number" step="0.001" id="resistance_hs" />
-                </div>
-                <div><label>Resistencia compresor LS:</label><input type="number" step="0.001" id="resistance_ls" />
-                </div>
-                <div><label>Resistencia circulador:</label><input type="number" step="0.001" id="resistance_circ" />
-                </div>
+                <div><label>Resistencia compresor HS:</label><input type="number" step="0.001" id="resistance_hs" /></div>
+                <div><label>Resistencia compresor LS:</label><input type="number" step="0.001" id="resistance_ls" /></div>
+                <div><label>Resistencia circulador:</label><input type="number" step="0.001" id="resistance_circ" /></div>
                 <div><label>Resistencia heater:</label><input type="number" step="0.001" id="resistance_heat" /></div>
-                <div><label>Resistencia humidificador:</label><input type="number" step="0.001" id="resistance_hum" />
-                </div>
+                <div><label>Resistencia humidificador:</label><input type="number" step="0.001" id="resistance_hum" /></div>
                 <div><label>Voltaje compresor HS:</label><input type="text" id="voltaje_hs" /></div>
                 <div><label>Voltaje compresor LS:</label><input type="text" id="voltaje_ls" /></div>
                 <div><label>Voltaje a tierra:</label><input type="number" id="to_ground" /></div>
@@ -83,71 +99,88 @@ HTML:
                 <div><label>Presiones compresor HS:</label><input type="text" id="pressures_hs" /></div>
                 <div><label>Presiones compresor LS:</label><input type="text" id="pressures_ls" /></div>
             </div>
-            <hr /> <!-- CHEQUEO ELÉCTRICO -->
+
+            <hr />
+            <!-- 6 – Chequeo eléctrico -->
             <div class="section-header"><strong>6 – Chequeo eléctrico</strong></div>
-            <div class="grid checkboxes"> <label><input type="checkbox" id="main_switch" />Switch principal, hardware y
-                    cables correctos</label> <label><input type="checkbox" id="switch_covers" />Cubiertas de
-                    presostatos</label> <label><input type="checkbox" id="tighting" />Conexiones reapretadas</label>
-                <label><input type="checkbox" id="headfan" />Revisión de headfans</label> <label><input type="checkbox"
-                        id="balance" />Carga balanceada</label> <label><input type="checkbox" id="fuses_ok" />Fusibles
-                    correctos</label> <label><input type="checkbox" id="faseado" />Faseado correcto</label>
-                <label><input type="checkbox" id="crankcase" />Calentador de cárter</label> <label><input
-                        type="checkbox" id="grounded" />Tierra física</label> </div>
-            <hr /> <!-- CHEQUEO REFRIGERACIÓN -->
+            <div class="grid checkboxes">
+                <label><input type="checkbox" id="main_switch" />Switch principal, hardware y cables correctos</label>
+                <label><input type="checkbox" id="switch_covers" />Cubiertas de presostatos</label>
+                <label><input type="checkbox" id="tighting" />Conexiones reapretadas</label>
+                <label><input type="checkbox" id="headfan" />Revisión de headfans</label>
+                <label><input type="checkbox" id="balance" />Carga balanceada</label>
+                <label><input type="checkbox" id="fuses_ok" />Fusibles correctos</label>
+                <label><input type="checkbox" id="faseado" />Faseado correcto</label>
+                <label><input type="checkbox" id="crankcase" />Calentador de cárter</label>
+                <label><input type="checkbox" id="grounded" />Tierra física</label>
+            </div>
+
+            <hr />
+            <!-- 7 – Chequeo en refrigeración -->
             <div class="section-header"><strong>7 – Chequeo en refrigeración</strong></div>
-            <div class="grid checkboxes"> <label><input type="checkbox" id="fans_ok" />Ventiladores OK</label>
-                <label><input type="checkbox" id="coils_ok" />Serpentines OK</label> <label><input type="checkbox"
-                        id="armafles_ok" />Armaflex OK</label> <label><input type="checkbox" id="inyection_ok" />Válvula
-                    de inyección OK</label> <label><input type="checkbox" id="oil_ok" />Nivel de aceite correcto</label>
-                <label><input type="checkbox" id="sights_ok" />Mirillas OK</label> <label><input type="checkbox"
-                        id="acid_ok" />Prueba de acidez</label> <label><input type="checkbox" id="noleaks" />Sin
-                    fugas</label> <label><input type="checkbox" id="hilow" />Chequeo Hi/Low</label> <label><input
-                        type="checkbox" id="lowoil" />Protección de aceite OK</label> <label><input type="checkbox"
-                        id="rotalocks" />Capuchones de rotalocks</label> <label><input type="checkbox"
-                        id="capillaries" />Capilares OK</label> <label><input type="checkbox" id="frosty" />Escarche de
-                    succión</label> </div>
-            <hr /> <!-- PRUEBAS -->
+            <div class="grid checkboxes">
+                <label><input type="checkbox" id="fans_ok" />Ventiladores OK</label>
+                <label><input type="checkbox" id="coils_ok" />Serpentines OK</label>
+                <label><input type="checkbox" id="armafles_ok" />Armaflex OK</label>
+                <label><input type="checkbox" id="inyection_ok" />Válvula de inyección OK</label>
+                <label><input type="checkbox" id="oil_ok" />Nivel de aceite correcto</label>
+                <label><input type="checkbox" id="sights_ok" />Mirillas OK</label>
+                <label><input type="checkbox" id="acid_ok" />Prueba de acidez</label>
+                <label><input type="checkbox" id="noleaks" />Sin fugas</label>
+                <label><input type="checkbox" id="hilow" />Chequeo Hi/Low</label>
+                <label><input type="checkbox" id="lowoil" />Protección de aceite OK</label>
+                <label><input type="checkbox" id="rotalocks" />Capuchones de rotalocks</label>
+                <label><input type="checkbox" id="capillaries" />Capilares OK</label>
+                <label><input type="checkbox" id="frosty" />Escarche de succión</label>
+            </div>
+
+            <hr />
+            <!-- 8 – Pruebas -->
             <div class="section-header"><strong>8 – Pruebas</strong></div>
             <div class="grid">
                 <div><label>Temp. ambiente (°C):</label><input type="text" id="hum_from" /></div>
-                <div><label>Punto máximo -10 (°C):</label><input type="text" id="hum_target" /></div> <label><input
-                        type="checkbox" id="heat_test" />Prueba de calentamiento (soak 30 min)</label>
+                <div><label>Punto máximo -10 (°C):</label><input type="text" id="hum_target" /></div>
+                <label><input type="checkbox" id="heat_test" />Prueba de calentamiento (soak 30 min)</label>
                 <div><label>Humedad baja (20 %HR):</label><input type="text" id="hum_low" /></div>
-                <div><label>Humedad alta (80 %HR):</label><input type="text" id="hum_hig" /></div> <label><input
-                        type="checkbox" id="hum_test" />Prueba de humedad (soak 30 min c/u)</label>
+                <div><label>Humedad alta (80 %HR):</label><input type="text" id="hum_hig" /></div>
+                <label><input type="checkbox" id="hum_test" />Prueba de humedad (soak 30 min c/u)</label>
                 <div><label>Punto máximo -10 (°C):</label><input type="text" id="temp_hig" /></div>
-                <div><label>Punto máximo +10 (°C):</label><input type="text" id="temp_low" /></div> <label><input
-                        type="checkbox" id="cold_test" />Prueba de enfriamiento (soak 30 min)</label>
+                <div><label>Punto máximo +10 (°C):</label><input type="text" id="temp_low" /></div>
+                <label><input type="checkbox" id="cold_test" />Prueba de enfriamiento (soak 30 min)</label>
                 <div><label>Duración (min):</label><input type="text" id="pulldown" /></div>
             </div>
-            <hr /> <!-- OBSERVACIONES -->
-            <div class="section-header"><strong>9 – Observaciones</strong></div> <textarea id="notes"></textarea>
+
             <hr />
-            <!-- FIRMA ESPECIALISTA -->
-            <div class="section-header">
-                <strong>10 – Firma de especialista</strong>
-            </div>
-            <div><label>Nombre de Especialista</label><input type="text" id="name_esp" />
-            </div> <button type="button" id="openSignatureEsp">Firma de Especialista</button>
+            <!-- 9 – Observaciones -->
+            <div class="section-header"><strong>9 – Observaciones</strong></div>
+            <textarea id="notes"></textarea>
+
+            <hr />
+            <!-- 10 – Firma especialista -->
+            <div class="section-header"><strong>10 – Firma de especialista</strong></div>
+            <div><label>Nombre de Especialista</label><input type="text" id="name_esp" /></div>
+            <button type="button" id="openSignatureEsp">Firma de Especialista</button>
             <canvas id="signaturePreviewEsp" width="300" height="150"></canvas>
+
             <hr />
-            <!-- FIRMA CLIENTE -->
-            <div class="section-header"><strong>
-                    11 – Firma de cliente</strong></div>
-            <div><label>Nombre de Cliente</label><input type="text" id="name_cus" />
-            </div> <button type="button" id="openSignatureCus">Firma de Cliente</button>
-            <canvas id="signaturePreviewCus" width="300" height="150">
-            </canvas>
+            <!-- 11 – Firma cliente -->
+            <div class="section-header"><strong>11 – Firma de cliente</strong></div>
+            <div><label>Nombre de Cliente</label><input type="text" id="name_cus" /></div>
+            <button type="button" id="openSignatureCus">Firma de Cliente</button>
+            <canvas id="signaturePreviewCus" width="300" height="150"></canvas>
+
             <div class="form-actions">
                 <button type="button" id="saveBtn">Guardar registro</button>
                 <button type="button" id="clearBtn" class="secondary">Limpiar formulario</button>
+                <button type="button" id="exportBtn">Exportar a Excel</button>
             </div>
-        </form> <!-- TABLA -->
+        </form>
+
+        <!-- TABLA -->
         <div class="card">
             <div class="section-header">
                 <strong>Registros capturados</strong>
-                <div class="actions"> <button id="exportBtn">Exportar a Excel</button>
-                    <button id="downloadCsvBtn" class="secondary">Exportar CSV</button>
+                <div class="actions">
                     <button id="deleteAllBtn" class="secondary">Borrar registros</button>
                 </div>
             </div>
@@ -160,12 +193,13 @@ HTML:
                 </table>
             </div>
         </div>
-    </div> <!-- MODAL FIRMA -->
+    </div>
+
+    <!-- MODAL FIRMA -->
     <div id="signatureModal">
         <div id="signatureBox">
             <h3>Firma manuscrita</h3>
-            <canvas id="signatureCanvas" width="300" height="150">
-            </canvas>
+            <canvas id="signatureCanvas" width="300" height="150"></canvas>
             <div class="signature-actions">
                 <button id="clearSignature">Limpiar</button>
                 <button id="saveSignature">Guardar firma</button>
@@ -173,8 +207,8 @@ HTML:
             </div>
         </div>
     </div>
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js">
-    </script>
+
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script src="script.js"></script>
 </body>
 
