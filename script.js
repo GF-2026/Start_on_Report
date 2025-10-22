@@ -277,3 +277,12 @@ canvas.addEventListener('touchmove', e => {
     ctx.lineTo(touch.x, touch.y);
     ctx.stroke();
 }, false);
+
+// Sección de semáforos
+function setEstado(num, color) {
+  const colores = ['roja', 'amarilla', 'verde'];
+  colores.forEach(c => {
+    document.getElementById(c + num).classList.remove('activa');
+  });
+  document.getElementById(color + num).classList.add('activa');
+}
