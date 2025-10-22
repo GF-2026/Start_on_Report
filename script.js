@@ -540,3 +540,11 @@ hr {
     margin: 2px;
     padding: 4px 8px;
   }
+// Sección de semáforos
+function setEstado(num, color) {
+  const colores = ['roja', 'amarilla', 'verde'];
+  colores.forEach(c => {
+    document.getElementById(c + num).classList.remove('activa');
+  });
+  document.getElementById(color + num).classList.add('activa');
+}
