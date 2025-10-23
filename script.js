@@ -138,7 +138,6 @@ document.getElementById('clearBtn').addEventListener('click', ()=>{
       document.getElementById(c + num)?.classList.remove('activa')
     );
   });
-});
 
 // ======================
 // RENDER TABLA
