@@ -241,10 +241,12 @@
                 <label><input type="checkbox" id="cold_test">Prueba de enfriamiento (soak 30 min)</label>
                 <div><label>Duración (min):</label><input type="text" id="pulldown"></div>
             </div>
-            <!-- 8 – Salud -->
-    <hr>
+           <!-- 8 – Salud -->
+<hr>
 <div class="section-header"><strong>9 – Indicadores de Salud</strong></div>            
+
 <div class="contenedor">
+
   <!-- Semáforo 1 -->
   <div class="seccion">
     <div class="titulo">Salud del sistema de Refrigeración</div>
@@ -254,9 +256,9 @@
       <div class="luz verde" id="verde1"></div>
     </div>
     <div class="botones">
-      <button onclick="setEstado('1','roja1')">Falla</button>
-      <button onclick="setEstado('1','amarilla1')">Atención</button>
-      <button onclick="setEstado('1','verde1')">OK</button>
+      <button onclick="setEstado('1','roja')">Falla</button>
+      <button onclick="setEstado('1','amarilla')">Atención</button>
+      <button onclick="setEstado('1','verde')">OK</button>
     </div>
   </div>
 
@@ -269,27 +271,29 @@
       <div class="luz verde" id="verde2"></div>
     </div>
     <div class="botones">
-      <button onclick="setEstado('2','roja2')">Falla</button>
-      <button onclick="setEstado('2','amarilla2')">Atención</button>
-      <button onclick="setEstado('2','verde2')">OK</button>
+      <button onclick="setEstado('2','roja')">Falla</button>
+      <button onclick="setEstado('2','amarilla')">Atención</button>
+      <button onclick="setEstado('2','verde')">OK</button>
     </div>
   </div>
 
   <!-- Semáforo 3 -->
   <div class="seccion">
     <div class="titulo">Salud del sistema Eléctrico</div>
-    <div class="semaforo" id="semaforo3">
+    <div class="semaforo" id="sema_elec">
       <div class="luz roja" id="roja3"></div>
       <div class="luz amarilla" id="amarilla3"></div>
       <div class="luz verde" id="verde3"></div>
     </div>
     <div class="botones">
-      <button onclick="setEstado('3','roja3')">Falla</button>
-      <button onclick="setEstado('3','amarilla3')">Atención</button>
-      <button onclick="setEstado('3','verde3')">OK</button>
+      <button onclick="setEstado('3','roja')">Falla</button>
+      <button onclick="setEstado('3','amarilla')">Atención</button>
+      <button onclick="setEstado('3','verde')">OK</button>
     </div>
   </div>
+
 </div>
+
             <!-- 10 – Observaciones -->
             <hr>
             <div class="section-header"><strong>10 – Observaciones</strong></div>
