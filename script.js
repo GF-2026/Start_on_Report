@@ -5,7 +5,7 @@ let records = JSON.parse(localStorage.getItem('records') || '[]');
 let currentSignatureTarget = null; // 'esp' o 'cus'
 const enableDeleteButton = true;   // true = activo, false = desactivado
 const storageKey = 'records';
-
+let estados = { 1: '', 2: '', 3: '' }; // 👈 estados de semáforos
 // ======================
 // AUXILIARES
 // ======================
@@ -66,6 +66,12 @@ document.getElementById('saveBtn').addEventListener('click', ()=>{
         specs_available: chk('specs_available'),
         refrigerant: chk('refrigerant'),
         manuals: chk('manuals'),
+
+
+        estado_ref: estados[1],
+        estado_heat: estados[2],
+        estado_elec: estados[3],
+            
         notes: get('notes'),
         name_esp: get('name_esp'),
         name_cus: get('name_cus'),
@@ -124,6 +130,14 @@ document.getElementById('clearBtn').addEventListener('click', ()=>{
     const cusCtx = document.getElementById('signaturePreviewCus')?.getContext('2d');
     if (espCtx) espCtx.clearRect(0,0,300,150);
     if (cusCtx) cusCtx.clearRect(0,0,300,150);
+});
+  // 🔄 Reset semáforos
+  estados = { 1: '', 2: '', 3: '' };
+  ['1','2','3'].forEach(num => {
+    ['roja','amarilla','verde'].forEach(c => 
+      document.getElementById(c + num)?.classList.remove('activa')
+    );
+  });
 });
 
 // ======================
@@ -281,16 +295,7 @@ canvas.addEventListener('touchmove', e => {
 // Sección de semáforos
 function setEstado(num, color) {
   const colores = ['roja', 'amarilla', 'verde'];
-  colores.forEach(c => {
-    document.getElementById(c + num).classList.remove('activa');
-  });
+  colores.forEach(c => document.getElementById(c + num).classList.remove('activa'));
   document.getElementById(color + num).classList.add('activa');
-}
-// Sección de semáforos
-function setEstado(num, color) {
-  const colores = ['roja', 'amarilla', 'verde'];
-  colores.forEach(c => {
-    document.getElementById(c + num).classList.remove('activa');
-  });
-  document.getElementById(color + num).classList.add('activa');
+  estados[num] = color; // 👈 guardar el color en variable global
 }
