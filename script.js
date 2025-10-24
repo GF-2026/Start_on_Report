@@ -39,7 +39,9 @@ function generateFolio(){
 // ======================
 // GUARDAR REGISTRO (CAMPOS SEPARADOS POR COLUMNA)
 // ======================
-document.getElementById('saveBtn').addEventListener('click', () => {
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('saveBtn').addEventListener('click', () => {
   const record = {
     folio: generateFolio(),
     OT: get('OT'),
@@ -134,6 +136,7 @@ document.getElementById('saveBtn').addEventListener('click', () => {
     localStorage.setItem(storageKey, JSON.stringify(records));
     renderTable();
     alert('✅ Registro guardado correctamente');
+});
 });
 
 // ======================
