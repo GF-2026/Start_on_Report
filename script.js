@@ -380,3 +380,20 @@ function setEstado(num, color) {
   document.getElementById(color + num).classList.add('activa');
   estados[num] = color; // 👈 guardar el color en variable global
 }
+// ======================
+// SEMÁFOROS (3 secciones)
+// ======================
+function setEstado(num, color) {
+  // Guarda el color activo para el semáforo indicado (1, 2 o 3)
+  estados[num] = color;
+
+  // Quita la clase 'activa' de las tres luces de ese semáforo
+  ['roja', 'amarilla', 'verde'].forEach(c => {
+    const el = document.getElementById(c + num);
+    if (el) el.classList.remove('activa');
+  });
+
+  // Activa solo la luz seleccionada
+  const luz = document.getElementById(color + num);
+  if (luz) luz.classList.add('activa');
+}
