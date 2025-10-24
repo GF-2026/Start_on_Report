@@ -407,42 +407,30 @@ hr {
     margin-bottom: 10px;
   }
 
-  .semaforo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70px;
-    background: #333;
-    border-radius: 15px;
-    padding: 10px;
-    margin: 0 auto;
-    box-shadow: 0 0 10px #0006 inset;
-  }
+.semaforo {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px 0;
+}
 
-  .luz {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    margin: 5px 0;
-    background-color: #222;
-    opacity: 0.3;
-    transition: 0.3s;
-  }
+.luz {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #555;
+  border: 2px solid black;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.6);
+  transition: background 0.3s, box-shadow 0.3s;
+}
 
-  .luz.activa {
-    opacity: 1;
-    box-shadow: 0 0 15px 5px currentColor;
-  }
+.luz.roja.activa { background: red; box-shadow: 0 0 10px red; }
+.luz.amarilla.activa { background: yellow; box-shadow: 0 0 10px gold; }
+.luz.verde.activa { background: limegreen; box-shadow: 0 0 10px limegreen; }
 
-  .roja { color: red; background-color: red; }
-  .amarilla { color: yellow; background-color: yellow; }
-  .verde { color: limegreen; background-color: limegreen; }
-
-  .botones {
-    margin-top: 8px;
-  }
-
-  .botones button {
-    margin: 2px;
-    padding: 4px 8px;
-  }
+.botones {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
