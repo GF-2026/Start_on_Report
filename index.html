@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte de Arranque</title>
+    <title>REPORTE DE MANTTO. PREVENTIVO</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 </head>
@@ -14,7 +14,7 @@
         <header>
             <img id="logo" src="LOGO.png" alt="FIXSER">
             <div>
-                <h1>REPORTE DE ARRANQUE</h1>
+                <h1>MANTENIMIENTO PREVENTIVO</h1>
                 <div class="muted">Llena el formulario, firma y presiona "Guardar registro".</div>
             </div>
         </header>
@@ -54,9 +54,7 @@
                 <div><label>Temperatura (°C):</label><input type="number" step="0.1" id="temperature"></div>
                 <div><label>Humedad (%):</label><input type="number" step="0.1" id="humidity"></div>
             </div>
-
-            <!-- 4 – Chequeo inicial -->
-            <hr>
+                        <hr>
             <div class="section-header"><strong>4 – Chequeo inicial</strong></div>
             <div class="grid checkboxes">
                 <label><input type="checkbox" id="marking">Se marcó futuro espacio de equipo</label>
@@ -69,7 +67,6 @@
                 <label><input type="checkbox" id="refrigerant">Tiene carga de refrigerante</label>
                 <label><input type="checkbox" id="manuals">Se tienen manuales y diagramas</label>
             </div>
-
             <!-- 5 – Mediciones -->
             <hr>
             <div class="section-header"><strong>5 – Mediciones</strong></div>
@@ -241,9 +238,9 @@
                 <label><input type="checkbox" id="cold_test">Prueba de enfriamiento (soak 30 min)</label>
                 <div><label>Duración (min):</label><input type="text" id="pulldown"></div>
             </div>
-            <hr>
-            <div class="section-header"><strong>9 – Indicadores de Salud</strong></div>
-          <!-- Semáforo 1 -->
+                        <hr>
+            <div class="section-header"><strong>8 – Indicadores de Salud</strong></div>
+<!-- Semáforo 1 -->
 <div class="seccion">
   <div class="titulo">Salud del sistema de Refrigeración</div>
   <div class="semaforo" id="sema_ref">
@@ -274,8 +271,9 @@
 </div>
 
 <!-- Semáforo 3 -->
+ <hr>
 <div class="seccion">
-  <div class="titulo">Salud del sistema Eléctrico</div>
+<div class="section-header"><strong>9 – Salud del sistema Eléctrico</strong></div>
   <div class="semaforo" id="sema_elec">
     <div class="luz roja" id="roja3"></div>
     <div class="luz amarilla" id="amarilla3"></div>
@@ -288,20 +286,19 @@
   </div>
 </div>
 
-
-            <!-- 10 – Observaciones -->
+            <!-- 9 – Observaciones -->
             <hr>
             <div class="section-header"><strong>10 – Observaciones</strong></div>
             <textarea id="notes"></textarea>
 
-            <!-- 11 – Firma de especialista -->
+            <!-- 10 – Firma de especialista -->
             <hr>
             <div class="section-header"><strong>11 – Firma de especialista</strong></div>
             <div><label>Nombre de Especialista</label><input type="text" id="name_esp"></div>
             <button type="button" id="openSignatureEsp">Firma de Especialista</button>
             <canvas id="signaturePreviewEsp" width="300" height="150"></canvas>
 
-            <!-- 12 – Firma de cliente -->
+            <!-- 11 – Firma de cliente -->
             <hr>
             <div class="section-header"><strong>12 – Firma de cliente</strong></div>
             <div><label>Nombre de Cliente</label><input type="text" id="name_cus"></div>
