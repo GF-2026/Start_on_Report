@@ -376,13 +376,6 @@ canvas.addEventListener('touchmove', e => {
     ctx.stroke();
 }, false);
 
-// Sección de semáforos
-function setEstado(num, color) {
-  const colores = ['roja', 'amarilla', 'verde'];
-  colores.forEach(c => document.getElementById(c + num).classList.remove('activa'));
-  document.getElementById(color + num).classList.add('activa');
-  estados[num] = color; // 👈 guardar el color en variable global
-}
 // ======================
 // SEMÁFOROS (3 secciones)
 // ======================
