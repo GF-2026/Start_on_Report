@@ -41,6 +41,8 @@ function generateFolio(){
 // GUARDAR REGISTRO (CAMPOS SEPARADOS POR COLUMNA)
 // ======================
 document.getElementById('saveBtn').addEventListener('click', () => {
+const record = {
+folio: generateFolio(),
 // ======================
 // GETTERS AUTOMÁTICOS
 // ======================
@@ -48,7 +50,7 @@ document.getElementById('saveBtn').addEventListener('click', () => {
 function get(id) {
   return document.getElementById(id)?.value.trim() || '';
 }
-
+ // 1️⃣ Datos de cliente
 const data = {
   OT: get('OT'),
   datetime: get('datetime'),
@@ -56,12 +58,14 @@ const data = {
   engineer: get('engineer'),
   phone: get('phone'),
   city: get('city'),
+      // 2️⃣ Datos del equipo
   description: get('description'),
   brand: get('brand'),
   model: get('model'),
   serial: get('serial'),
   controlnum: get('controlnum'),
-  status: get('status'),
+  status_test: get('status_test'),
+    // 3️⃣ Condiciones ambientales
   ubication: get('ubication'),
   temperature: get('temperature'),
   humidity: get('humidity'),
@@ -250,7 +254,7 @@ function renderTable(){
         'model', 
         'serial', 
         'controlnum', 
-        'status',
+        'status_test',
         
   'ubication', 
         'temperature', 
