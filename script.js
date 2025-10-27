@@ -11,7 +11,7 @@ let estados = { 1: '', 2: '', 3: '' }; // 👈 estados de semáforos
 // AUXILIARES
 // ======================
 function get(id){ return document.getElementById(id).value.trim(); }
-function chk(id){ return document.getElementById(id).checked ? 'Sí' : 'No'; }
+function chk(id){ return document.getElementById(id).checked ? '1' : '0'; }
 
 /**
  * Función auxiliar segura para obtener el dataURL de un elemento canvas.
