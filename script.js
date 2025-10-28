@@ -82,10 +82,12 @@ manuals: chk('manuals'),
   resistance_hs_1: get('resistance_hs_1'),
   resistance_hs_2: get('resistance_hs_2'),
   resistance_hs_3: get('resistance_hs_3'),
+res_hs_to_ground: get('res_hs_to_ground'),
 
   resistance_ls_1: get('resistance_ls_1'),
   resistance_ls_2: get('resistance_ls_2'),
   resistance_ls_3: get('resistance_ls_3'),
+res_ls_to_ground: get('res_ls_to_ground'),
 
   resistance_circ_1: get('resistance_circ_1'),
   resistance_circ_2: get('resistance_circ_2'),
@@ -98,10 +100,13 @@ manuals: chk('manuals'),
   resistance_hum_1: get('resistance_hum_1'),
   resistance_hum_2: get('resistance_hum_2'),
   resistance_hum_3: get('resistance_hum_3'),
+    res_hum_to_ground: get('res_hum_to_ground'),
 
   voltaje_hs_1: get('voltaje_hs_1'),
   voltaje_hs_2: get('voltaje_hs_2'),
   voltaje_hs_3: get('voltaje_hs_3'),
+    voltage_fase_to_neutral: get('voltage_fase_to_neutral'),
+    
 
   voltaje_ls_1: get('voltaje_ls_1'),
   voltaje_ls_2: get('voltaje_ls_2'),
