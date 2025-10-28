@@ -108,7 +108,7 @@ res_ls_to_ground: get('res_ls_to_ground'),
   voltaje_hs_1: get('voltaje_hs_1'),
   voltaje_hs_2: get('voltaje_hs_2'),
   voltaje_hs_3: get('voltaje_hs_3'),
-    voltage_fase_to_neutral: get('voltage_fase_to_neutral'),
+    volt_phase_to_neutral: get('volt_phase_to_neutral'),
     
 
   voltaje_ls_1: get('voltaje_ls_1'),
@@ -142,6 +142,7 @@ res_ls_to_ground: get('res_ls_to_ground'),
 
   // 5️⃣ Chequeo eléctrico
   main_switch: chk('main_switch'),
+  highvolt_cables_ok: chk('highvolt_cables_ok'),
   switch_covers: chk('switch_covers'),
   tighting: chk('tighting'),
   headfan: chk('headfan'),
@@ -250,7 +251,7 @@ function renderTable(){
 
   'voltaje_hs_1', 'voltaje_hs_2', 'voltaje_hs_3',
   'voltaje_ls_1', 'voltaje_ls_2', 'voltaje_ls_3',
-  'to_ground',
+  'voltage_fase_to_neutral',
 
   'current_hs_1', 'current_hs_2', 'current_hs_3',
   'current_ls_1', 'current_ls_2', 'current_ls_3',
@@ -260,7 +261,7 @@ function renderTable(){
 
   'pressures_hs_1', 'pressures_hs_2', 'pressures_ls_1', 'pressures_ls_2',
 
-  'main_switch', 'switch_covers', 'tighting', 'headfan', 'balance',
+  'main_switch', 'highvolt_cables_ok', 'switch_covers', 'tighting', 'headfan', 'balance',
   'fuses_ok', 'faseado', 'crankcase', 'grounded',
 
   'fans_ok', 'coils_ok', 'armafles_ok', 'inyection_ok', 'oil_ok',
