@@ -67,6 +67,8 @@
                 <label><input type="checkbox" id="specs_available">Hay especificaciones disponibles</label>
                 <label><input type="checkbox" id="refrigerant">Tiene carga de refrigerante</label>
                 <label><input type="checkbox" id="manuals">Se tienen manuales y diagramas</label>
+                <label><input type="checkbox" id="overloads_config">Configuración de overloads OK</label>
+                <label><input type="checkbox" id="highvolt_cables_ok">Cables de alto voltaje OK</label>
                 <input type="text" id="voltage_plate">Voltaje de placa:</input>
             </div>
             <!-- 5 – Mediciones -->
@@ -161,6 +163,13 @@
                         <input type="number" id="current_circ_2">
                         <input type="number" id="current_circ_3">
                     </div>
+                    
+                    <div>
+                        <label>Amperajes circuladores (A):</label><br>
+                        <input type="number" id="current_cond_fan1">
+                        <input type="number" id="current_cond_fan2">
+                        <input type="number" id="current_cond_fan3">
+                    </div>
 
                     <div>
                         <label>Amperajes heater (A):</label><br>
@@ -168,6 +177,14 @@
                         <input type="number" id="current_heat_2">
                         <input type="number" id="current_heat_3">
                     </div>
+
+                    <div>
+                        <label>Amperajes heater (A):</label><br>
+                        <input type="number" id="current_headfan_r">
+                        <input type="number" id="current_headfan_s">
+                        <input type="number" id="current_headfan_t">
+                    </div>
+                    
 
                     <div>
                         <label>Amperajes humidificador (A):</label><br>
@@ -178,15 +195,15 @@
 
                     <div>
                         <label>Presiones compresor HS:</label><br>
-                        <input type="number" id="pressures_hs_1">
-                        <input type="number" id="pressures_hs_2">
+                        <input type="number" id="low_pressures_hs_1">
+                        <input type="number" id="disch_pressures_hs_1">
                         <label>Psi</label><br>
                     </div>
 
                     <div>
                         <label>Presiones compresor LS:</label><br>
-                        <input type="number" id="pressures_ls_1">
-                        <input type="number" id="pressures_ls_2">
+                        <input type="number" id="low_pressures_ls_1">
+                        <input type="number" id="disch_pressures_ls_1">
                         <label>Psi</label><br>
                     </div>
                 </div>
@@ -224,7 +241,25 @@
                 <label><input type="checkbox" id="rotalocks">Capuchones de rotalocks</label>
                 <label><input type="checkbox" id="capillaries">Capilares OK</label>
                 <label><input type="checkbox" id="frosty">Escarche de succión</label>
+
+                <label><input type="checkbox" id="channels_ok">Canales OK</label>
+                <label><input type="checkbox" id="overtem_cool_ok">Over temp y overcool Ok</label>
+                <label><input type="checkbox" id="calibrated_valide">calibración OK</label>
+                <label><input type="checkbox" id="sensors_ok">Sensores OK</label>                
+
+                <label><input type="checkbox" id="static_press_ok">static_press_ok OK</label>
+                <label><input type="checkbox" id="temp_water_in_ok">temp_water_in_ok</label>
+                <label><input type="checkbox" id="calibrated_valide">temp_water_out_ok</label>
+                <label><input type="checkbox" id="sensors_ok">press_watter_in_ok</label>   
+                <label><input type="checkbox" id="press_watter_out_ok">press_watter_out_ok</label>
+            
+            <label><input type="checkbox" id="temp_disch_ok">temp_disch_ok</label>
+                <label><input type="checkbox" id="bypass_cal_ok">bypass_cal_ok</label>label>
             </div>
+            
+            
+            </div>
+            
 
             <!-- 8 – Pruebas -->
             <hr>
