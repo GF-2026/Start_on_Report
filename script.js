@@ -51,45 +51,36 @@ const record = {
   engineer: get('engineer'),
   phone: get('phone'),
   city: get('city'),
-
-  // 2️⃣ Datos del equipo
   description: get('description'),
   brand: get('brand'),
   model: get('model'),
   serial: get('serial'),
   controlnum: get('controlnum'),
   status: get('status_test'),
-
-  // 3️⃣ Condiciones ambientales
   ubication: get('ubication'),
   temperature: get('temperature'),
   humidity: get('humidity'),
- // 4 Condiciones ambientales
-  marking: chk('marking'),
-voltage_plate: chk('voltage_plate'),
-shock_free: chk('shock_free'),
-pallets: chk('pallets'),
-unpack: chk('unpack'),
-supplies_installed: chk('supplies_installed'),
-specs_available: chk('specs_available'),
-refrigerant: chk('refrigerant'),
-manuals: chk('manuals'),
-
-  // 4️⃣ Mediciones
+  specs_available: get('specs_available'),
+  manuals: get('manuals'),
+  shock_free: get('shock_free'),
+  supplies_installed: get('supplies_installed'),
+  correspon_voltage: get('correspon_voltage'),
+  refrigerant: get('refrigerant'),
   static_ls: get('static_ls'),
   static_hs: get('static_hs'),
+  marking: chk('marking'),
+  pallets: chk('pallets'),
+  unpack: chk('unpack'),
 
   resistance_hs_1: get('resistance_hs_1'),
   resistance_hs_2: get('resistance_hs_2'),
   resistance_hs_3: get('resistance_hs_3'),
+  res_hs_to_ground: get('res_hs_to_ground'),
 
   resistance_ls_1: get('resistance_ls_1'),
   resistance_ls_2: get('resistance_ls_2'),
   resistance_ls_3: get('resistance_ls_3'),
-
-  resistance_circ_1: get('resistance_circ_1'),
-  resistance_circ_2: get('resistance_circ_2'),
-  resistance_circ_3: get('resistance_circ_3'),
+  res_ls_to_ground: get('res_ls_to_ground'),
 
   resistance_heat_1: get('resistance_heat_1'),
   resistance_heat_2: get('resistance_heat_2'),
@@ -98,6 +89,23 @@ manuals: chk('manuals'),
   resistance_hum_1: get('resistance_hum_1'),
   resistance_hum_2: get('resistance_hum_2'),
   resistance_hum_3: get('resistance_hum_3'),
+  res_hum_to_ground: get('res_hum_to_ground'),
+
+  resistance_circ_1: get('resistance_circ_1'),
+  resistance_circ_2: get('resistance_circ_2'),
+  resistance_circ_3: get('resistance_circ_3'),
+
+  main_switch: chk('main_switch'),
+  highvolt_cables_ok: chk('highvolt_cables_ok'),
+  switch_covers: chk('switch_covers'),
+  fuses_ok: chk('fuses_ok'),
+  tighting: chk('tighting'),
+  faseado: chk('faseado'),
+  headfan: chk('headfan'),
+  crankcase: get('crankcase'),
+  balance: chk('balance'),
+  grounded: chk('grounded'),
+  control_voltage: chk('control_voltage'),
 
   voltaje_hs_1: get('voltaje_hs_1'),
   voltaje_hs_2: get('voltaje_hs_2'),
@@ -107,7 +115,8 @@ manuals: chk('manuals'),
   voltaje_ls_2: get('voltaje_ls_2'),
   voltaje_ls_3: get('voltaje_ls_3'),
 
-  to_ground: get('to_ground'),
+  voltage_fase_to_neutral: get('voltage_fase_to_neutral'),
+  plate_voltage: get('plate_voltage'),
 
   current_hs_1: get('current_hs_1'),
   current_hs_2: get('current_hs_2'),
@@ -121,6 +130,16 @@ manuals: chk('manuals'),
   current_circ_2: get('current_circ_2'),
   current_circ_3: get('current_circ_3'),
 
+  overloads_config: chk('overloads_config'),
+
+  current_cond_fan1: get('current_cond_fan1'),
+  current_cond_fan2: get('current_cond_fan2'),
+  current_cond_fan3: get('current_cond_fan3'),
+
+  current_headfan_r: get('current_headfan_r'),
+  current_headfan_s: get('current_headfan_s'),
+  current_headfan_t: get('current_headfan_t'),
+
   current_heat_1: get('current_heat_1'),
   current_heat_2: get('current_heat_2'),
   current_heat_3: get('current_heat_3'),
@@ -129,62 +148,57 @@ manuals: chk('manuals'),
   current_hum_2: get('current_hum_2'),
   current_hum_3: get('current_hum_3'),
 
-  pressures_hs_1: get('pressures_hs_1'),
-  pressures_hs_2: get('pressures_hs_2'),
-  pressures_ls_1: get('pressures_ls_1'),
-  pressures_ls_2: get('pressures_ls_2'),
+  low_pressures_hs_1: get('low_pressures_hs_1'),
+  disch_pressures_hs_1: get('disch_pressures_hs_1'),
+  low_pressures_ls_1: get('low_pressures_ls_1'),
+  disch_pressures_ls_1: get('disch_pressures_ls_1'),
 
-  // 5️⃣ Chequeo eléctrico
-  main_switch: chk('main_switch'),
-  switch_covers: chk('switch_covers'),
-  tighting: chk('tighting'),
-  headfan: chk('headfan'),
-  balance: chk('balance'),
-  fuses_ok: chk('fuses_ok'),
-  faseado: chk('faseado'),
-  crankcase: chk('crankcase'),
-  grounded: chk('grounded'),
+  channels_ok: chk('channels_ok'),
+  overtem_cool_ok: chk('overtem_cool_ok'),
+  calibrated_valide: chk('calibrated_valide'),
+  sensors_ok: chk('sensors_ok'),
+  static_press_ok: chk('static_press_ok'),
+  temp_water_in_ok: chk('temp_water_in_ok'),
+  temp_water_out_ok: chk('temp_water_out_ok'),
+  press_watter_in_ok: chk('press_watter_in_ok'),
+  press_watter_out_ok: chk('press_watter_out_ok'),
 
-  // 6️⃣ Chequeo en refrigeración
   fans_ok: chk('fans_ok'),
   coils_ok: chk('coils_ok'),
   armafles_ok: chk('armafles_ok'),
   inyection_ok: chk('inyection_ok'),
+  temp_disch_ok: chk('temp_disch_ok'),
   oil_ok: chk('oil_ok'),
+  bypass_cal_ok: chk('bypass_cal_ok'),
   sights_ok: chk('sights_ok'),
-  acid_ok: chk('acid_ok'),
-  noleaks: chk('noleaks'),
+  frosty: chk('frosty'),
   hilow: chk('hilow'),
-  lowoil: chk('lowoil'),
+  low_press_oil: chk('low_press_oil'),
   rotalocks: chk('rotalocks'),
   capillaries: chk('capillaries'),
-  frosty: chk('frosty'),
+  acid_ok: chk('acid_ok'),
+  noleaks: chk('noleaks'),
 
-  // 7️⃣ Pruebas
   hum_from: get('hum_from'),
   hum_target: get('hum_target'),
-  heat_test: chk('heat_test'),
+  heat_test: get('heat_test'),
   hum_low: get('hum_low'),
   hum_hig: get('hum_hig'),
-  hum_test: chk('hum_test'),
-  temp_hig: get('temp_hig'),
+  hum_test: get('hum_test'),
+  temp_high: get('temp_high'),
   temp_low: get('temp_low'),
-  cold_test: chk('cold_test'),
+  cold_test: get('cold_test'),
   pulldown: get('pulldown'),
 
-  // 8️⃣ Semáforos
-  estado_ref: estados[1],
-  estado_heat: estados[2],
-  estado_elec: estados[3],
+  estado_ref: get('estado_ref'),
+  estado_heat: get('estado_heat'),
+  estado_elec: get('estado_elec'),
 
-  // 9️⃣ Observaciones
   notes: get('notes'),
-
-  // 🔟 Firmas
   name_esp: get('name_esp'),
   name_cus: get('name_cus'),
-  signatureEsp: getSignatureData('signaturePreviewEsp'),
-  signatureCus: getSignatureData('signaturePreviewCus')
+  signatureEsp: get('signatureEsp'),
+  signatureCus: get('signatureCus')
 };
 
   records.push(record);
@@ -220,49 +234,67 @@ function renderTable(){
     const body = document.getElementById('tableBody');
     body.innerHTML = '';
     const columns = [
-  'OT', 'datetime', 'company', 'engineer', 'phone', 'city',
-  'description', 'brand', 'model', 'serial', 'controlnum', 'status',
-  'ubication', 'temperature', 'humidity',
-
-'marking',
-  'voltage_plate',
-  'shock_free',
-  'pallets',
-  'unpack',
-  'supplies_installed',
-  'specs_available',
-  'refrigerant',
+  'OT', 
+'datetime', 
+        'company', 
+        'engineer', 
+        'phone', 
+        'city',
+  'description', 
+        'brand', 
+        'model', 
+        'serial', 
+        'controlnum', 
+        'status',
+        
+  'ubication', 
+        'temperature', 
+        'humidity',
+        
+    'specs_available',      
   'manuals',
-
-  'static_ls', 'static_hs',
-
-  'resistance_hs_1', 'resistance_hs_2', 'resistance_hs_3',
-  'resistance_ls_1', 'resistance_ls_2', 'resistance_ls_3',
-  'resistance_circ_1', 'resistance_circ_2', 'resistance_circ_3',
+  'shock_free',
+  'supplies_installed',        
+'correspon_voltage',/* Crear lo neecsario*/        
+  'refrigerant',
+    'static_ls',       
+        'static_hs',        
+'marking',
+  'pallets', 
+ 'unpack', 
+        
+  'resistance_hs_1', 'resistance_hs_2', 'resistance_hs_3', 'res_hs_to_ground',
+  'resistance_ls_1', 'resistance_ls_2', 'resistance_ls_3', 'res_ls_to_ground',
   'resistance_heat_1', 'resistance_heat_2', 'resistance_heat_3',
-  'resistance_hum_1', 'resistance_hum_2', 'resistance_hum_3',
+    'resistance_hum_1', 'resistance_hum_2', 'resistance_hum_3', 'res_hum_to_ground',
+  'resistance_circ_1', 'resistance_circ_2', 'resistance_circ_3', 
+
+    'main_switch', 'highvolt_cables_ok','switch_covers','fuses_ok','tighting', 'faseado','headfan',
+   'crankcase', 'balance','grounded', 'control_voltage',
 
   'voltaje_hs_1', 'voltaje_hs_2', 'voltaje_hs_3',
   'voltaje_ls_1', 'voltaje_ls_2', 'voltaje_ls_3',
-  'to_ground',
+  'voltage_fase_to_neutral', 'plate_voltage',
 
   'current_hs_1', 'current_hs_2', 'current_hs_3',
   'current_ls_1', 'current_ls_2', 'current_ls_3',
-  'current_circ_1', 'current_circ_2', 'current_circ_3',
+  'current_circ_1', 'current_circ_2', 'current_circ_3', 'overloads_config',
+'current_cond_fan1', 'current_cond_fan2', 'current_cond_fan3',
+   'current_headfan_r', 'current_headfan_s', 'current_headfan_t',     
   'current_heat_1', 'current_heat_2', 'current_heat_3',
   'current_hum_1', 'current_hum_2', 'current_hum_3',
 
-  'pressures_hs_1', 'pressures_hs_2', 'pressures_ls_1', 'pressures_ls_2',
+  'low_pressures_hs_1', 'disch_pressures_hs_1', 'low_pressures_ls_1', 'disch_pressures_ls_1',
 
-  'main_switch', 'switch_covers', 'tighting', 'headfan', 'balance',
-  'fuses_ok', 'faseado', 'crankcase', 'grounded',
-
-  'fans_ok', 'coils_ok', 'armafles_ok', 'inyection_ok', 'oil_ok',
-  'sights_ok', 'acid_ok', 'noleaks', 'hilow', 'lowoil', 'rotalocks',
-  'capillaries', 'frosty',
+'channels_ok', 'overtem_cool_ok', 'calibrated_valide', 'sensors_ok', 'static_press_ok', 'temp_water_in_ok', '', '',
+        'temp_water_out_ok', 'press_watter_in_ok','press_watter_out_ok',
+        
+  'fans_ok', 'coils_ok', 'armafles_ok', 'inyection_ok', 'temp_disch_ok', 'oil_ok',
+  'bypass_cal_ok', 'sights_ok','frosty', 'hilow', 'low_press_oil', 'rotalocks','capillaries','acid_ok', 'noleaks',
+  
 
   'hum_from', 'hum_target', 'heat_test', 'hum_low', 'hum_hig',
-  'hum_test', 'temp_hig', 'temp_low', 'cold_test', 'pulldown',
+  'hum_test', 'temp_high', 'temp_low', 'cold_test', 'pulldown',
 
   'estado_ref', 'estado_heat', 'estado_elec',
   'notes', 'name_esp', 'name_cus', 'signatureEsp', 'signatureCus'
