@@ -197,8 +197,8 @@ const record = {
   notes: get('notes'),
   name_esp: get('name_esp'),
   name_cus: get('name_cus'),
-  signatureEsp: get('signatureEsp'),
-  signatureCus: get('signatureCus')
+signatureEsp: getSignatureData('signaturePreviewEsp'),
+signatureCus: getSignatureData('signaturePreviewCus')
 };
 
   records.push(record);
