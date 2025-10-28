@@ -56,7 +56,7 @@ const record = {
   model: get('model'),
   serial: get('serial'),
   controlnum: get('controlnum'),
-  status: get('status_test'),
+  status_test: get('status_test'),
   ubication: get('ubication'),
   temperature: get('temperature'),
   humidity: get('humidity'),
