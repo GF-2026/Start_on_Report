@@ -161,7 +161,7 @@ res_ls_to_ground: get('res_ls_to_ground'),
   acid_ok: chk('acid_ok'),
   noleaks: chk('noleaks'),
   hilow: chk('hilow'),
-  lowoil: chk('lowoil'),
+  level_oil: chk('level_oil'),
   rotalocks: chk('rotalocks'),
   capillaries: chk('capillaries'),
   frosty: chk('frosty'),
@@ -264,7 +264,7 @@ function renderTable(){
   'fuses_ok', 'faseado', 'crankcase', 'grounded',
 
   'fans_ok', 'coils_ok', 'armafles_ok', 'inyection_ok', 'oil_ok',
-  'sights_ok', 'acid_ok', 'noleaks', 'hilow', 'lowoil', 'rotalocks',
+  'sights_ok', 'acid_ok', 'noleaks', 'hilow', 'level_oil', 'rotalocks',
   'capillaries', 'frosty',
 
   'hum_from', 'hum_target', 'heat_test', 'hum_low', 'hum_high',
