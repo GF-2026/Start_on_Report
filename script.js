@@ -170,9 +170,9 @@ res_ls_to_ground: get('res_ls_to_ground'),
   hum_target: get('hum_target'),
   heat_test: chk('heat_test'),
   hum_low: get('hum_low'),
-  hum_hig: get('hum_hig'),
+  hum_high: get('hum_high'),
   hum_test: chk('hum_test'),
-  temp_hig: get('temp_hig'),
+  temp_high: get('temp_high'),
   temp_low: get('temp_low'),
   cold_test: chk('cold_test'),
   pulldown: get('pulldown'),
@@ -266,8 +266,8 @@ function renderTable(){
   'sights_ok', 'acid_ok', 'noleaks', 'hilow', 'lowoil', 'rotalocks',
   'capillaries', 'frosty',
 
-  'hum_from', 'hum_target', 'heat_test', 'hum_low', 'hum_hig',
-  'hum_test', 'temp_hig', 'temp_low', 'cold_test', 'pulldown',
+  'hum_from', 'hum_target', 'heat_test', 'hum_low', 'hum_high',
+  'hum_test', 'temp_high', 'temp_low', 'cold_test', 'pulldown',
 
   'estado_ref', 'estado_heat', 'estado_elec',
   'notes', 'name_esp', 'name_cus', 'signatureEsp', 'signatureCus'
