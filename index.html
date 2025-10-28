@@ -42,7 +42,7 @@
                 <div><label>Modelo:</label><input type="text" id="model"></div>
                 <div><label>Serie:</label><input type="text" id="serial"></div>
                 <div><label>Número de control:</label><input type="text" id="controlnum"></div>
-                <div><label>Estado Operativo:</label><input type="text" id="status_test"></div>
+                <div><label>Hay prueba corriendo:</label><input type="text" id="status_test"></div>
                 
             </div>
 
@@ -68,7 +68,6 @@
                 <label><input type="checkbox" id="refrigerant">Tiene carga de refrigerante</label>
                 <label><input type="checkbox" id="manuals">Se tienen manuales y diagramas</label>
                 <label><input type="checkbox" id="overloads_config">Configuración de overloads OK</label>
-                <label><input type="checkbox" id="highvolt_cables_ok">Cables de alto voltaje OK</label>
  
             </div>
             <!-- 5 – Mediciones -->
@@ -214,6 +213,7 @@
             <div class="section-header"><strong>6 – Chequeo eléctrico</strong></div>
             <div class="grid checkboxes">
                 <label><input type="checkbox" id="main_switch">Switch principal, hardware y cables correctos</label>
+                <label><input type="checkbox" id="highvolt_cables_ok">Cables de alto voltaje OK</label>
                 <label><input type="checkbox" id="switch_covers">Cubiertas de presostatos</label>
                 <label><input type="checkbox" id="tighting">Conexiones reapretadas</label>
                 <label><input type="checkbox" id="headfan">Revisión de headfans</label>
@@ -237,11 +237,10 @@
                 <label><input type="checkbox" id="acid_ok">Prueba de acidez</label>
                 <label><input type="checkbox" id="noleaks">Sin fugas</label>
                 <label><input type="checkbox" id="hilow">Chequeo Hi/Low</label>
-                <label><input type="checkbox" id="lowoil">Protección de aceite OK</label>
+                <label><input type="checkbox" id="level_oil">Protección de aceite OK</label>
                 <label><input type="checkbox" id="rotalocks">Capuchones de rotalocks</label>
                 <label><input type="checkbox" id="capillaries">Capilares OK</label>
                 <label><input type="checkbox" id="frosty">Escarche de succión</label>
-
                 <label><input type="checkbox" id="channels_ok">Canales OK</label>
                 <label><input type="checkbox" id="overtem_cool_ok">Over temp y overcool Ok</label>
                 <label><input type="checkbox" id="calibrated_valide">calibración OK</label>
