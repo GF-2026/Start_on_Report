@@ -41,6 +41,16 @@ function generateFolio(){
 // GUARDAR REGISTRO (CAMPOS SEPARADOS POR COLUMNA)
 // ======================
 document.getElementById('saveBtn').addEventListener('click', () => {
+    // --- DEPURAR CAMPOS FALTANTES ---
+const missing = [];
+columns.forEach(id => {
+  if (!document.getElementById(id)) missing.push(id);
+});
+if (missing.length > 0) {
+  console.warn("⚠️ Faltan estos IDs en el HTML:", missing);
+  alert("⚠️ Hay campos que no existen en el formulario. Revisa la consola (F12)");
+  return;
+}
 const record = {
   folio: generateFolio(),
 
