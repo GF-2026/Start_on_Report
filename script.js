@@ -69,7 +69,7 @@ const record = {
   humidity: get('humidity'),
  // 4 Condiciones ambientales
   marking: chk('marking'),
-voltage_plate_ok: chk('voltage_plate_ok'),
+voltage_plate_ok: get('voltage_plate_ok'),
 shock_free: chk('shock_free'),
 pallets: chk('pallets'),
 unpack: chk('unpack'),
