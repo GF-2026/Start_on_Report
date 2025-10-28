@@ -14,7 +14,7 @@ function get(id) {
   const el = document.getElementById(id);
   return el ? (el.value?.trim() || '') : '';
 }
-function chk(id){ return document.getElementById(id).checked ? '1' : '0'; }
+function chk(id){ return document.getElementById(id).checked ? 1 : 0; }
 
 /**
  * Función auxiliar segura para obtener el dataURL de un elemento canvas.
@@ -61,7 +61,7 @@ const record = {
   model: get('model'),
   serial: get('serial'),
   controlnum: get('controlnum'),
-  status: get('status_test'),
+  status_test: get('status_test'),
 
   // 3️⃣ Condiciones ambientales
   ubication: get('ubication'),
@@ -115,8 +115,6 @@ res_ls_to_ground: get('res_ls_to_ground'),
   voltaje_ls_2: get('voltaje_ls_2'),
   voltaje_ls_3: get('voltaje_ls_3'),
 
-  to_ground: get('to_ground'),
-
   current_hs_1: get('current_hs_1'),
   current_hs_2: get('current_hs_2'),
   current_hs_3: get('current_hs_3'),
@@ -138,9 +136,9 @@ res_ls_to_ground: get('res_ls_to_ground'),
   current_hum_3: get('current_hum_3'),
 
   pressures_hs_1: get('pressures_hs_1'),
-  pressures_hs_2: get('pressures_hs_2'),
+  pressures_hs_1: get('pressures_hs_1'),
   pressures_ls_1: get('pressures_ls_1'),
-  pressures_ls_2: get('pressures_ls_2'),
+  pressures_ls_1: get('pressures_ls_1'),
 
   // 5️⃣ Chequeo eléctrico
   main_switch: chk('main_switch'),
