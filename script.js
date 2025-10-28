@@ -10,7 +10,10 @@ let estados = { 1: '', 2: '', 3: '' }; // 👈 estados de semáforos
 // ======================
 // AUXILIARES
 // ======================
-function get(id){ return document.getElementById(id).value.trim(); }
+function get(id) {
+  const el = document.getElementById(id);
+  return el ? (el.value?.trim() || '') : '';
+}
 function chk(id){ return document.getElementById(id).checked ? '1' : '0'; }
 
 /**
