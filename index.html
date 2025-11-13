@@ -61,6 +61,10 @@
             <div><label>L1: (V)</label><input type="number"   id="voltage_L1"></div>
             <div><label>L2: (V)</label><input type="number"   id="voltage_L2"></div>
             <div><label>L3: (V)</label><input type="number"   id="voltage_L3"></div>
+            <div>
+                <label>Voltaje a neutro (V):</label><br>
+                <input type="number" id="volt_phase_to_neutral">
+            </div>
             <div class="grid checkboxes">
                 <label><input type="checkbox" id="marking_ok">Se marcó futuro espacio de equipo</label>
                 <label><input type="checkbox" id="voltage_plate_ok">El voltaje coincide con la placa</label>
@@ -148,16 +152,6 @@
                         <input type="number" id="resistance_hums_to_ground_ok">
                     </div>
 
-                    <div>
-                        <label>Voltaje general (V):</label><br>
-                        <input type="number" id="voltaje_L1">
-                        <input type="number" id="voltaje_L2">
-                        <input type="number" id="voltaje_L3">
-                    </div>
-                    <div>
-                        <label>Voltaje a neutro (V):</label><br>
-                        <input type="number" id="volt_phase_to_neutral">
-                    </div>
                     <div>
                         <label>Voltaje compresor HS (V):</label><br>
                         <input type="number" id="voltaje_hs_1">
