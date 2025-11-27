@@ -62,7 +62,7 @@
                 <div><label>L1*<input type="number"   id="voltage_L1" required></label></div>
                 <div><label>L2*<input type="number"   id="voltage_L2" required></label></div>
                  <div><label>L3*<input type="number"  id="voltage_L3" required></label></div>
-                 <label>Voltaje a neutro (V):</label>
+                 <div><label>Voltaje a neutro (V):</label></div>
                 <div><label><input type="number" id="volt_phase_to_neutral"></label></div>
             </div>
             <div class="grid checkboxes">
@@ -270,8 +270,8 @@
                 <label><input type="checkbox" id="sensors_ok">Sensores OK</label>
                 <label><input type="checkbox" id="static_press_ok">Presión estática OK</label>
                 <label><input type="checkbox" id="temp_water_in_ok">Temp. entrada a Cond. OK</label>
-                <label><input type="checkbox" id="calibrated_valide_ok">Temp. salida a Cond. OK</label>
-                <label><input type="checkbox" id="sensors_ok">Press. entrada a Cond. OK</label>   
+                <label><input type="checkbox" id="temp_out_cond_ok">Temp. salida a Cond. OK</label>
+                <label><input type="checkbox" id="sensors_press_in_ok">Press. entrada a Cond. OK</label>   
                 <label><input type="checkbox" id="press_watter_out_ok">Press. salida a Cond. OK</label>
             
             <label><input type="checkbox" id="temp_disch_ok">Temp. Descarga OK</label>
@@ -287,7 +287,7 @@
             <div class="section-header"><strong>8 – Pruebas</strong></div>
             <div class="grid">
                 <div><label>Temp. ambiente (°C):</label><input type="text" id="hum_from"></div>
-                <div><label>Punto máximo -10 (°C):</label><input type="text" id="hum_target"></div>
+                <div><label>Punto máximo -10 (°C):</label><input type="text" id="heat_target"></div>
                 <label><input type="checkbox" id="heat_test_ok">Prueba de calentamiento (soak 30 min)</label>
                 <div><label>Punto máximo -10 (°C):</label><input type="text" id="temp_hig"></div>
                 <div><label>Punto minimo +10 (°C):</label><input type="text" id="temp_low"></div>
