@@ -231,12 +231,7 @@ voltaje_hs_2: get('voltaje_hs_2'),
 voltaje_hs_3: get('voltaje_hs_3'),
 voltaje_ls_1: get('voltaje_ls_1'),
 voltaje_ls_2: get('voltaje_ls_2'),
-voltaje_ls_3: get('voltaje_ls_3'),
-  estado_ref: estados[1],
-  estado_heat: estados[2],
-  estado_elec: estados[3],
-  resultado_servicio:estado('proximo_servicio'),
-
+voltaje_ls_3: get('voltaje_ls_3')
 };
 
   records.push(record);
@@ -281,6 +276,7 @@ function renderTable(){
 'bypass_calibration_ls_ok',
 'capillaries_ok',
 'city',
+'controller_calibrated_ok',
 'coils_ok',
 'cold_test_ok',
 'company',
@@ -347,7 +343,6 @@ function renderTable(){
 'name_esp',
 'no_strange_noise_ok',
 'noleaks_ok',
-'notes',
 'notes_Esp',
 'notes_Cus',
 'OT',
@@ -403,6 +398,7 @@ function renderTable(){
 'specs_available_ok',
 'static_hs',
 'static_ls',
+'static_press_ok',
 'status_test',
 'supplies_installed_ok',
 'switch_covers_ok',
