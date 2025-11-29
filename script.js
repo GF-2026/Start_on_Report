@@ -4,7 +4,7 @@
 // ======================
 let records = JSON.parse(localStorage.getItem('records') || '[]');
 let currentSignatureTarget = null; // 'esp' o 'cus'
-const enableDeleteButton = false;   // true = activo, false = desactivado
+const enableDeleteButton = true;   // true = activo, false = desactivado
 const storageKey = 'records';
 let estados = { 1: '', 2: '', 3: '' }; // 👈 estados de semáforos
 // ======================
@@ -582,7 +582,7 @@ document.getElementById('sendEmailBtn').addEventListener('click', () => {
   // 💡 Usamos HTML con <br> para asegurar formato visible en BlueMail
   const htmlBody =
 `Hola,<br><br>
-Tienes un nuevo reporte preventivo:<br><br>
+Tienes un nuevo reporte de arranque:<br><br>
 <strong>Folio:</strong> ${folio}<br>
 <strong>Empresa:</strong> ${company}<br>
 <strong>Modelo:</strong> ${model}<br>
@@ -598,4 +598,3 @@ Gracias.`;
   const mailtoLink = `mailto:${to}?subject=${subject}&body=${body}`;
   window.location.href = mailtoLink;
 });
-
