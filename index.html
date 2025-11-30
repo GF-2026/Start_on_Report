@@ -51,26 +51,26 @@
             <div class="section-header"><strong>3 – Condiciones ambientales</strong></div>
             <div class="grid">
                  <div><label>Ubicación en planta:*</label><input type="text" id="ubication" required></div>
-                <div><label>Temperatura (°C):</label><input type="number"   id="temperature"></div>
-                <div><label>Humedad (%):</label><input type="number"   id="humidity"></div>
+                <div><label>Temperatura (°C):</label><input type="text"   id="temperature"></div>
+                <div><label>Humedad (%):</label><input type="text"   id="humidity"></div>
 
             </div>
                         <hr>
             <div class="section-header"><strong>4 – Chequeo inicial</strong></div>
             <div>Voltaje General: (V)</div>
             <div class="grid">          
-                <div><label>L1*<input type="number"   id="voltage_L1" required></label></div>
-                <div><label>L2*<input type="number"   id="voltage_L2" required></label></div>
-                 <div><label>L3*<input type="number"  id="voltage_L3" required></label></div>
+                <div><label>L1*<input type="text"   id="voltage_L1" required></label></div>
+                <div><label>L2*<input type="text"   id="voltage_L2" required></label></div>
+                 <div><label>L3*<input type="text"  id="voltage_L3" required></label></div>
                  <div><label>Voltaje a neutro (V):</label></div>
-                <div><label><input type="number" id="volt_phase_to_neutral"></label></div>
+                <div><label><input type="text" id="voltage_fase_to_neutral"></label></div>
             </div>
             <div class="grid checkboxes">
                 <label><input type="checkbox" id="marking_ok">Se marcó futuro espacio de equipo</label>
                 <label><input type="checkbox" id="voltage_plate_ok">El voltaje coincide con la placa</label>
                 <label><input type="checkbox" id="shock_free_ok">Está libre de golpes</label>
                 <label><input type="checkbox" id="pallets_ok">Se deja espacio para tarimas</label>
-                <label><input type="checkbox" id="unpack_ok">Se deja espacio para desempacar</label>
+                <label><input type="checkbox" id="have_space_unpack_ok">Se deja espacio para desempacar</label>
                 <label><input type="checkbox" id="supplies_installed_ok">Suministros instalados</label>
                 <label><input type="checkbox" id="specs_available_ok">Hay especificaciones disponibles</label>
                 <label><input type="checkbox" id="has_refrigerant_ok">Tiene carga de refrigerante</label>
@@ -84,150 +84,150 @@
                 <div class="mediciones">
                     <div>
                         <label>Presión Estática LS:*</label><br>
-                        <input type="number"  id="static_ls" required>
+                        <input type="text"  id="static_ls" required>
                         <label>Psi</label><br>
                     </div>
 
                     <div>
                         <label>Presión Estática HS:*</label><br>
-                        <input type="number"  id="static_hs" required>
+                        <input type="text"  id="static_hs" required>
                         <label>Psi</label><br>
                     </div>
 
                     <div>
                         <label>Resistencia compresor HS (Ω):</label><br>
-                        <div><label>T1-T2*<input type="number"   id="resistance_hs_1" required></label></div>
-                        <div><label>T1-T3*<input type="number"   id="resistance_hs_2" required></label></div>
-                        <div><label>T2-T3*<input type="number"   id="resistance_hs_3" required></label></div>
+                        <div><label>T1-T2*<input type="text"   id="resistance_hs_rs" required></label></div>
+                        <div><label>T1-T3*<input type="text"   id="resistance_hs_rt" required></label></div>
+                        <div><label>T2-T3*<input type="text"   id="resistance_hs_st" required></label></div>
                     </div>
                     <div>
                         <label>A tierra:*</label><br>
-                        <input type="number" id="res_hs_to_ground" required>
+                        <input type="text" id="resistance_hs_to_ground" required>
                     </div>
 
                     <div>
                         <label>Resistencia compresor LS (Ω):</label><br>
-                        <div><label>T1-T2*<input type="number"   id="resistance_ls_1" required></label></div>
-                        <div><label>T1-T3*<input type="number"   id="resistance_ls_2" required></label></div>
-                        <div><label>T2-T3*<input type="number"   id="resistance_ls_3" required></label></div>
+                        <div><label>T1-T2*<input type="text"   id="resistance_ls_rs" required></label></div>
+                        <div><label>T1-T3*<input type="text"   id="resistance_ls_rt" required></label></div>
+                        <div><label>T2-T3*<input type="text"   id="resistance_ls_st" required></label></div>
                     </div>
                     
                     <div>
                         <label>A tierra:*</label><br>
-                        <input type="number" id="res_ls_to_ground" required>
+                        <input type="text" id="resistance_ls_to_ground" required>
                     </div>
 
                     <div>
                         <label>Resistencia circulador (Ω):*</label><br>
-                        <input type="number"   id="resistance_circ_1" required>
-                        <input type="number"   id="resistance_circ_2">
-                        <input type="number"   id="resistance_circ_3">
+                        <input type="text"   id="resistance_circ_rs" required>
+                        <input type="text"   id="resistance_circ_rt">
+                        <input type="text"   id="resistance_circ_st">
                     </div>
                         
                     <div>
                         <label>A tierra:*</label><br>
-                        <input type="number" id="resistance_circs_to_ground_ok" required>
+                        <input type="text" id="resistance_circs_to_ground" required>
                     </div>
 
                     <div>
                         <label>Resistencia heater (Ω):</label><br>
-                        <div><label>H1-H2*<input type="number"   id="resistance_heat_1" required></label></div>
-                        <div><label>H1-H3*<input type="number"   id="resistance_heat_2" required></label></div>
-                        <div><label>H2-H3*<input type="number"   id="resistance_heat_3" required></label></div> 
+                        <div><label>H1-H2*<input type="text"   id="resistance_heat_rs" required></label></div>
+                        <div><label>H1-H3*<input type="text"   id="resistance_heat_rt" required></label></div>
+                        <div><label>H2-H3*<input type="text"   id="resistance_heat_st" required></label></div> 
                     </div>
                         
                     <div>
                         <label>A tierra:*</label><br>
-                        <input type="number" id="resistance_heats_to_ground_ok" required>
+                        <input type="text" id="resistance_heats_to_ground" required>
                     </div>
 
                     <div>
                         <label>Resistencia humidificador (Ω):</label><br>
-                        <input type="number"   id="resistance_hum_1">
-                        <input type="number"   id="resistance_hum_2">
-                        <input type="number"   id="resistance_hum_3">
+                        <input type="text"   id="resistance_hum_rs">
+                        <input type="text"   id="resistance_hum_rt">
+                        <input type="text"   id="resistance_hum_st">
                     </div>
                         
                     <div>
                         <label>A tierra:</label><br>
-                        <input type="number" id="resistance_hums_to_ground_ok">
+                        <input type="text" id="resistance_hums_to_ground">
                     </div>
 
                     <div>
                         <label>Voltaje compresor HS (V):</label><br>
-                        <input type="number" id="voltaje_hs_1">
-                        <input type="number" id="voltaje_hs_2">
-                        <input type="number" id="voltaje_hs_3">
+                        <input type="text" id="voltaje_hs_r">
+                        <input type="text" id="voltaje_hs_s">
+                        <input type="text" id="voltaje_hs_t">
                     </div>
 
                     <div>
                         <label>Voltaje compresor LS (V):</label><br>
-                        <input type="number" id="voltaje_ls_1">
-                        <input type="number" id="voltaje_ls_2">
-                        <input type="number" id="voltaje_ls_3">
+                        <input type="text" id="voltaje_ls_r">
+                        <input type="text" id="voltaje_ls_s">
+                        <input type="text" id="voltaje_ls_t">
                     </div>
 
                     <div>
                         <label>Amperajes compresor HS (A):</label><br>               
-                        <div><label>T1*<input type="number"   id="current_hs_1" required></label></div>
-                        <div><label>T2*<input type="number"   id="current_hs_2" required></label></div>
-                        <div><label>T3*<input type="number"   id="current_hs_3" required></label></div>
+                        <div><label>T1*<input type="text"   id="current_hs_r" required></label></div>
+                        <div><label>T2*<input type="text"   id="current_hs_s" required></label></div>
+                        <div><label>T3*<input type="text"   id="current_hs_t" required></label></div>
                     </div>
 
                     <div>
                         <label>Amperajes compresor LS (A):</label><br>
-                        <div><label>T1*<input type="number"   id="current_ls_1" required></label></div>
-                        <div><label>T2*<input type="number"   id="current_ls_2" required></label></div>
-                        <div><label>T3*<input type="number"   id="current_ls_3" required></label></div>
+                        <div><label>T1*<input type="text"   id="current_ls_r" required></label></div>
+                        <div><label>T2*<input type="text"   id="current_ls_s" required></label></div>
+                        <div><label>T3*<input type="text"   id="current_ls_t" required></label></div>
                     </div>
 
                     <div>
                         <label>Amperajes circuladores (A):</label><br>
-                        <input type="number" id="current_circ_1">
-                        <input type="number" id="current_circ_2">
-                        <input type="number" id="current_circ_3">
+                        <input type="text" id="current_circ_r">
+                        <input type="text" id="current_circ_s">
+                        <input type="text" id="current_circ_t">
                     </div>
                     
                     <div>
                         <label>Amperajes de Condensador (A):</label><br>
-                        <input type="number" id="current_cond_fan1">
-                        <input type="number" id="current_cond_fan2">
-                        <input type="number" id="current_cond_fan3">
+                        <input type="text" id="current_cond_fan_r">
+                        <input type="text" id="current_cond_fan_s">
+                        <input type="text" id="current_cond_fan_t">
                     </div>
 
                     <div>
                         <label>Amperajes heater (A):</label><br>
-                        <input type="number" id="current_heat_1">
-                        <input type="number" id="current_heat_2">
-                        <input type="number" id="current_heat_3">
+                        <input type="text" id="current_heat_r">
+                        <input type="text" id="current_heat_s">
+                        <input type="text" id="current_heat_t">
                     </div>
 
                     <div>
                         <label>Amperajes de head fan (A):</label><br>
-                        <input type="number" id="current_headfan_r">
-                        <input type="number" id="current_headfan_s">
-                        <input type="number" id="current_headfan_t">
+                        <input type="text" id="current_headfan_r">
+                        <input type="text" id="current_headfan_s">
+                        <input type="text" id="current_headfan_t">
                     </div>
                     
 
                     <div>
                         <label>Amperajes humidificador (A):</label><br>
-                        <input type="number" id="current_hum_1">
-                        <input type="number" id="current_hum_2">
-                        <input type="number" id="current_hum_3">
+                        <input type="text" id="current_hum_r">
+                        <input type="text" id="current_hum_s">
+                        <input type="text" id="current_hum_t">
                     </div>
 
                     <div>
                         <label>Presiones compresor HS:*</label><br>
-                        <input type="number" id="low_pressures_hs_1" required>
-                        <input type="number" id="disch_pressures_hs_1" required>
+                        <input type="text" id="pressures_hs_suction" required>
+                        <input type="text" id="pressures_hs_disch" required>
                         <label>Psi</label><br>
                     </div>
 
                     <div>
                         <label>Presiones compresor LS:*</label><br>
-                        <input type="number" id="low_pressures_ls_1" required>
-                        <input type="number" id="disch_pressures_ls_1" required>
+                        <input type="text" id="pressures_ls_suction" required>
+                        <input type="text" id="pressures_ls_disch" required>
                         <label>Psi</label><br>
                     </div>
                 </div>
@@ -256,25 +256,26 @@
                 <label><input type="checkbox" id="fans_ok">Ventiladores OK</label>
                 <label><input type="checkbox" id="coils_ok">Serpentines OK</label>
                 <label><input type="checkbox" id="armafles_ok">Armaflex OK</label>
-                <label><input type="checkbox" id="inyection_ok">Válvula de inyección OK</label>
+                <label><input type="checkbox" id="injection_valve_ok">Válvula de inyección OK</label>
                 <label><input type="checkbox" id="oil_ok">Nivel de aceite correcto</label>
+                <label><input type="checkbox" id="protect_lowleveloil_ok">Bajo Nivel de aceite Protección</label>
                 <label><input type="checkbox" id="sights_ok">Mirillas OK</label>
                 <label><input type="checkbox" id="acid_ok">Prueba de acidez</label>
-                <label><input type="checkbox" id="hilow">Chequeo Hi/Low</label>
-                <label><input type="checkbox" id="rotalocks">Capuchones de rotalocks</label>
-                <label><input type="checkbox" id="capillaries">Capilares OK</label>
-                <label><input type="checkbox" id="frosty">Escarche de succión</label>
+                <label><input type="checkbox" id="hilow_protect_ok">Chequeo Hi/Low</label>
+                <label><input type="checkbox" id="rotalocks_ok">Capuchones de rotalocks</label>
+                <label><input type="checkbox" id="capillaries_ok">Capilares OK</label>
+                <label><input type="checkbox" id="frosty_ok">Escarche de succión</label>
                 <label><input type="checkbox" id="channels_ok">Canales OK</label>
-                <label><input type="checkbox" id="overtem_cool_ok">Over temp y overcool Ok</label>
-                <label><input type="checkbox" id="calibrated_valide">calibración OK</label>
+                <label><input type="checkbox" id="overcool_overtemp_ok">Over temp y overcool Ok</label>
+                <label><input type="checkbox" id="controller_calibrated_ok">calibración OK</label>
                 <label><input type="checkbox" id="sensors_ok">Sensores OK</label>
                 <label><input type="checkbox" id="static_press_ok">Presión estática OK</label>
-                <label><input type="checkbox" id="temp_water_in_ok">Temp. entrada a Cond. OK</label>
-                <label><input type="checkbox" id="temp_out_cond_ok">Temp. salida a Cond. OK</label>
-                <label><input type="checkbox" id="sensors_press_in_ok">Press. entrada a Cond. OK</label>   
-                <label><input type="checkbox" id="press_watter_out_ok">Press. salida a Cond. OK</label>
-            
-            <label><input type="checkbox" id="temp_disch_ok">Temp. Descarga OK</label>
+                <label><input type="checkbox" id="temp_water_in_cond_ok">Temp. entrada a Cond. OK</label>
+                <label><input type="checkbox" id="temp_water_out_cond_ok">Temp. salida a Cond. OK</label>
+                <label><input type="checkbox" id="press_water_in_cond_ok">Press. entrada a Cond. OK</label>   
+                <label><input type="checkbox" id="press_watter_out_cond_ok">Press. salida a Cond. OK</label>
+                <label><input type="checkbox" id="temp_disch_hs_ok">Temp. Descarga HS OK</label>
+                <label><input type="checkbox" id="temp_disch_ls_ok">Temp. Descarga LS OK</label>                
                 <label><input type="checkbox" id="bypass_cal_ok">Cal. Bypass OK</label>
             </div>
             
@@ -292,7 +293,7 @@
                 <div><label>Punto máximo -10 (°C):</label><input type="text" id="temp_hig"></div>
                 <div><label>Punto minimo +10 (°C):</label><input type="text" id="temp_low"></div>
                 <label><input type="checkbox" id="cold_test_ok">Prueba de enfriamiento (soak 30 min)</label>
-                <div><label>Duración (min):</label><input type="text" id="pulldown"></div>
+                <div><label>Presión máxima (Psi):</label><input type="text" id="pulldown"></div>
                 <label><input type="checkbox">Setear a valores propios para la humedad</label>                
                 <div><label>Humedad baja (20 %HR):</label><input type="text" id="hum_low"></div>
                 <div><label>Humedad alta (80 %HR):</label><input type="text" id="hum_hig"></div>
