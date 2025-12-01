@@ -244,13 +244,6 @@ voltaje_ls_t: get('voltaje_ls_t')
 // ======================
 document.getElementById('clearBtn').addEventListener('click', ()=>{
     document.getElementById('reportForm').reset();
-    
-    // Los clearRect deben estar dentro de un chequeo de existencia si los ID no son seguros
-    const espCtx = document.getElementById('signaturePreviewEsp')?.getContext('2d');
-    const cusCtx = document.getElementById('signaturePreviewCus')?.getContext('2d');
-    if (espCtx) espCtx.clearRect(0,0,300,150);
-    if (cusCtx) cusCtx.clearRect(0,0,300,150);
-});
   // 🔄 Reset semáforos
   estados = { 1: '', 2: '', 3: '' };
   ['1','2','3'].forEach(num => {
@@ -258,6 +251,13 @@ document.getElementById('clearBtn').addEventListener('click', ()=>{
       document.getElementById(c + num)?.classList.remove('activa')
     );
   });
+    
+    // Los clearRect deben estar dentro de un chequeo de existencia si los ID no son seguros
+    const espCtx = document.getElementById('signaturePreviewEsp')?.getContext('2d');
+    const cusCtx = document.getElementById('signaturePreviewCus')?.getContext('2d');
+    if (espCtx) espCtx.clearRect(0,0,300,150);
+    if (cusCtx) cusCtx.clearRect(0,0,300,150);
+});
 // ======================
 // RENDER TABLA
 // ======================
