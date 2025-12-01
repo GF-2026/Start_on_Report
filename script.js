@@ -56,7 +56,7 @@ function generateFolio(){
     const now = new Date();
     const y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0'), d = String(now.getDate()).padStart(2,'0');
     const h = String(now.getHours()).padStart(2,'0'), min = String(now.getMinutes()).padStart(2,'0');
-    return `Sartup_Report-${company}-${y}${m}${d}-${h}${min}`;
+    return `Preventive_Report-${company}-${y}${m}${d}-${h}${min}`;
 }
 
 // ======================
@@ -230,7 +230,11 @@ voltaje_hs_s: get('voltaje_hs_s'),
 voltaje_hs_t: get('voltaje_hs_t'),
 voltaje_ls_r: get('voltaje_ls_r'),
 voltaje_ls_s: get('voltaje_ls_s'),
-voltaje_ls_t: get('voltaje_ls_t')
+voltaje_ls_t: get('voltaje_ls_t'),
+estado_ref: get('estado_ref'),
+estado_heat: get('estado_heat'),
+estado_elec: get('estado_elec'),
+resultado_servicio: get('resultado_servicio')
 };
 
   records.push(record);
@@ -244,13 +248,6 @@ voltaje_ls_t: get('voltaje_ls_t')
 // ======================
 document.getElementById('clearBtn').addEventListener('click', ()=>{
     document.getElementById('reportForm').reset();
-  // 🔄 Reset semáforos
-  estados = { 1: '', 2: '', 3: '' };
-  ['1','2','3'].forEach(num => {
-    ['roja','amarilla','verde'].forEach(c => 
-      document.getElementById(c + num)?.classList.remove('activa')
-    );
-  });
     
     // Los clearRect deben estar dentro de un chequeo de existencia si los ID no son seguros
     const espCtx = document.getElementById('signaturePreviewEsp')?.getContext('2d');
@@ -363,7 +360,7 @@ function renderTable(){
 'coils_ok',
 'armafles_ok',
 'injection_valve_ok',
-'level_oi_ok',
+'oil_ok',
 'protect_lowleveloil_ok',
 'sights_ok',
 'acid_ok',
@@ -433,7 +430,7 @@ document.getElementById('exportBtn').addEventListener('click', ()=>{
     const ws = XLSX.utils.json_to_sheet(records);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Reportes');
-    XLSX.writeFile(wb, 'Startup_reports.xlsx');
+    XLSX.writeFile(wb, 'Preventive_reports.xlsx');
 });
 
 // ======================
@@ -539,36 +536,6 @@ canvas.addEventListener('touchmove', e => {
     ctx.stroke();
 }, false);
 const seccion = document.getElementById('section-headerx');
-// ======================
-// SEMÁFOROS
-// ======================
-
-// Cambia el estado visual del semáforo correspondiente
-function setEstado(num, color) {
-    const colores = ['roja', 'amarilla', 'verde'];
-
-    // Limpia clases activas
-    colores.forEach(c => {
-        document.getElementById(c + num)?.classList.remove('activa');
-    });
-
-    // Activa solo el color seleccionado
-    if (color) {
-        document.getElementById(color + num)?.classList.add('activa');
-    }
-
-    // Guarda estado en el objeto global
-    estados[num] = color;
-}
-
-// Escuchadores para cada grupo de radio
-['1','2','3'].forEach(num => {
-    document.querySelectorAll(`input[name="estado_${num}"]`).forEach(radio => {
-        radio.addEventListener('change', () => {
-            setEstado(num, radio.value);  // roja / amarilla / verde
-        });
-    });
-});
 
 function verProximoServicio() {
   const seleccionado = document.querySelector('input[name="proximo_servicio"]:checked');
@@ -582,7 +549,7 @@ function verProximoServicio() {
 }
 document.getElementById('sendEmailBtn').addEventListener('click', () => {
   const to = "tck@olimp0.com";
-  const subject = encodeURIComponent("Nuevo reporte de arranque");
+  const subject = encodeURIComponent("Nuevo reporte preventivo");
 
   const company = get('company');
   const folio = generateFolio('folio');
@@ -594,7 +561,7 @@ document.getElementById('sendEmailBtn').addEventListener('click', () => {
   // 💡 Usamos HTML con <br> para asegurar formato visible en BlueMail
   const htmlBody =
 `Hola,<br><br>
-Tienes un nuevo reporte de arranque:<br><br>
+Tienes un nuevo reporte preventivo:<br><br>
 <strong>Folio:</strong> ${folio}<br>
 <strong>Empresa:</strong> ${company}<br>
 <strong>Modelo:</strong> ${model}<br>
