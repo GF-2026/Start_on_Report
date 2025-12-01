@@ -545,15 +545,30 @@ const seccion = document.getElementById('section-headerx');
 
 // Cambia el estado visual del semáforo correspondiente
 function setEstado(num, color) {
-  const colores = ['roja', 'amarilla', 'verde'];
-  colores.forEach(c => {
-    document.getElementById(c + num)?.classList.remove('activa');
-  });
-  document.getElementById(color + num)?.classList.add('activa');
+    const colores = ['roja', 'amarilla', 'verde'];
 
-  // 🔄 Guardar el valor seleccionado en el objeto estados
-  estados[num] = color;
+    // Limpia clases activas
+    colores.forEach(c => {
+        document.getElementById(c + num)?.classList.remove('activa');
+    });
+
+    // Activa solo el color seleccionado
+    if (color) {
+        document.getElementById(color + num)?.classList.add('activa');
+    }
+
+    // Guarda estado en el objeto global
+    estados[num] = color;
 }
+
+// Escuchadores para cada grupo de radio
+['1','2','3'].forEach(num => {
+    document.querySelectorAll(`input[name="estado_${num}"]`).forEach(radio => {
+        radio.addEventListener('change', () => {
+            setEstado(num, radio.value);  // roja / amarilla / verde
+        });
+    });
+});
 
 function verProximoServicio() {
   const seleccionado = document.querySelector('input[name="proximo_servicio"]:checked');
