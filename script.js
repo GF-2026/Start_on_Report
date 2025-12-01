@@ -545,20 +545,14 @@ const seccion = document.getElementById('section-headerx');
 
 // Cambia el estado visual del semáforo correspondiente
 function setEstado(num, color) {
-    const colores = ['roja', 'amarilla', 'verde'];
+  const colores = ['roja', 'amarilla', 'verde'];
+  colores.forEach(c => {
+    document.getElementById(c + num)?.classList.remove('activa');
+  });
+  document.getElementById(color + num)?.classList.add('activa');
 
-    // Quitar todas
-    colores.forEach(c => {
-        const el = document.getElementById(c + num);
-        if (el) el.classList.remove('activa');
-    });
-
-    // Activar la seleccionada
-    const target = document.getElementById(color + num);
-    if (target) target.classList.add('activa');
-
-    // Guardar estado en variable global
-    estados[num] = color;
+  // 🔄 Guardar el valor seleccionado en el objeto estados
+  estados[num] = color;
 }
 
 function verProximoServicio() {
