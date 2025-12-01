@@ -561,18 +561,6 @@ function setEstado(num, color) {
     estados[num] = color;
 }
 
-// Conectar radio-buttons → semáforos
-['1','2','3'].forEach(num => {
-    ['roja','amarilla','verde'].forEach(color => {
-        const radio = document.getElementById(color + '_radio_' + num);
-        if (radio) {
-            radio.addEventListener('change', () => {
-                if (radio.checked) setEstado(num, color);
-            });
-        }
-    });
-});
-
 function verProximoServicio() {
   const seleccionado = document.querySelector('input[name="proximo_servicio"]:checked');
   const salida = document.getElementById('resultado_servicio');
