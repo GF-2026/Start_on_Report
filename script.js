@@ -597,7 +597,7 @@ document.getElementById('sendEmailBtn').addEventListener('click', () => {
   // 💡 Usamos HTML con <br> para asegurar formato visible en BlueMail
   const htmlBody =
 `Hola,<br><br>
-Tienes un nuevo reporte preventivo:<br><br>
+Tienes un nuevo reporte de arranque:<br><br>
 <strong>Folio:</strong> ${folio}<br>
 <strong>Empresa:</strong> ${company}<br>
 <strong>Modelo:</strong> ${model}<br>
