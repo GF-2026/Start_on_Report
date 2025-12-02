@@ -24,7 +24,22 @@ function get(id) {
     if ('value' in el) return el.value.trim();  // Si tiene valor, devuelve value
     return '';                        // Si no tiene value, devuelve vacío
 }
+window.addEventListener('DOMContentLoaded', () => {
+    resetSemaforos();
+});
+function resetSemaforos() {
+    const selects = [
+        'estado_ref',
+        'estado_heat',
+        'estado_elec',
+        'resultado_servicio'
+    ];
 
+    selects.forEach(id => {
+        const sel = document.getElementById(id);
+        if (sel) sel.value = "";
+    });
+}
 // Obtener estado de un checkbox de forma segura
 function chk(id) {
     const el = document.getElementById(id);
@@ -254,6 +269,9 @@ document.getElementById('clearBtn').addEventListener('click', ()=>{
     const cusCtx = document.getElementById('signaturePreviewCus')?.getContext('2d');
     if (espCtx) espCtx.clearRect(0,0,300,150);
     if (cusCtx) cusCtx.clearRect(0,0,300,150);
+    resetSemaforos();
+});
+
 });
 // ======================
 // RENDER TABLA
