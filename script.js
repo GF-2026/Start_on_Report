@@ -271,8 +271,6 @@ document.getElementById('clearBtn').addEventListener('click', ()=>{
     if (cusCtx) cusCtx.clearRect(0,0,300,150);
     resetSemaforos();
 });
-
-});
 // ======================
 // RENDER TABLA
 // ======================
