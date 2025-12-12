@@ -300,6 +300,7 @@ function renderTable(){
 'voltage_L2',
 'voltage_L3',
 'voltage_fase_to_neutral',
+'voltage_plate',
 'marking_ok',
 'voltage_plate_ok',
 'shock_free_ok',
