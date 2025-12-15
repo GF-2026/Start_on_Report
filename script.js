@@ -294,7 +294,7 @@ function renderTable(){
 'serial',
 'controlnum',
 'status_test',
-'suggest_solution'
+'suggest_solution',
 'ubication',
 'temperature',
 'humidity',
