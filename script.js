@@ -4,7 +4,7 @@
 // ======================
 let records = JSON.parse(localStorage.getItem('records') || '[]');
 let currentSignatureTarget = null; // 'esp' o 'cus'
-const enableDeleteButton = false;   // true = activo, false = desactivado
+const enableDeleteButton = true;   // true = activo, false = desactivado
 const storageKey = 'records';
 let estados = { 1: '', 2: '', 3: '' }; // 👈 estados de semáforos
 // ======================
@@ -44,7 +44,7 @@ function resetSemaforos() {
 function chk(id) {
     const el = document.getElementById(id);
     if (!el) return '0';              // Si no existe, devuelve 0
-    return el.checked ? '1' : '0';   // Si existe, devuelve '1' o '0'
+    return el.checked ? 1 : 0;   // Si existe, devuelve '1' o '0'
 }
 
 // Obtener valor de un grupo de radio buttons de forma segura
