@@ -7,6 +7,18 @@
     <title>REPORTE DE ARRANQUE</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+<script>
+const DEV_MODE = true;
+
+if (DEV_MODE) {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+      chk.checked = true;
+    });
+  });
+}
+</script>
+
 </head>
 
 <body>
@@ -318,16 +330,12 @@
 
                     <div>
                         <label>Amperajes humidificador 1 (A):</label><br>
-                        <input type="number" id="current_hum1_r" required class="special-box">
-                        <input type="number" id="current_hum1_s" required class="special-box">
-                        <input type="number" id="current_hum1_t" required class="special-box">
+                        <input type="number" id="current_hum1" required class="special-box">
                     </div> 
 
                     <div>
                         <label>Amperajes humidificador 2 (A):</label><br>
-                        <input type="number" id="current_hum2_r" required class="special-box">
-                        <input type="number" id="current_hum2_s" required class="special-box">
-                        <input type="number" id="current_hum2_t" required class="special-box">
+                        <input type="number" id="current_hum2" required class="special-box">
                     </div>                     
 
                     <div>
